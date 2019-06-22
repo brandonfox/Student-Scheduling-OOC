@@ -18,7 +18,7 @@ public class UserGroup {
     private String description;
 
     @OneToMany
-    @JoinTable(name = "join_group_events",
+    @JoinTable(name = "join_group_event",
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )

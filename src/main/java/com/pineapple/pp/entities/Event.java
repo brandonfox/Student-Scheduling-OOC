@@ -25,7 +25,7 @@ public class Event {
     private Date endTime;
 
     @ManyToOne
-    @JoinTable(name = "join_group_events",
+    @JoinTable(name = "join_group_event",
             inverseJoinColumns = @JoinColumn(name = "group_id"),
             joinColumns = @JoinColumn(name = "event_id")
     )
