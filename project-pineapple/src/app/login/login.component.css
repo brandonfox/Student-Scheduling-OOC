@@ -1,0 +1,32 @@
+.form-group {
+  font-family: Ubuntu, cursive;
+}
+
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+.pineapple-Login-header {
+  padding: 18px 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pineapple-Login-header_logo {
+  flex: 160px 0 0;
+  min-width: 1px;
+}
+
+.pineapple-Login-header_text {
+  font-family: Ubuntu, cursive;
+  flex: 1;
+  text-align: right;
+  font-size: 13px;
+  line-height: 1.3;
+  box-sizing: border-box;
+  padding-left: 12px;
+}
