@@ -18,6 +18,7 @@ import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { HomeLayoutComponent } from './home-layout/home-layout.component';
+import {UserService} from "./service/user.service";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', data: { title: 'First Component' }, pathMatch: 'full' },
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
     LoginLayoutComponent,
     HomeLayoutComponent
   ],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 
