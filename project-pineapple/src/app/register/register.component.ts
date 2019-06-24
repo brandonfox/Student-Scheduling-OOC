@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: Router
     ) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/register']);
     }
 
     ngOnInit() {

@@ -6,45 +6,48 @@ import { HttpClientModule } from '@angular/common/http';
 // used to create fake backend
 
 import { AppComponent } from './app.component';
-import {LoginComponent} from './login/login.component';
-import {RegisterComponent} from './register/register.component';
-import {RouterModule} from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import {
-  MatToolbarModule,
-  MatButtonModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatListModule,
-  MatCheckboxModule,
-  MatFormFieldModule
-} from '@angular/material';
 import { DemoMaterialModule } from './core/material-module';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
+import { LoginLayoutComponent } from './login-layout/login-layout.component';
+import { HomeLayoutComponent } from './home-layout/home-layout.component';
+
+const appRoutes: Routes = [
+  { path: '', redirectTo: 'login', data: { title: 'First Component' }, pathMatch: 'full' },
+  {
+    path: 'login', component: LoginLayoutComponent, data: {title: 'First Component'},
+    children: [
+      {path: '', component: LoginComponent},
+      {path: 'register', component: RegisterComponent}
+    ]
+  },
+  { path: 'main', component: HomeLayoutComponent,
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'second', component: SecondComponent }
+    ]
+  }
+];
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterComponent},
-      {path: '', component: HomeComponent},
-      { path: 'first', component: FirstComponent, data: { title: 'First Component' } },
-      { path: 'second', component: SecondComponent, data: { title: 'Second Component' } }
-    ]),
+    RouterModule.forRoot(
+      appRoutes,
+      { useHash: false } // <-- debugging purposes only
+    ),
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
     DemoMaterialModule
   ],
   declarations: [
@@ -54,7 +57,9 @@ import { SecondComponent } from './second/second.component';
     HomeComponent,
     NavigationComponent,
     FirstComponent,
-    SecondComponent
+    SecondComponent,
+    LoginLayoutComponent,
+    HomeLayoutComponent
   ],
   bootstrap: [AppComponent]
 })
