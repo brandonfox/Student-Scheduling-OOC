@@ -23,9 +23,9 @@ public class User {
 //
 //    private String name;
 //
-//    private String hashedPassword;
+    private String password;
 //
-//    private String email;
+    private String email;
 //
 //    private Integer age;
 //
@@ -49,8 +49,8 @@ public class User {
     public Long getId() { return id; }
     public String getUsername() { return username; }
 //    public String getName() { return name; }
-//    public String getHashedPassword() { return hashedPassword; }
-//    public String getEmail() { return email; }
+    public String getPassword() { return password; }
+    public String getEmail() { return email; }
 //    public Integer getAge() { return age;}
 //    public Long getPhoneNumber() { return phoneNumber; }
 //    public Set<User> getFriends() { return friends; }
@@ -58,8 +58,8 @@ public class User {
     public void setId(Long id) { this.id = id; }
     public void setUsername(String username) { this.username = username; }
 //    public void setName(String name) { this.name = name; }
-//    public void setHashedPassword(String hashedPassword) { this.hashedPassword = hashedPassword; }
-//    public void setEmail(String email) { this.email = email; }
+    public void setPassword(String password) { this.password = password; }
+    public void setEmail(String email) { this.email = email; }
 //    public void setAge(Integer age) { this.age = age; }
 //    public void setPhoneNumber(Long phoneNumber) { this.phoneNumber = phoneNumber; }
 //    public void setFriends(Set<User> friends) { this.friends = friends; }

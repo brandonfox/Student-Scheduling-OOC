@@ -1,8 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../service/user.service';
-import {NgForm} from '@angular/forms';
+import {User} from '../model/user';
 
 @Component({
   selector: 'app-user-edit',
@@ -10,15 +9,22 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
-  user: any = {};
 
-  sub: Subscription;
+  user: User = new User();
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private userService: UserService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService) {
   }
 
   ngOnInit() {
+  }
+
+  createUser(): void {
+    this.userService.createUser(this.user)
+      .subscribe( data => {
+        alert('User created successfully.');
+      });
   }
 }

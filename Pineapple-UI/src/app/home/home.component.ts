@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../service/user.service';
+import {User} from '../model/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +10,23 @@ import { UserService } from '../service/user.service';
 })
 export class HomeComponent implements OnInit {
 
-  users: Array<any>;
+  users: User[];
 
   constructor(
+    private router: Router,
     private userService: UserService
   ) { }
 
   ngOnInit() {
-    this.userService.getAll().subscribe(
+    this.userService.getUsers().subscribe(
       data => {this.users = data; }
       );
   }
 
+  editUser(user: User): void {
+    this.userService.editUser(user)
+      .subscribe( data => {
+        this.users = this.users.filter(u => u !== user);
+      });
+  };
 }

@@ -27,17 +27,4 @@ import java.util.stream.Stream;
 public class PpApplication {
 
 	public static void main(String[] args) { SpringApplication.run(PpApplication.class, args); }
-	
-	@Bean
-	ApplicationRunner init(UserRepository repository) {
-		return args -> {
-			Stream.of("Ferrari", "Jaguar", "Porsche", "Lamborghini", "Bugatti",
-				"AMC Gremlin", "Triumph Stag", "Ford Pinto", "Yugo GV").forEach(name -> {
-				User user = new User();
-				user.setUsername(name);
-				repository.save(user);
-			});
-			repository.findAll().forEach(System.out::println);
-		};
-	}
 }

@@ -1,23 +1,17 @@
-<mat-card>
-  <form #userForm="ngForm" (ngSubmit)="save(userForm.value)">
-    <mat-card-header>
-      <mat-card-title><h2>{{user.name ? 'Edit' : 'Add'}} Car</h2></mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <input type="hidden" name="href" [(ngModel)]="user.href">
-      <mat-form-field>
-        <input matInput placeholder="Car Name" [(ngModel)]="user.name"
-               required name="name" #name>
-      </mat-form-field>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit"
-              [disabled]="!userForm.valid">Save</button>
-      <button mat-raised-button color="secondary" (click)="remove(user.href)"
-              *ngIf="user.href" type="button">Delete</button>
-      <a mat-button routerLink="/car-list">Cancel</a>
-    </mat-card-actions>
-    <mat-card-footer>
-    </mat-card-footer>
+<div class="col-md-6">
+  <h2 class="text-center">Add User</h2>
+  <form>
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input [(ngModel)]="user.username" placeholder="First Name" name="firstName" class="form-control" id="username">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input [(ngModel)]="user.email" placeholder="Last name" name="lastName" class="form-control" id="email">
+    </div>
+
+    <button class="btn btn-success" (click)="createUser()">Create</button>
+
   </form>
-</mat-card>
+</div>

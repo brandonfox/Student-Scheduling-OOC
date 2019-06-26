@@ -1123,64 +1123,54 @@
     <table id="282" parent="9" name="friendship">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="283" parent="9" name="user">
+    <table id="283" parent="9" name="users">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="284" parent="9" name="users">
-      <Engine>MyISAM</Engine>
-    </table>
-    <column id="285" parent="282" name="user_1">
+    <column id="284" parent="282" name="user_1">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="282" name="user_2">
+    <column id="285" parent="282" name="user_2">
       <Position>2</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="287" parent="282" name="FKks8sss12o9706b9swwai4dd97">
+    <index id="286" parent="282" name="FKks8sss12o9706b9swwai4dd97">
       <ColNames>user_2</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="288" parent="282" name="PRIMARY">
+    <key id="287" parent="282" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_1
 user_2</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="289" parent="283" name="id">
+    <column id="288" parent="283" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="283" name="username">
+    <column id="289" parent="283" name="email">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="291" parent="283" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="292" parent="284" name="id">
-      <Position>1</Position>
-      <DataType>bigint(20)|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="293" parent="284" name="username">
-      <Position>2</Position>
+    <column id="290" parent="283" name="password">
+      <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="294" parent="284" name="PRIMARY">
+    <column id="291" parent="283" name="username">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="292" parent="283" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

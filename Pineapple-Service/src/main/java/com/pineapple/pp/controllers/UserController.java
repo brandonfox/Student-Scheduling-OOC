@@ -3,6 +3,9 @@ package com.pineapple.pp.controllers;
 import com.pineapple.pp.entities.User;
 import com.pineapple.pp.exception.ResourceNotFoundException;
 import com.pineapple.pp.repositories.UserRepository;
+import com.pineapple.pp.services.UserService;
+import com.pineapple.pp.utils.LoginResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,50 +16,47 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
-    private UserRepository repository;
     
-    public UserController(UserRepository repository) {
-        this.repository = repository;
+    private UserService userService;
+    
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
     
-    @GetMapping("/users")
-    @CrossOrigin(origins = "http://localhost:4200")
-    public List<User> getAllUsers() {
-        return repository.findAll();
+    @PostMapping(path = "/add")
+    public String add(@RequestBody String json) {
+        if (userService.add(json) == null) {
+            return "fail";
+        }
+        else {
+            return "success";
+        }
     }
     
-    @PostMapping("/users")
-    public User createNote(@Valid @RequestBody User user) {
-        return repository.save(user);
+    @PostMapping("/login")
+    public LoginResponse login(@RequestBody String json) {
+        User user = userService.getUser(json);
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setEmail(user.getEmail());
+        return loginResponse;
     }
     
-    @GetMapping("/users/{id}")
-    public User getNoteById(@PathVariable(value = "id") Long noteId) {
-        return repository.findById(noteId)
-            .orElseThrow(() -> new ResourceNotFoundException("Note", "id", noteId));
+    @GetMapping("/all")
+    public Iterable<User> findAll() {
+        return userService.list();
     }
     
-    @PutMapping("/users/{id}")
-    public User updateNote(@PathVariable(value = "id") Long userId,
-                           @Valid @RequestBody User userDetails) {
-        
-        User user = repository.findById(userId)
-            .orElseThrow(() -> new ResourceNotFoundException("Note", "id", userId));
-        
-        user.setUsername(userDetails.getUsername());
-    
-        return repository.save(user);
+    @PostMapping("/find")
+    public User getUser(@RequestBody String json) {
+        return userService.getUser(json);
     }
     
-    @DeleteMapping("/users/{id}")
-    public ResponseEntity<?> deleteNote(@PathVariable(value = "id") Long userId) {
-        User user = repository.findById(userId)
-            .orElseThrow(() -> new ResourceNotFoundException("Note", "id", userId));
-        
-        repository.delete(user);
-        
-        return ResponseEntity.ok().build();
+    @PostMapping("/update")
+    public User editUser(@RequestBody String json) {
+        return userService.editUser(json);
     }
 }
