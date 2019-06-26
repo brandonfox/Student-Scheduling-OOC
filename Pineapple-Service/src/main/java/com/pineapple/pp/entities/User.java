@@ -2,6 +2,7 @@ package com.pineapple.pp.entities;
 
 import jdk.nashorn.internal.objects.annotations.Getter;
 import jdk.nashorn.internal.objects.annotations.Setter;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,6 +11,8 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name = "users")
+@EntityListeners(AuditingEntityListener.class)
 public class User {
 
     @Id
