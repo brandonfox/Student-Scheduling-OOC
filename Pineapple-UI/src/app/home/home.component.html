@@ -1,0 +1,39 @@
+<!--<h2>Home Page</h2>-->
+<!--<div class="card" style="width: 18rem;">-->
+
+<!--  <h2>User List</h2>-->
+
+<!--  <div *ngFor="let user of users">-->
+<!--    {{user.username}}-->
+<!--  </div>-->
+
+
+<!--  <img src="../../assets/pineapple.png" width="240" class="card-img-top" alt="pineapple">-->
+<!--  <div class="card-body">-->
+<!--    <h5 class="card-title">Card title</h5>-->
+<!--    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--    <a href="/login" class="btn btn-primary">Go login</a>-->
+<!--  </div>-->
+<!--</div>-->
+
+<mat-card>
+  <mat-card-header>User List</mat-card-header>
+  <button mat-fab color="primary" [routerLink]="['/user-add']">Add</button>
+
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let user of users">
+        <h3 mat-line>
+          {{user.username}}
+          <a mat-button [routerLink]="['/user-edit', user.id]">{{user.username}}</a>
+        </h3>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+<!--<h2>User List</h2>-->
+
+<!--<div *ngFor="let user of users">-->
+<!--  {{user.username}}-->
+<!--</div>-->
