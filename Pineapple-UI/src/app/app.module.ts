@@ -19,15 +19,17 @@ import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { HomeLayoutComponent } from './home-layout/home-layout.component';
 import {UserService} from './service/user.service';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', data: { title: 'First Component' }, pathMatch: 'full' },
   {
     path: 'login', component: LoginLayoutComponent, data: {title: 'First Component'},
     children: [
-      {path: '', component: LoginComponent},
-      {path: 'register', component: RegisterComponent}
+      {path: '', component: LoginComponent}
     ]
+  },
+  {path: 'register', component: LoginLayoutComponent, data: {title: 'First Component'}, children: [{path: '', component: RegisterComponent}]
   },
   { path: 'main', component: HomeLayoutComponent,
     children: [
@@ -36,6 +38,8 @@ const appRoutes: Routes = [
       { path: 'second', component: SecondComponent }
     ]
   },
+  {path: 'users',
+  component: UserListComponent},
   {
     path: 'user-add',
     component: UserEditComponent
@@ -69,7 +73,8 @@ const appRoutes: Routes = [
     SecondComponent,
     LoginLayoutComponent,
     HomeLayoutComponent,
-    UserEditComponent
+    UserEditComponent,
+    UserListComponent
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {UserService} from '../service/user.service';
 
 
 @Component({templateUrl: 'register.component.html'})
@@ -8,10 +9,12 @@ export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
+    userData;
 
     constructor(
         private formBuilder: FormBuilder,
-        private router: Router
+        private router: Router,
+        private userService: UserService
     ) {
           this.router.navigate(['/register']);
     }
@@ -29,11 +32,13 @@ export class RegisterComponent implements OnInit {
     get f() { return this.registerForm.controls; }
 
     onSubmit() {
+        console.log('Submitting form');
         this.submitted = true;
-
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
         }
+        console.log('Form valid, Creating user');
+        this.userService.createUser(this.registerForm);
     }
 }

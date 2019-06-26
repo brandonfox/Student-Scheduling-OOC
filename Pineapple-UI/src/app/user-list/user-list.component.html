@@ -1,0 +1,6 @@
+<h3>User List</h3>
+
+<div class="user-item" *ngFor="let user of userList | async">
+  <span>{{user.username}}</span>
+  <span>{{user.id}}</span>
+</div>
