@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.pineapple.pp.entities.User;
 import com.pineapple.pp.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;

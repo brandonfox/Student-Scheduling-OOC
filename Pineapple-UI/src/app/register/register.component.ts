@@ -2,6 +2,7 @@
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {UserService} from '../service/user.service';
+import {User} from '../model/user';
 
 
 @Component({templateUrl: 'register.component.html'})
@@ -9,7 +10,6 @@ export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
-    userData;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -38,7 +38,12 @@ export class RegisterComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         }
-        console.log('Form valid, Creating user');
-        this.userService.createUser(this.registerForm);
+        console.log('Form: ' + this.registerForm.getRawValue());
+        this.userService.createUser(this.registerForm.getRawValue()).subscribe(
+          data => this.processRegisterResponse(data)
+        );
+    }
+    processRegisterResponse(data) {
+      console.log(data.toString());
     }
 }

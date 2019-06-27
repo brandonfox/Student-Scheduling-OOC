@@ -1,7 +1,5 @@
 package com.pineapple.pp.entities;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -11,7 +9,7 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 @EntityListeners(AuditingEntityListener.class)
 public class User {
 

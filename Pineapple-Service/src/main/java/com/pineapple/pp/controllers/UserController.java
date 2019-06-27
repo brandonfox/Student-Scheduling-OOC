@@ -5,7 +5,9 @@ import com.pineapple.pp.exception.ResourceNotFoundException;
 import com.pineapple.pp.repositories.UserRepository;
 import com.pineapple.pp.services.UserService;
 import com.pineapple.pp.utils.LoginResponse;
+import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +18,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     
@@ -27,12 +28,15 @@ public class UserController {
         this.userService = userService;
     }
     
-    @PostMapping(path = "/add")
+    @PostMapping(path = "/register")
     public String add(@RequestBody String json) {
+        System.out.print("Creating new user " + json + "... ");
         if (userService.add(json) == null) {
+            System.out.print("Fail..\n");
             return "fail";
         }
         else {
+            System.out.print("Success!\n");
             return "success";
         }
     }
@@ -47,6 +51,7 @@ public class UserController {
     
     @GetMapping("/all")
     public Iterable<User> findAll() {
+        System.out.println("Retrieving all users");
         return userService.list();
     }
     
@@ -57,6 +62,7 @@ public class UserController {
     
     @PostMapping("/update")
     public User editUser(@RequestBody String json) {
+
         return userService.editUser(json);
     }
 }

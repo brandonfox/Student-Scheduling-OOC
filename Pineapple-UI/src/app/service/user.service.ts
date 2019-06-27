@@ -12,10 +12,10 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  private userUrl = 'http://localhost:8080/user';
+  private userUrl = 'http://localhost:8080/';
 
   public getUsers() {
-    return this.http.get<User[]>(this.userUrl + '/all');
+    return this.http.get<User[]>(this.userUrl + '/users' + '/all');
   }
 
   public editUser(user) {
@@ -23,6 +23,6 @@ export class UserService {
   }
 
   public createUser(user) {
-    return this.http.post<User>(this.userUrl + '/add', user);
+    return this.http.post<User>(this.userUrl + '/register', user);
   }
 }
