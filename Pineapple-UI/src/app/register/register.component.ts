@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {UserService} from '../service/user.service';
-import {User} from '../model/user';
+import {RegistrationResponse} from '../model/registration-response';
 
 
 @Component({templateUrl: 'register.component.html'})
@@ -10,6 +10,8 @@ export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
+    userResponse: RegistrationResponse;
+
 
     constructor(
         private formBuilder: FormBuilder,
@@ -24,7 +26,8 @@ export class RegisterComponent implements OnInit {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            email: ['', [Validators.required, Validators.email]],
         });
     }
 
@@ -44,6 +47,12 @@ export class RegisterComponent implements OnInit {
         );
     }
     processRegisterResponse(data) {
-      console.log(data.toString());
+      // TODO Store session information in an authentication token stored as a cookie
+      this.userResponse = data.valueOf();
+      console.log(this.userResponse.successStatus);
+      if (this.userResponse.successStatus) {
+        this.router.navigate(['main']);
+      }
+      // TODO change form to display error information (Username taken, email taken etc.)
     }
 }

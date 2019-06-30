@@ -5,6 +5,7 @@ import com.pineapple.pp.exception.ResourceNotFoundException;
 import com.pineapple.pp.repositories.UserRepository;
 import com.pineapple.pp.services.UserService;
 import com.pineapple.pp.utils.LoginResponse;
+import com.pineapple.pp.utils.RegistrationResponse;
 import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -29,15 +30,15 @@ public class UserController {
     }
     
     @PostMapping(path = "/register")
-    public String add(@RequestBody String json) {
+    public @ResponseBody RegistrationResponse add(@RequestBody String json) {
         System.out.print("Creating new user " + json + "... ");
         if (userService.add(json) == null) {
             System.out.print("Fail..\n");
-            return "fail";
+            return new RegistrationResponse("username");
         }
         else {
             System.out.print("Success!\n");
-            return "success";
+            return new RegistrationResponse();
         }
     }
     

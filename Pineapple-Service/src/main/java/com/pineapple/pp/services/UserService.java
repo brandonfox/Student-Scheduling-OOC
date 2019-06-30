@@ -26,7 +26,7 @@ public interface UserService {
 
     default User add(String json) {
         User user = getGson().fromJson(json, User.class);
-        if (getUserRepository().existsByEmail(user.getEmail())) {
+        if (getUserRepository().existsByEmail(user.getEmail()) || getUserRepository().existsByUsername(user.getUsername())) {
             return null;
         }
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
