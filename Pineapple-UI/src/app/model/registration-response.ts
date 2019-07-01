@@ -1,4 +1,4 @@
 export class RegistrationResponse {
   successStatus: boolean;
-  invalidField: string;
+  context: string;
 }

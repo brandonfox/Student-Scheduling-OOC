@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {UserService} from '../service/user.service';
 import {RegistrationResponse} from '../model/registration-response';
-
+import { AuthenticationService} from '../service/authentication.service';
 
 @Component({templateUrl: 'register.component.html'})
 export class RegisterComponent implements OnInit {
@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private userService: UserService
+        private userService: UserService,
+        private authenticationService: AuthenticationService
     ) {
           this.router.navigate(['/register']);
     }
@@ -51,6 +52,7 @@ export class RegisterComponent implements OnInit {
       this.userResponse = data.valueOf();
       console.log(this.userResponse.successStatus);
       if (this.userResponse.successStatus) {
+        this.authenticationService.setAuthToken(this.userResponse.context);
         this.router.navigate(['main']);
       }
       // TODO change form to display error information (Username taken, email taken etc.)

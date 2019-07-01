@@ -20,6 +20,7 @@ import { HomeLayoutComponent } from './home-layout/home-layout.component';
 import {UserService} from './service/user.service';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list/user-list.component';
+import {CookieService} from 'ngx-cookie-service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', data: { title: 'First Component' }, pathMatch: 'full' },
@@ -62,7 +63,7 @@ const appRoutes: Routes = [
     ),
     LayoutModule,
     FormsModule,
-    DemoMaterialModule
+    DemoMaterialModule,
   ],
   declarations: [
     AppComponent,
@@ -76,7 +77,7 @@ const appRoutes: Routes = [
     UserEditComponent,
     UserListComponent
   ],
-  providers: [UserService],
+  providers: [UserService, CookieService],
   bootstrap: [AppComponent]
 })
 

@@ -3,6 +3,7 @@ package com.pineapple.pp.controllers;
 import com.pineapple.pp.entities.User;
 import com.pineapple.pp.exception.ResourceNotFoundException;
 import com.pineapple.pp.repositories.UserRepository;
+import com.pineapple.pp.services.SecurityService;
 import com.pineapple.pp.services.UserService;
 import com.pineapple.pp.utils.LoginResponse;
 import com.pineapple.pp.utils.RegistrationResponse;
@@ -32,13 +33,14 @@ public class UserController {
     @PostMapping(path = "/register")
     public @ResponseBody RegistrationResponse add(@RequestBody String json) {
         System.out.print("Creating new user " + json + "... ");
-        if (userService.add(json) == null) {
+        User user = userService.add(json);
+        if (user == null) {
             System.out.print("Fail..\n");
-            return new RegistrationResponse("username");
+            return new RegistrationResponse(false,"username");
         }
         else {
             System.out.print("Success!\n");
-            return new RegistrationResponse();
+            return new RegistrationResponse(true, SecurityService.createUserAuthenticationToken(user));
         }
     }
     
