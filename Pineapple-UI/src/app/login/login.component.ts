@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
+    invalidCredentials: boolean;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -34,6 +35,10 @@ export class LoginComponent implements OnInit {
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+        // this.authService.checkAuthToken().then(data => {
+        // if (data) {
+        //   this.router.navigate(['main']);
+        // }});
     }
 
     // convenience getter for easy access to form fields
@@ -54,7 +59,8 @@ export class LoginComponent implements OnInit {
         // Login successfull
         this.authService.setAuthToken(loginResponse.context);
         this.router.navigate(['main']);
+      } else { // TODO Else with a visual update for the user to know that their info was invalid
+        this.invalidCredentials = true;
       }
-      // TODO Else with a visual update for the user to know that their info was invalid
     }
 }

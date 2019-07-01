@@ -11,6 +11,8 @@ export class RegisterComponent implements OnInit {
     loading = false;
     submitted = false;
     userResponse: UserQueryResponse;
+    emailTaken = false;
+    usernameTaken = false;
 
 
     constructor(
@@ -48,13 +50,16 @@ export class RegisterComponent implements OnInit {
         );
     }
     processRegisterResponse(data) {
-      // TODO Store session information in an authentication token stored as a cookie
       this.userResponse = data.valueOf();
       console.log(this.userResponse.successStatus);
       if (this.userResponse.successStatus) {
         this.authenticationService.setAuthToken(this.userResponse.context);
         this.router.navigate(['main']);
+      } else {
+        this.usernameTaken = false;
+        this.emailTaken = false;
+        if (this.userResponse.context === 'username') {this.usernameTaken = true; }
+        if (this.userResponse.context === 'email') {this.emailTaken = true; }
       }
-      // TODO change form to display error information (Username taken, email taken etc.)
     }
 }
