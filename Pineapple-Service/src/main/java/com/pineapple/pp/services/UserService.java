@@ -29,7 +29,8 @@ public interface UserService {
         if (getUserRepository().existsByEmail(user.getEmail()) || getUserRepository().existsByUsername(user.getUsername())) {
             return null;
         }
-        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        user.setSalt(BCrypt.gensalt());
+        user.setPassword(BCrypt.hashpw(user.getPassword(), user.getSalt()));
         getUserRepository().save(user);
         return user;
     }
