@@ -29,18 +29,20 @@ public interface UserService {
         if (getUserRepository().existsByEmail(user.getEmail()) || getUserRepository().existsByUsername(user.getUsername())) {
             return null;
         }
-        user.setSalt(BCrypt.gensalt());
-        user.setPassword(BCrypt.hashpw(user.getPassword(), user.getSalt()));
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         getUserRepository().save(user);
         return user;
     }
 
     default User getUser(String json) {
         User user = getGson().fromJson(json, User.class);
-        if (!getUserRepository().existsByEmail(user.getEmail())) {
-            return null;
+        if(getUserRepository().existsByEmail(user.getUsername())) {
+            return getUserRepository().findByEmail(user.getUsername());
         }
-        return getUserRepository().findByEmail(user.getEmail());
+        else if(getUserRepository().existsByUsername(user.getUsername())) {
+            return getUserRepository().findByUsername(user.getUsername());
+        }
+        return null;
     }
 
     default User editUser(String json) {

@@ -1,4 +1,4 @@
-export class RegistrationResponse {
+export class UserQueryResponse {
   successStatus: boolean;
   context: string;
 }

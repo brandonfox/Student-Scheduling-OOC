@@ -25,4 +25,7 @@ export class UserService {
   public createUser(user) {
     return this.http.post<User>(this.userUrl + '/register', user);
   }
+  public attemptLogin(login) {
+    return this.http.post(this.userUrl + '/login', login);
+  }
 }

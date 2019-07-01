@@ -8,6 +8,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.pineapple.pp.entities.User;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class SecurityService {
 
@@ -34,5 +35,8 @@ public class SecurityService {
             //Verification failed. Token is invalid
             return false;
         }
+    }
+    public static boolean isValidCredentials(User user, String attemptedPassword){
+        return BCrypt.checkpw(attemptedPassword,user.getPassword());
     }
 }

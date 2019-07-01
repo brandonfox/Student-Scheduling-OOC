@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {UserService} from '../service/user.service';
-import {RegistrationResponse} from '../model/registration-response';
+import {UserQueryResponse} from '../model/user-query-response';
 import { AuthenticationService} from '../service/authentication.service';
 
 @Component({templateUrl: 'register.component.html'})
@@ -10,7 +10,7 @@ export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
-    userResponse: RegistrationResponse;
+    userResponse: UserQueryResponse;
 
 
     constructor(

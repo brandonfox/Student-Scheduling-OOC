@@ -1,6 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService} from '../service/user.service';
+import {UserQueryResponse} from '../model/user-query-response';
+import { AuthenticationService} from '../service/authentication.service';
 
 @Component({
   selector: 'app-login-component',
@@ -17,6 +20,8 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
+        private userService: UserService,
+        private authService: AuthenticationService
     ) {
             this.router.navigate(['/login']);
     }
@@ -36,10 +41,20 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
+        console.log('Submitting form');
         // stop here if form is invalid
         if (this.loginForm.invalid) {
             return;
         }
+        this.userService.attemptLogin(this.loginForm.getRawValue()).subscribe(data => this.processLoginResponse(data));
+    }
+    processLoginResponse(data) {
+      const loginResponse: UserQueryResponse = data.valueOf();
+      if (loginResponse.successStatus) {
+        // Login successfull
+        this.authService.setAuthToken(loginResponse.context);
+        this.router.navigate(['main']);
+      }
+      // TODO Else with a visual update for the user to know that their info was invalid
     }
 }

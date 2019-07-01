@@ -1,23 +1,13 @@
 package com.pineapple.pp.controllers;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.pineapple.pp.entities.User;
-import com.pineapple.pp.exception.ResourceNotFoundException;
-import com.pineapple.pp.repositories.UserRepository;
 import com.pineapple.pp.services.SecurityService;
 import com.pineapple.pp.services.UserService;
-import com.pineapple.pp.utils.LoginResponse;
-import com.pineapple.pp.utils.RegistrationResponse;
-import com.sun.deploy.net.HttpResponse;
+import com.pineapple.pp.utils.UserQueryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -31,25 +21,41 @@ public class UserController {
     }
     
     @PostMapping(path = "/register")
-    public @ResponseBody RegistrationResponse add(@RequestBody String json) {
+    public @ResponseBody
+    UserQueryResponse add(@RequestBody String json) {
         System.out.print("Creating new user " + json + "... ");
         User user = userService.add(json);
         if (user == null) {
             System.out.print("Fail..\n");
-            return new RegistrationResponse(false,"username");
+            return new UserQueryResponse(false,"username");
         }
         else {
             System.out.print("Success!\n");
-            return new RegistrationResponse(true, SecurityService.createUserAuthenticationToken(user));
+            return new UserQueryResponse(true, SecurityService.createUserAuthenticationToken(user));
         }
     }
     
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody String json) {
+    @ResponseBody
+    public UserQueryResponse login(@RequestBody String json) {
         User user = userService.getUser(json);
-        LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setEmail(user.getEmail());
-        return loginResponse;
+        System.out.print("Processing login request: ");
+        if(user == null){
+            //Username or email is incorrect
+            System.out.print("User " + json + " not found\n");
+            return new UserQueryResponse(false,"username");
+        }
+        //TODO Consider moving this into its own class / functions
+        JsonObject jsonObject = (JsonObject) new JsonParser().parse(json);
+        if(SecurityService.isValidCredentials(user,jsonObject.get("password").getAsString())){
+            System.out.print("User " + json + " logging in\n");
+            //If user credentials were valid send a response with a authentication token
+            return new UserQueryResponse(true,SecurityService.createUserAuthenticationToken(user));
+        }
+        System.out.print("User " + json + " wrong password\n");
+        //User exists but password is wrong
+        //Tell frontend username is wrong for security reasons
+        return new UserQueryResponse(false,"username");
     }
     
     @GetMapping("/all")

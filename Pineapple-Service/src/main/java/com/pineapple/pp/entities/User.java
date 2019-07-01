@@ -22,8 +22,6 @@ public class User {
 //    private String name;
 //
 
-    private String salt;
-
     private String password;
 //
     private String email;
@@ -49,7 +47,6 @@ public class User {
 
     public Long getId() { return id; }
     public String getUsername() { return username; }
-    public String getSalt() { return salt; }
 //    public String getName() { return name; }
     public String getPassword() { return password; }
     public String getEmail() { return email; }
@@ -62,7 +59,6 @@ public class User {
 //    public void setName(String name) { this.name = name; }
     public void setPassword(String password) { this.password = password; }
     public void setEmail(String email) { this.email = email; }
-    public void setSalt(String salt) { this.salt = salt;}
 //    public void setAge(Integer age) { this.age = age; }
 //    public void setPhoneNumber(Long phoneNumber) { this.phoneNumber = phoneNumber; }
 //    public void setFriends(Set<User> friends) { this.friends = friends; }
