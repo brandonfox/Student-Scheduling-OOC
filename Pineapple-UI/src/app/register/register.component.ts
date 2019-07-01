@@ -5,7 +5,11 @@ import {UserService} from '../service/user.service';
 import {UserQueryResponse} from '../model/user-query-response';
 import { AuthenticationService} from '../service/authentication.service';
 
-@Component({templateUrl: 'register.component.html'})
+@Component({
+  selector: 'app-register',
+  templateUrl: 'register.component.html',
+  styleUrls: ['./register.component.scss']
+})
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;

@@ -14,12 +14,9 @@ import { HomeComponent } from './home/home.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DemoMaterialModule } from './core/material-module';
 import { NavigationComponent } from './navigation/navigation.component';
-import { SecondComponent } from './second/second.component';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { HomeLayoutComponent } from './home-layout/home-layout.component';
 import {UserService} from './service/user.service';
-import { UserEditComponent } from './user-edit/user-edit.component';
-import { UserListComponent } from './user-list/user-list.component';
 import {CookieService} from 'ngx-cookie-service';
 
 const appRoutes: Routes = [
@@ -35,19 +32,8 @@ const appRoutes: Routes = [
   { path: 'main', component: HomeLayoutComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent },
-      { path: 'second', component: SecondComponent }
+      { path: 'home', component: HomeComponent }
     ]
-  },
-  {path: 'users',
-  component: UserListComponent},
-  {
-    path: 'user-add',
-    component: UserEditComponent
-  },
-  {
-    path: 'user-edit/:id',
-    component: UserEditComponent
   }
 ];
 
@@ -71,11 +57,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     HomeComponent,
     NavigationComponent,
-    SecondComponent,
     LoginLayoutComponent,
     HomeLayoutComponent,
-    UserEditComponent,
-    UserListComponent
   ],
   providers: [UserService, CookieService],
   bootstrap: [AppComponent]
