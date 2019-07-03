@@ -2,6 +2,7 @@ package com.pineapple.pp.services;
 
 import com.google.gson.Gson;
 import com.pineapple.pp.entities.User;
+import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -34,15 +35,9 @@ public interface UserService {
         return user;
     }
 
-    default User getUser(String json) {
+    default User getUserFromJson(String json) {
         User user = getGson().fromJson(json, User.class);
-        if(getUserRepository().existsByEmail(user.getUsername())) {
-            return getUserRepository().findByEmail(user.getUsername());
-        }
-        else if(getUserRepository().existsByUsername(user.getUsername())) {
-            return getUserRepository().findByUsername(user.getUsername());
-        }
-        return null;
+        return getUser(user.getUsername());
     }
 
     default User editUser(String json) {
@@ -55,5 +50,17 @@ public interface UserService {
 
     default User findByEmail(String email) {
         return getUserRepository().findByEmail(email);
+    }
+    default User getUser(UserToken token){
+        return getUser(token.getUsername());
+    }
+    default User getUser(String identificationString){
+        if(getUserRepository().existsByEmail(identificationString)) {
+            return getUserRepository().findByEmail(identificationString);
+        }
+        else if(getUserRepository().existsByUsername(identificationString)) {
+            return getUserRepository().findByUsername(identificationString);
+        }
+        return null;
     }
 }

@@ -1,6 +1,6 @@
 package com.pineapple.pp.utils;
 
-public class UserQueryResponse {
+public class QueryResponse {
 
     private boolean success;
 
@@ -8,9 +8,12 @@ public class UserQueryResponse {
     //Store either authenticationtoken or the invalid field
     private String context;
 
-    public UserQueryResponse(boolean success, String context){
+    public QueryResponse(boolean success, String context){
         this.success = success;
         this.context = context;
+    }
+    public QueryResponse(boolean success){
+        this(success,"");
     }
 
     public boolean getSuccessStatus(){return success;}
