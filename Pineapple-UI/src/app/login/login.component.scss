@@ -1,0 +1,34 @@
+.header {
+  text-align: center;
+}
+
+.logo {
+  width: 100px;
+  padding-top: 80px;
+  fill: currentColor;
+}
+
+.form-field,
+.alert-danger {
+  display: block;
+  width: 300px;
+  margin: 20px auto;
+  font-family: Ubuntu, sans-serif;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 300px;
+  margin: auto;
+}
+
+.button-container button {
+  margin: 3px auto;
+  font-family: Ubuntu, serif;
+  color: grey;
+}
+
+button:focus {
+  outline:0;
+}

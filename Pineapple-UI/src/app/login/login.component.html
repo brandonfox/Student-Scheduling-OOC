@@ -1,30 +1,55 @@
-﻿<div class="pineapple-Login-header">
-  <div class="pineapple-Login-header_logo">
-    <img class="logo" align="left" alt="Pineapple Logo" src="../../assets/pineapple.png">
-  </div>
-  <div class="pineapple-Login-header_text">
-    <h2>Welcome, this is your stairway to heaven.</h2>
-  </div>
+﻿<section class="header">
+  <img src="../../assets/outline_ballot_black_48dp.png" alt="logo" class="logo">
+  <h1>PINEAPPLE</h1>
+</section>
+<div
+  *ngIf="submitted && (f.username.errors || f.password.errors)"
+  class="alert alert-danger"
+  role="alert">
+  <div *ngIf="f.username.errors.required || f.password.errors.required">Username and password is required</div>
 </div>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label>Username</label>
-        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <button [disabled]="loading" type="submit" class="btn btn-dark">Login</button>
-        <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-        <a routerLink="/register" class="btn btn-link">Register</a>
-    </div>
+  <div class="form-group">
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Username</mat-label>
+      <label>
+        <input
+          matInput
+          type="text"
+          class="control"
+          formControlName="username"
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+          placeholder="example@example.com">
+      </label>
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field
+      class="form-field"
+      style="outline-color: antiquewhite"
+      appearance="fill">
+      <mat-label>Password</mat-label>
+      <label>
+        <input
+          matInput
+          type="password"
+          class="control"
+          formControlName="password"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+      </label>
+    </mat-form-field>
+  </div>
+  <div class="button-container">
+    <button
+      [disabled]="loading"
+      type="submit"
+      mat-raised-button
+      style="background-color: antiquewhite"
+      class="button"
+      routerLink="/main">Login</button>
+    <button
+      mat-button color="primary"
+      routerLink="/register"
+      class="button">Register</button>
+  </div>
 </form>

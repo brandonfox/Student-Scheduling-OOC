@@ -1,0 +1,32 @@
+.header {
+  padding-top: 10px;
+  text-align: center;
+  font-family: Ubuntu, serif;
+}
+
+.card {
+  max-width: 400px;
+}
+
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
+}
+
+.button-bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+mat-icon{
+  color: grey;
+}
+
+button:focus {
+  outline:0;
+}
