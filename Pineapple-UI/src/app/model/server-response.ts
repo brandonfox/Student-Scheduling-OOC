@@ -1,4 +1,4 @@
-export class UserQueryResponse {
+export class ServerResponse {
   successStatus: boolean;
   context: string;
 }
