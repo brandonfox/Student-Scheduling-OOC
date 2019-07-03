@@ -39,6 +39,7 @@ build/
 
 # dependencies
 /node_modules
+/Pineapple-UI/node_modules
 
 # profiling files
 chrome-profiler-events.json
