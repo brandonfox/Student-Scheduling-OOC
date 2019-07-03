@@ -18,12 +18,11 @@ public class CardServiceImpl implements CardService{
         this.gson = gson;
     }
 
+    @Override
     public CardRepository getCardRepository() {
         return cardRepository;
     }
 
     @Override
-    public Gson getGson() {
-        return gson;
-    }
+    public Gson getGson() { return gson; }
 }

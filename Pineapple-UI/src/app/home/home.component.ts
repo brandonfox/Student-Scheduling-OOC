@@ -28,5 +28,5 @@ export class HomeComponent implements OnInit {
       .subscribe( data => {
         this.users = this.users.filter(u => u !== user);
       });
-  };
+  }
 }

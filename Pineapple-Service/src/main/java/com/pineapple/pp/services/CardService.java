@@ -32,7 +32,7 @@ public interface CardService {
     default Card editCard(String json) {
         Card card = getGson().fromJson(json, Card.class);
         Card cardFromDB = getCardRepository().findCardById(card.getId());
-        cardFromDB.setTitle(card.getStatus());
+        cardFromDB.setTitle(card.getTitle());
         cardFromDB.setDescription(card.getDescription());
         cardFromDB.setStatus(card.getStatus());
         cardFromDB.setUsers(card.getUsers());
