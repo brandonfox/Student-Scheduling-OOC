@@ -2,7 +2,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService} from '../service/user.service';
-import {UserQueryResponse} from '../model/user-query-response';
+import { ServerResponse } from '../model/server-response';
 import { AuthenticationService} from '../service/authentication.service';
 
 @Component({
@@ -46,7 +46,10 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
+        this.loading = true;
         console.log('Submitting form');
+
+
         // stop here if form is invalid
         if (this.loginForm.invalid) {
             return;
@@ -54,13 +57,14 @@ export class LoginComponent implements OnInit {
         this.userService.attemptLogin(this.loginForm.getRawValue()).subscribe(data => this.processLoginResponse(data));
     }
     processLoginResponse(data) {
-      const loginResponse: UserQueryResponse = data.valueOf();
+      const loginResponse: ServerResponse = data.valueOf();
       if (loginResponse.successStatus) {
-        // Login successfull
+        // Login successful
         this.authService.setAuthToken(loginResponse.context);
         this.router.navigate(['main']);
-      } else { // TODO Else with a visual update for the user to know that their info was invalid
-        this.invalidCredentials = true;
+      } else {
+        this.invalidCredentials = true; // Use this boolean for determining whether an error message should be displayed
       }
+      this.loading = false;
     }
 }

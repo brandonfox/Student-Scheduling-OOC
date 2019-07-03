@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {UserService} from '../service/user.service';
-import {UserQueryResponse} from '../model/user-query-response';
+import {ServerResponse} from '../model/server-response';
 import { AuthenticationService} from '../service/authentication.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
-    userResponse: UserQueryResponse;
+    userResponse: ServerResponse;
     emailTaken = false;
     usernameTaken = false;
 
@@ -43,6 +43,7 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         console.log('Submitting form');
+        this.loading = true;
         this.submitted = true;
         // stop here if form is invalid
         if (this.registerForm.invalid) {
@@ -65,5 +66,6 @@ export class RegisterComponent implements OnInit {
         if (this.userResponse.context === 'username') {this.usernameTaken = true; }
         if (this.userResponse.context === 'email') {this.emailTaken = true; }
       }
+      this.loading = false;
     }
 }
