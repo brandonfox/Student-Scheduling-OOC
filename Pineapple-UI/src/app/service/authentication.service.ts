@@ -23,6 +23,11 @@ export class AuthenticationService {
   public checkAuthToken(): Promise<boolean> {
     return this.http.post<boolean>(this.authenticationUrl, this.getAuthToken()).toPromise();
   }
+
+  /**
+   * Function to check if the current session is valid (User is logged in)
+   * If session is invalid will delete the authenticaion cookie and redirect to the login screen
+   */
   public authenticateUser() {
     this.checkAuthToken().then(data => {
       if (!data) {
@@ -30,6 +35,11 @@ export class AuthenticationService {
       }
     });
   }
+
+  /**
+   * Stores a session token as a cookie
+   * @param authToken the token to store
+   */
   public setAuthToken(authToken) {
     this.cookieService.set('authToken', authToken);
   }
@@ -39,9 +49,17 @@ export class AuthenticationService {
   public getAuthToken(): string {
     return this.cookieService.get('authToken');
   }
+
+  /**
+   * Post function that sends the current session token
+   */
   public post(url, data) {
     return this.http.post(url, data, { headers: this.getAuthorizedHeader()});
   }
+
+  /**
+   * Get function that sends the current session token
+   */
   public get(url) {
     return this.http.get(url, {headers: this.getAuthorizedHeader()});
   }
