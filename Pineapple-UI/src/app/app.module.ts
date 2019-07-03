@@ -14,25 +14,20 @@ import { HomeComponent } from './home/home.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DemoMaterialModule } from './core/material-module';
 import { NavigationComponent } from './navigation/navigation.component';
-import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { HomeLayoutComponent } from './home-layout/home-layout.component';
 import {UserService} from './service/user.service';
 import {CookieService} from 'ngx-cookie-service';
+import { AddeventComponent } from './addevent/addevent.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', data: { title: 'First Component' }, pathMatch: 'full' },
-  {
-    path: 'login', component: LoginLayoutComponent, data: {title: 'First Component'},
-    children: [
-      {path: '', component: LoginComponent}
-    ]
-  },
-  {path: 'register', component: LoginLayoutComponent, data: {title: 'First Component'}, children: [{path: '', component: RegisterComponent}]
-  },
+  { path: 'login', component: LoginComponent, data: {title: 'First Component'}},
+  { path: 'register', component: RegisterComponent, data: {title: 'First Component'}},
   { path: 'main', component: HomeLayoutComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent }
+      { path: 'home', component: HomeComponent },
+      { path: 'add', component: AddeventComponent }
     ]
   }
 ];
@@ -57,8 +52,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     HomeComponent,
     NavigationComponent,
-    LoginLayoutComponent,
     HomeLayoutComponent,
+    AddeventComponent,
   ],
   providers: [UserService, CookieService],
   bootstrap: [AppComponent]

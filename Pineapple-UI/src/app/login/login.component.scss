@@ -25,4 +25,10 @@
 
 .button-container button {
   margin: 3px auto;
+  font-family: Ubuntu, serif;
+  color: grey;
+}
+
+button:focus {
+  outline:0;
 }

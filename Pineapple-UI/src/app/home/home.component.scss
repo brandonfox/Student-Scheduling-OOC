@@ -4,7 +4,7 @@
   font-family: Ubuntu, serif;
 }
 
-.example-card {
+.card {
   max-width: 400px;
 }
 
@@ -25,4 +25,8 @@
 
 mat-icon{
   color: grey;
+}
+
+button:focus {
+  outline:0;
 }
