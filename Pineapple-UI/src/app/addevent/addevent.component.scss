@@ -1,0 +1,45 @@
+.form-field,
+.alert-danger {
+  display: block;
+  width: calc(578px + (100% - 1049px)*.16666667);
+  margin: 20px;
+  font-family: Ubuntu, sans-serif;
+}
+
+.button-bottom-right-check,
+.button-bottom-right-close {
+  position: absolute;
+  bottom: 10px;
+}
+
+.button-bottom-right-close {
+  right: 90px;
+}
+
+.button-bottom-right-check {
+  right: 16px;
+}
+
+button:focus {
+  outline: 0;
+  border: none;
+}
+
+mat-icon{
+  color: grey;
+}
+
+mat-form-field,
+.raised-button,
+.all-day {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.all-day {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+

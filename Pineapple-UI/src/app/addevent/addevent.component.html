@@ -1,1 +1,56 @@
-<p>addevent works!</p>
+<div class="form-container">
+  <div class="form-group">
+    <mat-form-field class="form-field" appearance="standard">
+      <label>
+        <input
+          matInput
+          type="text"
+          class="control"
+          placeholder="Add Title"
+          style="font-size: 30px;"
+          >
+      </label>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="datepicker">
+  <mat-form-field class="example-full-width">
+    <label>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+    </label>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button class="raised-button" mat-raised-button (click)="picker.open()">Open</button>
+  to
+  <mat-form-field class="example-full-width">
+    <input matInput [matDatepicker]="picker2" placeholder="Choose a date">
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+  <button class="raised-button" mat-raised-button (click)="picker.open()">Open</button>
+</div>
+<div class="all-day">
+    <mat-slide-toggle
+      class="example-margin"
+      color="primary"
+      [checked]="checked"
+      [disabled]="disabled">
+      All day
+    </mat-slide-toggle>
+
+</div>
+
+<button
+  class="button-bottom-right-check"
+  style="background-color: antiquewhite"
+  routerLink="/main/add"
+  mat-fab>
+  <mat-icon>check</mat-icon>
+</button>
+<button
+  class="button-bottom-right-close"
+  routerLink="/main/add"
+  style="background-color: white"
+  mat-fab>
+  <mat-icon>close</mat-icon>
+</button>

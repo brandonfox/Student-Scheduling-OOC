@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./addevent.component.scss']
 })
 export class AddeventComponent implements OnInit {
+  checked = false;
+  disabled = false;
 
   constructor() { }
 
