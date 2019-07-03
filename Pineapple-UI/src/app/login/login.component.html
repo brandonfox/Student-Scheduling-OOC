@@ -3,10 +3,10 @@
   <h1>PINEAPPLE</h1>
 </section>
 <div
-  *ngIf="submitted && (f.username.errors || f.password.errors)"
+  *ngIf="submitted && (f.username.errors?.required || f.password.errors?.required || invalidCredentials)"
   class="alert alert-danger"
   role="alert">
-  <div *ngIf="f.username.errors.required || f.password.errors.required">Username and password is required</div>
+  <div >Username and password is required</div>
 </div>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
@@ -45,8 +45,7 @@
       type="submit"
       mat-raised-button
       style="background-color: antiquewhite"
-      class="button"
-      routerLink="/main">Login</button>
+      class="button">Login</button>
     <button
       mat-button color="primary"
       routerLink="/register"

@@ -52,7 +52,8 @@ export class LoginComponent implements OnInit {
 
         // stop here if form is invalid
         if (this.loginForm.invalid) {
-            return;
+          this.loading = false;
+          return;
         }
         this.userService.attemptLogin(this.loginForm.getRawValue()).subscribe(data => this.processLoginResponse(data));
     }

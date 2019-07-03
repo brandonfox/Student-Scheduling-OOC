@@ -18,9 +18,13 @@ import { HomeLayoutComponent } from './home-layout/home-layout.component';
 import {UserService} from './service/user.service';
 import {CookieService} from 'ngx-cookie-service';
 import { AddeventComponent } from './addevent/addevent.component';
+import {EventListTestComponent} from './event-list-test/event-list-test.component';
+import {EventAddTestComponent} from './event-add-test/event-add-test.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', data: { title: 'First Component' }, pathMatch: 'full' },
+  {path: 'events', component: EventListTestComponent},
+  {path: 'events/add', component: EventAddTestComponent},
   { path: 'login', component: LoginComponent, data: {title: 'First Component'}},
   { path: 'register', component: RegisterComponent, data: {title: 'First Component'}},
   { path: 'main', component: HomeLayoutComponent,
@@ -54,6 +58,8 @@ const appRoutes: Routes = [
     NavigationComponent,
     HomeLayoutComponent,
     AddeventComponent,
+    EventAddTestComponent,
+    EventListTestComponent,
   ],
   providers: [UserService, CookieService],
   bootstrap: [AppComponent]
