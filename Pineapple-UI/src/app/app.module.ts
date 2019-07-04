@@ -22,6 +22,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list/user-list.component';
 import {CookieService} from 'ngx-cookie-service';
 import { CardComponent } from './card/card.component';
+import {CardService} from './service/card.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', data: { title: 'First Component' }, pathMatch: 'full' },
@@ -49,7 +50,19 @@ const appRoutes: Routes = [
   {
     path: 'user-edit/:id',
     component: UserEditComponent
-  }
+  },
+  {
+    path: 'cards',
+    component: CardComponent
+  },
+  {
+    path: 'edit-card',
+    component: CardComponent
+  },
+  {
+    path: 'create-card',
+    component: CardComponent
+  },
 ];
 
 @NgModule({
@@ -79,7 +92,7 @@ const appRoutes: Routes = [
     UserListComponent,
     CardComponent
   ],
-  providers: [UserService, CookieService],
+  providers: [UserService, CookieService, CardService],
   bootstrap: [AppComponent]
 })
 

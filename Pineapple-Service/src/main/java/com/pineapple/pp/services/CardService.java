@@ -10,11 +10,11 @@ import java.util.List;
 public interface CardService {
 
     default List<Card> list() {
+        System.out.println("In list() in CardService.java");
         List<Card> userList = new ArrayList<>();
         for (Card card : getCardRepository().findAll()) {
-            if (card != null) {
-                userList.add(card);
-            }
+            System.out.println(card.getTitle());
+            userList.add(card);
         }
         return userList;
     }

@@ -1,10 +1,7 @@
 package com.pineapple.pp.controllers;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.pineapple.pp.entities.Card;
 import com.pineapple.pp.services.CardService;
-import com.pineapple.pp.services.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +16,7 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    @PostMapping(path = "/new-card")
+    @PostMapping(path = "/create-card")
     public void add(@RequestBody String json) {
         System.out.print("Creating new card " + json + "... ");
         Card card = cardService.add(json);

@@ -12,7 +12,7 @@ import {FormGroup} from '@angular/forms';
 })
 export class CardComponent implements OnInit {
 
-  // createCardForm: FormGroup;
+  createCardForm: FormGroup;
   cards: Card[];
   constructor(
     private router: Router,
@@ -24,16 +24,14 @@ export class CardComponent implements OnInit {
       data => { this.cards = data; }
     );
   }
-
-//   createCard() {
-//     console.log('Creating card');
-//     if (this.createCardForm.invalid) { return; }
-//     console.log('Creating card with: ' + this.createCardForm.getRawValue());
-//     this.cardService.createCard(this.createCardForm.getRawValue())
-//       .subscribe(params => {
-//         this.pro
-//       });
-// }
+  get getField() { return this.createCardForm.controls; }
+  createCard() {
+    console.log('Creating card');
+    if (this.createCardForm.invalid) { return; }
+    console.log('Creating card with: ' + this.createCardForm.getRawValue());
+    this.cardService.createCard(this.createCardForm.getRawValue())
+      .subscribe(params => { });
+}
 
   editCard(card: Card): void {
     this.cardService.editCard(card)
