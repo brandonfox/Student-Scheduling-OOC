@@ -1,4 +1,5 @@
 .sidenav-content {
+  background-color: lightgray;
   display: flex;
   height: 100vh;
   padding-left: 10px;
@@ -9,9 +10,14 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)
 }
 .active{
-  background-color:rgba(9, 30, 66, 0.25);
+  background-color:rgba(9, 30, 66, 0.1);
 }
 
 mat-icon{
   color: grey;
+}
+
+.logout {
+  position: absolute;
+  bottom: 8px;
 }

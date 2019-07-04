@@ -11,6 +11,13 @@
   font-family: Ubuntu, sans-serif;
 }
 
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 300px;
+  margin: auto;
+}
+
 .button-container button {
   margin: 3px auto;
   font-family: Ubuntu, serif;
