@@ -53,19 +53,22 @@ export class AuthenticationService {
   /**
    * Post function that sends the current session token
    */
-  public post(url, data) {
-    return this.http.post(url, data, { headers: this.getAuthorizedHeader()});
+  public post<T>(url, data) {
+    return this.http.post<T>(url, data, { headers: this.getAuthorizedHeader()});
   }
 
   /**
    * Get function that sends the current session token
    */
-  public get(url) {
-    return this.http.get(url, {headers: this.getAuthorizedHeader()});
+  public get<T>(url) {
+    return this.http.get<T>(url, {headers: this.getAuthorizedHeader()});
   }
   private getAuthorizedHeader(): HttpHeaders {
     // Headers are immutable so when appending header fields must use new returned object, Took me a while
     return new HttpHeaders().append('authorization', this.getAuthToken());
+  }
+  public logout() {
+    this.doUnauthorizedUserStuff();
   }
   // This should probably be renamed to logout
   public doUnauthorizedUserStuff() {
