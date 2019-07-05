@@ -42,6 +42,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -52,7 +54,8 @@ import {MatTreeModule} from '@angular/material/tree';
     MatSidenavModule,
     MatListModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    NgbModule
   ],
   exports: [
     A11yModule,
@@ -97,7 +100,8 @@ import {MatTreeModule} from '@angular/material/tree';
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
+    NgbModule
   ]
 })
 export class DemoMaterialModule {}
