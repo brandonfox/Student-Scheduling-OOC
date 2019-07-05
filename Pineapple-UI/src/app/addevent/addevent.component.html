@@ -1,6 +1,6 @@
 <div class="form-container">
-  <div class="form-group">
-    <mat-form-field class="form-field">
+  <div class="form-group" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="add-title" appearance="legacy">
       <label>
         <input
           matInput
@@ -8,60 +8,81 @@
           class="control"
           placeholder="Add Title"
           style="font-size: 30px;"
-          >
+          formControlName="name">
       </label>
+      <div *ngIf="submitted && f.name.errors.required">Name is required</div>
     </mat-form-field>
   </div>
 </div>
 
-<div class="datepicker">
-  <mat-form-field class="example-full-width">
-    <label>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-    </label>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <button class="raised-button" mat-raised-button (click)="picker.open()">Open</button>
-  to
-  <mat-form-field class="example-full-width">
-    <input matInput [matDatepicker]="picker2" placeholder="Choose a date">
-    <mat-datepicker #picker2></mat-datepicker>
-  </mat-form-field>
-  <button class="raised-button" mat-raised-button (click)="picker.open()">Open</button>
-</div>
-<div class="all-day">
-    <mat-slide-toggle
-      class="example-margin"
-      color="primary"
-      [checked]="checked"
-      [disabled]="disabled">
-      All day
-    </mat-slide-toggle>
-
-</div>
-
-<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+<div class="form-container">
   <div class="form-group">
-    <label>Name</label>
-    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': f.name.errors }" />
-    <div *ngIf="f.name.errors" class="invalid-feedback">
-      <div *ngIf="f.name.errors.required">Name is required</div>
+    <mat-form-field class="date-picker">
+      <label>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+      </label>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button class="raised-button" mat-raised-button (click)="picker.open()">Open</button>
+    <div
+      class="time-picker">
+      <ngb-timepicker
+        [style.display]="disableSelect.value ? 'none' : 'block' "
+        [(ngModel)]="time"
+        [spinners]="false">
+      </ngb-timepicker>
+    </div>
+    <span class="date-picker"> to </span>
+    <mat-form-field class="date-picker">
+      <label>
+        <input matInput [matDatepicker]="picker2" placeholder="Choose a date">
+      </label>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <button class="raised-button" mat-raised-button (click)="picker2.open()">Open</button>
+    <div class="time-picker">
+      <ngb-timepicker
+        [style.display]="disableSelect.value ? 'none' : 'block' "
+        [(ngModel)]="time"
+        [spinners]="false"></ngb-timepicker>
     </div>
   </div>
+</div>
+
+<div class="form-container">
   <div class="form-group">
-    <label>Description</label>
-    <input type="text" formControlName="description" class="form-control"/>
+    <mat-slide-toggle
+      class="all-day-form"
+      color="primary"
+      [checked]="checked"
+      [formControl]="disableSelect">
+      All day
+    </mat-slide-toggle>
   </div>
+</div>
+
+<div class="form-container">
   <div class="form-group">
-    <button [disabled]="loading" type="submit" class="btn btn-dark">Submit</button>
-    <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    <mat-form-field class="description" appearance="outline">
+      <mat-label>Description</mat-label>
+      <label>
+        <textarea
+          matInput></textarea>
+      </label>
+    </mat-form-field>
   </div>
-</form>
+</div>
+<!--<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">-->
+<!--  <div class="form-group">-->
+<!--    <label>Description</label>-->
+<!--    <input type="text" formControlName="description" class="form-control"/>-->
+<!--  </div>-->
+<!--</form>-->
 
 <button
+  type="submit"
   class="button-bottom-right-check"
   style="background-color: antiquewhite"
-  routerLink="/main/add"
   mat-fab>
   <mat-icon>check</mat-icon>
 </button>

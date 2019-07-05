@@ -3,14 +3,15 @@
   <h1>PINEAPPLE</h1>
 </section>
 <div
-  *ngIf="submitted && (f.username.errors || f.password.errors)"
+  *ngIf="submitted && (f.username.errors || f.password.errors || invalidCredentials)"
   class="alert alert-danger"
   role="alert">
-  <div *ngIf="f.username.errors.required || f.password.errors.required">Username and password is required</div>
+  <div *ngIf="f.username.errors?.required || f.password.errors?.required || invalidCredentials">Something is wrong with the input</div>
 </div>
+
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <mat-form-field class="form-field" appearance="fill">
+    <mat-form-field class="form-field" appearance="legacy">
       <mat-label>Username</mat-label>
       <label>
         <input
@@ -18,16 +19,12 @@
           type="text"
           class="control"
           formControlName="username"
-          [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-          placeholder="example@example.com">
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
       </label>
     </mat-form-field>
   </div>
   <div class="form-group">
-    <mat-form-field
-      class="form-field"
-      style="outline-color: antiquewhite"
-      appearance="fill">
+    <mat-form-field class="form-field" appearance="legacy">
       <mat-label>Password</mat-label>
       <label>
         <input
@@ -45,8 +42,7 @@
       type="submit"
       mat-raised-button
       style="background-color: antiquewhite"
-      class="button"
-      routerLink="/main">Login</button>
+      class="button">Login</button>
     <button
       mat-button color="primary"
       routerLink="/register"

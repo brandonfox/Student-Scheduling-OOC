@@ -15,8 +15,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { DemoMaterialModule } from './core/material-module';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HomeLayoutComponent } from './home-layout/home-layout.component';
-import {UserService} from './service/user.service';
-import {CookieService} from 'ngx-cookie-service';
+import { UserService } from './service/user.service';
+import { CookieService } from 'ngx-cookie-service';
 import { AddeventComponent } from './addevent/addevent.component';
 
 const appRoutes: Routes = [

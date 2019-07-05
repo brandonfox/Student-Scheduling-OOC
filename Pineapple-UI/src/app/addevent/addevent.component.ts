@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../service/authentication.service';
 import {EventService} from '../service/event.service';
 import {Router} from '@angular/router';
@@ -12,8 +12,10 @@ import {Router} from '@angular/router';
 export class AddeventComponent implements OnInit {
   eventForm: FormGroup;
   loading = false;
-  checked = false;
-  disabled = false;
+  submitted = false;
+  checked = true;
+  disableSelect = new FormControl(this.checked);
+  time = {hour: 0, minute: 0};
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,8 +30,11 @@ export class AddeventComponent implements OnInit {
       description: [''],
     });
   }
+
   public onSubmit() {
+    console.log('Submitting form');
     this.loading = true;
+    this.submitted = true;
     if (this.eventForm.invalid) {
       this.loading = false;
       return;
