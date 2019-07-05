@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../service/authentication.service';
 import {EventService} from '../service/event.service';
 import {Router} from '@angular/router';
+import DateTimeFormat = Intl.DateTimeFormat;
 
 @Component({
   selector: 'app-addevent',
@@ -15,7 +16,6 @@ export class AddeventComponent implements OnInit {
   submitted = false;
   checked = true;
   disableSelect = new FormControl(this.checked);
-  time = {hour: 0, minute: 0};
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,6 +27,9 @@ export class AddeventComponent implements OnInit {
   ngOnInit() {
     this.eventForm = this.formBuilder.group({
       name: ['', Validators.required],
+      startTime: [DateTimeFormat()],
+      endTime: [DateTimeFormat()],
+      allDay: [Boolean],
       description: [''],
     });
   }
@@ -40,7 +43,7 @@ export class AddeventComponent implements OnInit {
       return;
     }
     this.eventService.addEvent(this.eventForm.getRawValue());
-    this.router.navigate(['events']);
+    this.router.navigate(['main/home']);
   }
   get f() {return this.eventForm.controls; }
 }
