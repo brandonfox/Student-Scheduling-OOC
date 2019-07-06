@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginLayoutComponent } from './login-layout.component';
+import { EventAddTestComponent } from './event-add-test.component';
 
-describe('LoginLayoutComponent', () => {
-  let component: LoginLayoutComponent;
-  let fixture: ComponentFixture<LoginLayoutComponent>;
+describe('EventAddTestComponent', () => {
+  let component: EventAddTestComponent;
+  let fixture: ComponentFixture<EventAddTestComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginLayoutComponent ]
+      declarations: [ EventAddTestComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginLayoutComponent);
+    fixture = TestBed.createComponent(EventAddTestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

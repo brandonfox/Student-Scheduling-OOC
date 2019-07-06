@@ -14,55 +14,26 @@ import { HomeComponent } from './home/home.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DemoMaterialModule } from './core/material-module';
 import { NavigationComponent } from './navigation/navigation.component';
-import { SecondComponent } from './second/second.component';
-import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { HomeLayoutComponent } from './home-layout/home-layout.component';
-import {UserService} from './service/user.service';
-import { UserEditComponent } from './user-edit/user-edit.component';
-import { UserListComponent } from './user-list/user-list.component';
-import {CookieService} from 'ngx-cookie-service';
-import { CardComponent } from './card/card.component';
-import {CardService} from './service/card.service';
+import { UserService } from './service/user.service';
+import { CookieService } from 'ngx-cookie-service';
+import { AddeventComponent } from './addevent/addevent.component';
+import {EventListTestComponent} from './event-list-test/event-list-test.component';
+import {EventAddTestComponent} from './event-add-test/event-add-test.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', data: { title: 'First Component' }, pathMatch: 'full' },
-  {
-    path: 'login', component: LoginLayoutComponent, data: {title: 'First Component'},
-    children: [
-      {path: '', component: LoginComponent}
-    ]
-  },
-  {path: 'register', component: LoginLayoutComponent, data: {title: 'First Component'}, children: [{path: '', component: RegisterComponent}]
-  },
+  {path: 'events', component: EventListTestComponent},
+  {path: 'events/add', component: EventAddTestComponent},
+  { path: 'login', component: LoginComponent, data: {title: 'First Component'}},
+  { path: 'register', component: RegisterComponent, data: {title: 'First Component'}},
   { path: 'main', component: HomeLayoutComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'second', component: SecondComponent }
+      { path: 'add', component: AddeventComponent }
     ]
-  },
-  {path: 'users',
-  component: UserListComponent},
-  {
-    path: 'user-add',
-    component: UserEditComponent
-  },
-  {
-    path: 'user-edit/:id',
-    component: UserEditComponent
-  },
-  {
-    path: 'cards',
-    component: CardComponent
-  },
-  {
-    path: 'edit-card',
-    component: CardComponent
-  },
-  {
-    path: 'create-card',
-    component: CardComponent
-  },
+  }
 ];
 
 @NgModule({
@@ -85,14 +56,12 @@ const appRoutes: Routes = [
     RegisterComponent,
     HomeComponent,
     NavigationComponent,
-    SecondComponent,
-    LoginLayoutComponent,
     HomeLayoutComponent,
-    UserEditComponent,
-    UserListComponent,
-    CardComponent
+    AddeventComponent,
+    EventAddTestComponent,
+    EventListTestComponent,
   ],
-  providers: [UserService, CookieService, CardService],
+  providers: [UserService, CookieService],
   bootstrap: [AppComponent]
 })
 

@@ -1,11 +1,6 @@
 .header {
-  text-align: center;
-}
-
-.logo {
-  width: 100px;
   padding-top: 80px;
-  fill: currentColor;
+  text-align: center;
 }
 
 .form-field,
@@ -25,12 +20,10 @@
 
 .button-container button {
   margin: 3px auto;
-  font-family: Ubuntu, sans-serif;
+  font-family: Ubuntu, serif;
   color: grey;
 }
 
 button:focus {
-  outline: 0;
+  outline:0;
 }
-
-/*# sourceMappingURL=login.component.css.map */

@@ -1,32 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../service/user.service';
-import {User} from '../model/user';
-import {Router} from '@angular/router';
+import {AuthenticationService} from '../service/authentication.service';
+import {EventService} from '../service/event.service';
+import {Event} from '../model/event';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
-  users: User[];
-
+  events: Event[];
   constructor(
-    private router: Router,
-    private userService: UserService
-  ) { }
+    private authService: AuthenticationService,
+    private eventService: EventService,
+  ) {
+    this.authService.authenticateUser();
+  }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(
-      data => {this.users = data; }
-      );
+    this.eventService.getEvents().then(data => {
+      this.events = data;
+    });
   }
-
-  editUser(user: User): void {
-    this.userService.editUser(user)
-      .subscribe( data => {
-        this.users = this.users.filter(u => u !== user);
-      });
-  }
+  // TODO Change html file to display date in a more human readable format
+  // TODO Add a refresh mechanism to display events properly
 }

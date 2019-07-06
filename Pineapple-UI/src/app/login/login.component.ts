@@ -2,65 +2,71 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService} from '../service/user.service';
-import {UserQueryResponse} from '../model/user-query-response';
+import { ServerResponse } from '../model/server-response';
 import { AuthenticationService} from '../service/authentication.service';
 
 @Component({
   selector: 'app-login-component',
   templateUrl: 'login.component.html',
-  styleUrls: ['login.component.css']
+  styleUrls: ['login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    loginForm: FormGroup;
-    loading = false;
-    submitted = false;
-    returnUrl: string;
-    invalidCredentials: boolean;
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+  invalidCredentials: boolean;
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
-        private router: Router,
-        private userService: UserService,
-        private authService: AuthenticationService
-    ) {
-            this.router.navigate(['/login']);
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService,
+    private authService: AuthenticationService
+  ) {
+    this.router.navigate(['/login']);
+  }
+
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+    // this.authService.checkAuthToken().then(data => {
+    // if (data) {
+    //   this.router.navigate(['main']);
+    // }});
+  }
+
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.loginForm.controls;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    this.loading = true;
+    console.log('Submitting form');
+
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      this.loading = false;
+      return;
     }
-
-    ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-        // this.authService.checkAuthToken().then(data => {
-        // if (data) {
-        //   this.router.navigate(['main']);
-        // }});
+    this.userService.attemptLogin(this.loginForm.getRawValue()).subscribe(data => this.processLoginResponse(data));
+  }
+  processLoginResponse(data) {
+    const loginResponse: ServerResponse = data.valueOf();
+    if (loginResponse.successStatus) {
+      // Login successful
+      this.authService.setAuthToken(loginResponse.context);
+      this.router.navigate(['main']);
+    } else {
+      this.invalidCredentials = true; // Use this boolean for determining whether an error message should be displayed
     }
-
-    // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
-
-    onSubmit() {
-        this.submitted = true;
-        console.log('Submitting form');
-        // stop here if form is invalid
-        if (this.loginForm.invalid) {
-            return;
-        }
-        this.userService.attemptLogin(this.loginForm.getRawValue()).subscribe(data => this.processLoginResponse(data));
-    }
-    processLoginResponse(data) {
-      const loginResponse: UserQueryResponse = data.valueOf();
-      if (loginResponse.successStatus) {
-        // Login successfull
-        this.authService.setAuthToken(loginResponse.context);
-        this.router.navigate(['main']);
-      } else { // TODO Else with a visual update for the user to know that their info was invalid
-        this.invalidCredentials = true;
-      }
-    }
+    this.loading = false;
+  }
 }
