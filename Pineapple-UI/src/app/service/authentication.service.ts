@@ -25,12 +25,14 @@ export class AuthenticationService {
    * Function to check if the current session is valid (User is logged in)
    * If session is invalid will delete the authentication cookie and redirect to the login screen
    */
-  public authenticateUser() {
-    this.checkAuthToken().then(data => {
+  public authenticateUser(): Promise<boolean> {
+    const check = this.checkAuthToken();
+    check.then(data => {
       if (!data) {
         this.doUnauthorizedUserStuff();
       }
     });
+    return check;
   }
 
   /**
