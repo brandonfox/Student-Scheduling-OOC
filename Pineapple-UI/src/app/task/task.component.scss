@@ -1,3 +1,39 @@
 .card {
-  max-width: 400px;
+  max-width: 250px;
+  max-height: 50px;
+  cursor: pointer;
+  padding: 3px 15px;
+}
+
+.button-bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+.tooltip-container {
+  position: relative;
+  &:hover {
+    .tooltip-content {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+      //top: -125px;
+    }
+  }
+}
+.tooltip-content {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background: #2e2e2d;
+  border-radius: 5px;
+  padding: 15px 15px;
+  margin: 16px;
+  font-size: 15px;
+  width: auto;
+  z-index: 2;
+  color: #E8E8D8;
 }

@@ -34,7 +34,6 @@ public interface TaskService {
         Task taskFromDB = getTaskRepository().findTaskById(task.getId());
         taskFromDB.setTitle(task.getTitle());
         taskFromDB.setDescription(task.getDescription());
-        taskFromDB.setStatus(task.getStatus());
         getTaskRepository().save(taskFromDB);
         return taskFromDB;
     }

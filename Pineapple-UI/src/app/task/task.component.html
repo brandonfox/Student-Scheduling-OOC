@@ -1,1 +1,21 @@
-<p>task works!</p>
+<section class="header">
+  <h2>Tasks for __ event</h2>
+  <h5>hover to show description (todo: enhance look and feel)</h5>
+</section>
+
+<div class="card-deck">
+  <div class="card tooltip-container" *ngFor="let task of tasks">
+    {{task.title}}
+    <div class="tooltip-content">
+      <p>{{task.description}}</p>
+    </div>
+  </div>
+</div>
+
+<button
+  class="button-bottom-right"
+  style="background-color: antiquewhite"
+  routerLink="/main/add-task"
+  mat-fab>
+  <mat-icon>add</mat-icon>
+</button>

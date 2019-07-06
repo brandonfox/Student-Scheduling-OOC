@@ -1,27 +1,21 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AuthenticationService} from './authentication.service';
 import {Task} from '../model/task';
 
-const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
-};
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TaskService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private authService: AuthenticationService) { }
 
-  private url = 'http://localhost:8080/';
+  private taskUrl = 'http://localhost:8080/tasks';
 
-  public getTasks() {
-    return this.http.get<Task[]>(this.url + '/tasks');
-  }
-
-  public editTask(task) {
-    return this.http.post(this.url + '/edit-card', task);
+  public getTasks(): Promise<Task[]> {
+    return this.authService.get<Task[]>(this.taskUrl).toPromise();
   }
 
   public createTask(task) {
-    return this.http.post<Task>(this.url + '/create-card', task);
+    return this.authService.post<Task>(this.taskUrl, task).toPromise();
   }
 }
