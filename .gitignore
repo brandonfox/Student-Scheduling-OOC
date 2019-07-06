@@ -14,10 +14,14 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+/Pineapple-Service/.idea
+/Pineapple-UI/.idea
+/Pineapple-Service/*.iws
+/Pineapple-UI/*.iws
+/Pineapple-Service/*.iml
+/Pineapple-UI/*.iml
+/Pineapple-Service/*.ipr
+/Pineapple-UI/*.ipr
 
 ### NetBeans ###
 /nbproject/private/
