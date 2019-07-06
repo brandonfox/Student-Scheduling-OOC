@@ -1,8 +1,7 @@
-export class Card {
+export class Task {
 
   id: string;
   title: string;
   description: string;
   status: string;
-  // todo: users set
 }

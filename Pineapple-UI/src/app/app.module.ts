@@ -20,6 +20,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AddeventComponent } from './addevent/addevent.component';
 import {EventListTestComponent} from './event-list-test/event-list-test.component';
 import {EventAddTestComponent} from './event-add-test/event-add-test.component';
+import { TaskComponent } from './task/task.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', data: { title: 'First Component' }, pathMatch: 'full' },
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
     AddeventComponent,
     EventAddTestComponent,
     EventListTestComponent,
+    TaskComponent,
   ],
   providers: [UserService, CookieService],
   bootstrap: [AppComponent]
