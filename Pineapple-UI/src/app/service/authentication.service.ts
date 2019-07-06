@@ -44,7 +44,7 @@ export class AuthenticationService {
     this.cookieService.set('authToken', authToken);
   }
   public clearAuthToken() {
-    this.cookieService.delete('authToken');
+    this.cookieService.set('authToken', null);
   }
   public getAuthToken(): string {
     return this.cookieService.get('authToken');

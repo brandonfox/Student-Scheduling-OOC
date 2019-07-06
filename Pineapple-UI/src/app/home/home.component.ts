@@ -15,10 +15,11 @@ export class HomeComponent implements OnInit {
     private authService: AuthenticationService,
     private eventService: EventService,
   ) {
+    this.authService.authenticateUser();
   }
 
   ngOnInit() {
-    this.authService.authenticateUser();
+
     this.eventService.getEvents().then(data => {
       this.events = data;
     });
