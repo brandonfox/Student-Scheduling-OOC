@@ -13,7 +13,6 @@ const routes: Routes = [
             { path: '',
                 canActivateChild: [AuthGuard],
                 children: [
-                    {path: '', redirectTo: 'home', pathMatch: 'full'},
                     {path: 'home', component: HomeComponent},
                     {path: 'add', component: AddeventComponent}
                 ]

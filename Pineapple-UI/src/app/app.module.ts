@@ -21,8 +21,8 @@ import { MainModule } from './main/main.module';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'login', data: { title: 'First Component' }, pathMatch: 'full' },
-    {path: 'events', component: EventListTestComponent},
-    {path: 'events/add', component: EventAddTestComponent},
+    { path: 'events', component: EventListTestComponent},
+    { path: 'events/add', component: EventAddTestComponent},
     { path: 'login', component: LoginComponent, data: {title: 'First Component'}},
     { path: 'register', component: RegisterComponent, data: {title: 'First Component'}}
 ];

@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
         if (loginResponse.successStatus) {
             // Login successful
             this.authService.setAuthToken(loginResponse.context);
-            this.router.navigate(['main']);
+            this.router.navigate(['main/home']);
         } else {
             this.invalidCredentials = true; // Use this boolean for determining whether an error message should be displayed
         }

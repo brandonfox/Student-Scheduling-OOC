@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
 
 import { AuthenticationService } from '../service/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild {
 
     login = false;
 
@@ -19,7 +18,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(
         next: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+        state: RouterStateSnapshot): boolean {
         console.log('AuthGuard#canActivate called');
         return this.checkLogin();
         // if (this.authService.getAuthToken()) {
@@ -32,9 +31,15 @@ export class AuthGuard implements CanActivate {
         // return false;
     }
 
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        return this.canActivate(route, state);
+    }
+
     checkLogin(): boolean {
         this.authService.checkAuthToken().then(data => {
-            this.login = data; } );
+            this.login = data;
+            console.log(data);
+        } );
         if (this.login) { return true; }
 
         // Navigate to the login page with extras
