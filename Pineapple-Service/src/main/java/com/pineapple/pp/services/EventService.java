@@ -40,8 +40,12 @@ public class EventService {
      * @return a list of events for user
      */
     public List<Event> getEventsFor(UserToken token){
-        System.out.println("Retrieveing events for user " + token.getUsername());
-        return eventRepository.findAllByUser(userService.getUser(token));
+        try {
+            System.out.println("Retrieving events for user " + token.getUsername());
+            return eventRepository.findAllByUser(userService.getUser(token));
+        }catch(NullPointerException ex) {
+            return null;
+        }
     }
 
     public Event addEvent(String json, User user){
