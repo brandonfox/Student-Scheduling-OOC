@@ -17,16 +17,13 @@ export class AuthenticationService {
   // Must handle the promise from the calling component
   // Access the data using a lambda stored into a private variable
   // Ex. checkAuthToken().then(data => this.authenticated = data);
-  /**
-   * @deprecated use authenticateUser instead
-   */
   public checkAuthToken(): Promise<boolean> {
     return this.http.post<boolean>(this.authenticationUrl, this.getAuthToken()).toPromise();
   }
 
   /**
    * Function to check if the current session is valid (User is logged in)
-   * If session is invalid will delete the authenticaion cookie and redirect to the login screen
+   * If session is invalid will delete the authentication cookie and redirect to the login screen
    */
   public authenticateUser() {
     this.checkAuthToken().then(data => {
