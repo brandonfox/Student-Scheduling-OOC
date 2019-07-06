@@ -5,7 +5,7 @@ public class QueryResponse {
     private boolean success;
 
     //String to store extra information needed at registration
-    //Store either authenticationtoken or the invalid field
+    //Store either authentication token or the invalid field
     private String context;
 
     public QueryResponse(boolean success, String context){
