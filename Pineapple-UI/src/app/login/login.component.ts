@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log('Initializing...');
+        console.log(this.authService.getAuthToken());
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
@@ -56,12 +58,13 @@ export class LoginComponent implements OnInit {
             this.loading = false;
             return;
         }
+        console.log('Valid form');
         this.userService.attemptLogin(this.loginForm.getRawValue()).subscribe(data => this.processLoginResponse(data));
     }
     processLoginResponse(data) {
         const loginResponse: ServerResponse = data.valueOf();
         if (loginResponse.successStatus) {
-            // Login successful
+            console.log('Login Successful');
             this.authService.setAuthToken(loginResponse.context);
             this.router.navigate(['main/home']);
         } else {

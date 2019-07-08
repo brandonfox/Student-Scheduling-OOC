@@ -8,8 +8,6 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
 
-    login = false;
-
     constructor(
         private authService: AuthenticationService,
         private router: Router
@@ -19,16 +17,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean {
-        console.log('AuthGuard#canActivate called');
         return this.checkLogin();
-        // if (this.authService.getAuthToken()) {
-        //     return true;
-        // }
-        //
-        // // navigate to login page
-        // this.router.navigate(['/login']);
-        // // you can save redirect url so after authing we can move them back to the page they requested
-        // return false;
     }
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -36,13 +25,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     }
 
     checkLogin(): boolean {
-        this.authService.checkAuthToken().then(data => {
-            this.login = data;
-            console.log(data);
-        } );
-        if (this.login) { return true; }
-
-        // Navigate to the login page with extras
+        console.log('Checking Authentication...');
+        if (this.authService.checkToken()) {
+            console.log('Authentication Granted.');
+            return true;
+        }
         this.router.navigate(['/login']);
         return false;
     }

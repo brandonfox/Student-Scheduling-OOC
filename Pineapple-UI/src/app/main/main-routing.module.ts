@@ -9,14 +9,11 @@ const routes: Routes = [
     { path: 'main',
         component: MainLayoutComponent,
         canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         children: [
-            { path: '',
-                canActivateChild: [AuthGuard],
-                children: [
-                    {path: 'home', component: HomeComponent},
-                    {path: 'add', component: AddeventComponent}
-                ]
-            }
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'home', component: HomeComponent},
+            { path: 'add', component: AddeventComponent}
         ]
     }
 ];

@@ -1,24 +1,24 @@
 <section class="header">
-  <h2>To-Do List</h2>
+    <h2>To-Do List</h2>
 </section>
 
 <div class="card-deck">
-  <div class="card" *ngFor="let event of events">
-    <div class="card-body">
-      <h5 class="card-title">{{event.name}}</h5>
-      <p class="card-text">{{event.description}}</p>
+    <div class="card" *ngFor="let event of events">
+        <div class="card-body">
+            <h5 class="card-title">{{event.name}}</h5>
+            <p class="card-text">{{event.description}}</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">{{event.startTime}}</small>
+            <small class="text-muted">{{event.endTime}}</small>
+        </div>
     </div>
-    <div class="card-footer">
-      <small class="text-muted">{{event.startTime}}</small>
-      <small class="text-muted">{{event.endTime}}</small>
-    </div>
-  </div>
 </div>
 
 <button
-  class="button-bottom-right"
-  style="background-color: antiquewhite"
-  routerLink="/main/add"
-  mat-fab>
-  <mat-icon>add</mat-icon>
+    class="button-bottom-right"
+    style="background-color: antiquewhite"
+    routerLink="/main/add"
+    mat-fab>
+    <mat-icon>add</mat-icon>
 </button>
