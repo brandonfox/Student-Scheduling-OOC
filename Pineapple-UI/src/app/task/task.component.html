@@ -1,12 +1,14 @@
 <section class="header">
   <h2>Tasks for __ event</h2>
   <h5>hover to show description (todo: enhance look and feel)</h5>
+  <br/>
 </section>
 
 <div class="card-deck">
   <div class="card tooltip-container" *ngFor="let task of tasks">
-    {{task.title}}
+    <div class="card-text">{{task.title}}</div>
     <div class="tooltip-content">
+      <h6>{{task.title}}</h6>
       <p>{{task.description}}</p>
     </div>
   </div>
