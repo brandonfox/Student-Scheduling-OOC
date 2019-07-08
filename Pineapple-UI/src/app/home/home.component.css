@@ -8,6 +8,10 @@
   max-width: 400px;
 }
 
+.card-header {
+  max-height: 50px;
+}
+
 .button-bottom-right {
   position: absolute;
   bottom: 8px;
@@ -20,6 +24,15 @@ mat-icon {
 
 button:focus {
   outline: 0;
+}
+
+.task-header .align-left {
+  text-align: left;
+  float: left;
+}
+.task-header .align-right {
+  text-align: right;
+  float: right;
 }
 
 .tooltip-container {

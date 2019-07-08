@@ -8,6 +8,10 @@
   max-width: 400px;
 }
 
+.card-header {
+  max-height: 50px;
+}
+
 .button-bottom-right {
   position: absolute;
   bottom: 8px;
@@ -27,6 +31,19 @@ button:focus {
 //  white-space: nowrap;
 //  text-overflow: ellipsis;
 //}
+
+// todo: text overflow and tooltip boundary control
+
+.task-header {
+  .align-left {
+    text-align: left;
+    float: left;
+  }
+  .align-right {
+    text-align: right;
+    float: right;
+  }
+}
 
 .tooltip-container {
   position: relative;
