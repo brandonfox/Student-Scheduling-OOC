@@ -8,14 +8,16 @@ import { AuthenticationService } from '../../service/authentication.service';
   styleUrls: ['./event-list-test.component.css']
 })
 export class EventListTestComponent implements OnInit {
-  constructor(
+    private events;
+
+    constructor(
     private eventService: EventService,
     private authService: AuthenticationService
   ) {
     this.authService.authenticateUser();
     this.events = eventService.getEvents();
   }
-  private events;
+
   ngOnInit() {
   }
 

@@ -72,7 +72,7 @@ public class UserService {
         return getUser(token.getUsername());
     }
     
-    public User getUser(String identificationString){
+    private User getUser(String identificationString){
         if(getUserRepository().existsByEmail(identificationString)) {
             return getUserRepository().findByEmail(identificationString);
         }
@@ -80,5 +80,28 @@ public class UserService {
             return getUserRepository().findByUsername(identificationString);
         }
         return null;
+    }
+    
+    public User getUserById(String jason) {
+        User user = getUserFromJson(jason);
+        return userRepository.findUserById(user.getId());
+    }
+    
+    public List<User> getAllUsers(UserToken token){
+        try {
+            System.out.println("Retrieving events for user " + token.getUsername());
+            return userRepository.findAll();
+        }catch(NullPointerException ex) {
+            return null;
+        }
+    }
+    
+    public User getUserByUsername(UserToken token){
+        try {
+            System.out.println("Retrieving events for user " + token.getUsername());
+            return userRepository.findByUsername(token.getUsername());
+        }catch(NullPointerException ex) {
+            return null;
+        }
     }
 }

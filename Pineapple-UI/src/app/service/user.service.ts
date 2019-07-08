@@ -18,7 +18,11 @@ export class UserService {
     private userUrl = 'http://localhost:8080/';
 
     public getUser(): Promise<User> {
-        return this.authService.get<User>(this.userUrl + 'user').toPromise();
+        return this.authService.get<User>(this.userUrl + '/user').toPromise();
+    }
+
+    public getUsers(): Promise<User[]> {
+        return this.authService.get<User[]>('http://localhost:8080/users').toPromise();
     }
 
     public editUser(user) {

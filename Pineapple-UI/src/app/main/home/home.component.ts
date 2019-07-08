@@ -12,18 +12,27 @@ import {User} from '../../model/user';
 })
 export class HomeComponent implements OnInit {
 
-    events: Event[];
-    user: User;
+    now: number;
+
+    private users;
+    private user;
+
     constructor(
         private authService: AuthenticationService,
+        private userService: UserService,
         private eventService: EventService
     ) {
+        this.users = userService.getUsers();
+        this.user = userService.getUser();
     }
 
     ngOnInit() {
-        this.eventService.getEvents().then(data => {
-            this.events = data;
-        });
+        console.log(this.user.valueOf());
+        this.getUserInfo().then(data => this.user = data);
+    }
+
+    getUserInfo() {
+        return this.userService.getUser();
     }
     // TODO Change html file to display date in a more human readable format
     // TODO Add a refresh mechanism to display events properly
