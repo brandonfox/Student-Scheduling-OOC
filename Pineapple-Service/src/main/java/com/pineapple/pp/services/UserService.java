@@ -4,14 +4,26 @@ import com.google.gson.Gson;
 import com.pineapple.pp.entities.User;
 import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public interface UserService {
-
-    default List<User> list() {
+@Service
+public class UserService {
+    
+    private UserRepository userRepository;
+    private final Gson gson;
+    
+    @Autowired
+    public UserService(UserRepository userRepository, Gson gson) {
+        this.userRepository = userRepository;
+        this.gson = gson;
+    }
+    
+    public List<User> list() {
         List<User> userList = new ArrayList<>();
         for (User user : getUserRepository().findAll()) {
             if (user != null) {
@@ -20,12 +32,16 @@ public interface UserService {
         }
         return userList;
     }
-
-    UserRepository getUserRepository();
-
-    Gson getGson();
-
-    default User add(String json) {
+    
+    private UserRepository getUserRepository() {
+        return this.userRepository;
+    }
+    
+    private Gson getGson() {
+        return this.gson;
+    }
+    
+    public User add(String json) {
         User user = getGson().fromJson(json, User.class);
         if (getUserRepository().existsByEmail(user.getEmail()) || getUserRepository().existsByUsername(user.getUsername())) {
             return null;
@@ -34,27 +50,29 @@ public interface UserService {
         getUserRepository().save(user);
         return user;
     }
-
-    default User getUserFromJson(String json) {
+    
+    public User getUserFromJson(String json) {
         User user = getGson().fromJson(json, User.class);
         return getUser(user.getUsername());
     }
-
-    default User editUser(String json) {
+    
+    public User editUser(String json) {
         User user = getGson().fromJson(json, User.class);
         User userFromDB = getUserRepository().findUserById(user.getId());
         userFromDB.setEmail(user.getEmail());
         getUserRepository().save(userFromDB);
         return userFromDB;
     }
-
-    default User findByEmail(String email) {
+    
+    public User findByEmail(String email) {
         return getUserRepository().findByEmail(email);
     }
-    default User getUser(UserToken token){
+    
+    public User getUser(UserToken token){
         return getUser(token.getUsername());
     }
-    default User getUser(String identificationString){
+    
+    private User getUser(String identificationString){
         if(getUserRepository().existsByEmail(identificationString)) {
             return getUserRepository().findByEmail(identificationString);
         }
@@ -62,5 +80,28 @@ public interface UserService {
             return getUserRepository().findByUsername(identificationString);
         }
         return null;
+    }
+    
+    public User getUserById(String jason) {
+        User user = getUserFromJson(jason);
+        return userRepository.findUserById(user.getId());
+    }
+    
+    public List<User> getAllUsers(UserToken token){
+        try {
+            System.out.println("Retrieving events for user " + token.getUsername());
+            return userRepository.findAll();
+        }catch(NullPointerException ex) {
+            return null;
+        }
+    }
+    
+    public User getUserByUsername(UserToken token){
+        try {
+            System.out.println("Retrieving events for user " + token.getUsername());
+            return userRepository.findByUsername(token.getUsername());
+        }catch(NullPointerException ex) {
+            return null;
+        }
     }
 }

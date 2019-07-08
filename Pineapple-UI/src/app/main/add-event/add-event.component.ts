@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthenticationService} from '../service/authentication.service';
-import {EventService} from '../service/event.service';
+import {AuthenticationService} from '../../service/authentication.service';
+import {EventService} from '../../service/event.service';
 import {Router} from '@angular/router';
 import DateTimeFormat = Intl.DateTimeFormat;
 
 @Component({
-  selector: 'app-addevent',
-  templateUrl: './addevent.component.html',
-  styleUrls: ['./addevent.component.scss']
+  selector: 'app-add-event',
+  templateUrl: './add-event.component.html',
+  styleUrls: ['./add-event.component.scss']
 })
-export class AddeventComponent implements OnInit {
+export class AddEventComponent implements OnInit {
   eventForm: FormGroup;
   loading = false;
   submitted = false;

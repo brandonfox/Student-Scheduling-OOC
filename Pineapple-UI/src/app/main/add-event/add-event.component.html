@@ -1,4 +1,4 @@
-<form  [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
   <div class="form-container">
     <div class="form-group">
       <mat-form-field class="add-title" appearance="legacy">
@@ -71,12 +71,6 @@
       </mat-form-field>
     </div>
   </div>
-  <!--<form [formGroup]="eventForm" (ngSubmit)="onSubmit()">-->
-  <!--  <div class="form-group">-->
-  <!--    <label>Description</label>-->
-  <!--    <input type="text" formControlName="description" class="form-control"/>-->
-  <!--  </div>-->
-  <!--</form>-->
 
   <button
     type="submit"

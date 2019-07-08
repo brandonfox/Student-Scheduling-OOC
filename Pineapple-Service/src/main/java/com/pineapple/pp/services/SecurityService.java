@@ -13,11 +13,11 @@ import com.pineapple.pp.entities.UserToken;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 public class SecurityService {
-
+    
     private static final String encryptionCode = "We are making a website with the most top of the line security and this code is the most secure code in history";
-
+    
     private static final Algorithm algorithmHS = Algorithm.HMAC256(encryptionCode);
-
+    
     public static String createUserAuthenticationToken(User user){
         try {
             System.out.println("Creating authentication token for user " + user.getUsername());

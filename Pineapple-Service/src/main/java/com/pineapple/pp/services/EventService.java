@@ -12,18 +12,18 @@ import java.util.List;
 
 @Service
 public class EventService {
-
+    
     private final EventRepository eventRepository;
     private final UserService userService;
     private final Gson gson;
-
+    
     @Autowired
     public EventService(EventRepository eventRepo, UserService userRepo){
         eventRepository = eventRepo;
         userService = userRepo;
         this.gson = new Gson();
     }
-
+    
     /**
      * Get all events for a specific user
      * @param identificationString username or email of user
@@ -47,7 +47,7 @@ public class EventService {
             return null;
         }
     }
-
+    
     public Event addEvent(String json, User user){
         Event event = gson.fromJson(json,Event.class);
         //TODO Add system for checking event conflicts or ignore (If multiple events are a thing)
@@ -55,5 +55,5 @@ public class EventService {
         eventRepository.save(event);
         return event;
     }
-
+    
 }
