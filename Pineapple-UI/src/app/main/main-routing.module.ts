@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { HomeComponent } from './home/home.component';
-import { AddeventComponent } from './addevent/addevent.component';
+import { AddEventComponent } from './add-event/add-event.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { TaskComponent } from '../task/task.component';
+import { AddTaskComponent } from './add-task/add-task.component';
 
 const routes: Routes = [
     { path: 'main',
@@ -13,7 +15,9 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent},
-            { path: 'add', component: AddeventComponent}
+            { path: 'add', component: AddEventComponent},
+            { path: 'tasks', component: TaskComponent },
+            { path: 'add-task', component: AddTaskComponent }
         ]
     }
 ];
