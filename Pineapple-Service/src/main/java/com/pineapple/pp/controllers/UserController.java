@@ -23,12 +23,18 @@ public class UserController {
         this.userService = userService;
     }
     
-    @GetMapping("/user")
-    public User getUserInfo(@RequestHeader("authorization") String token){
-        System.out.println("Retrieved request to get user. Parsing token");
+    @GetMapping("/users")
+    public List<User> getUsersInfo(@RequestHeader("authorization") String token) {
+        System.out.println("Retrieved request to get users. Parsing token");
         UserToken userDetails = SecurityService.parseToken(token);
-        assert userDetails != null;
-        return userService.getUser(userDetails);
+        return userService.getAllUsers(userDetails);
+    }
+    
+    @GetMapping("/user")
+    public User getUserInfo(@RequestHeader("authorization") String token) {
+        System.out.println("Retrieved request to get users. Parsing token");
+        UserToken userDetails = SecurityService.parseToken(token);
+        return userService.getUserByUsername(userDetails);
     }
     
     @PostMapping(path = "/register")
