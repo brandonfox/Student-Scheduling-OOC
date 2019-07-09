@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import { CookieService} from 'ngx-cookie-service';
 import {Router} from '@angular/router';
 
@@ -57,15 +57,15 @@ export class AuthenticationService {
     /**
      * Post function that sends the current session token
      */
-    public post<T>(url, data) {
-        return this.http.post<T>(url, data, { headers: this.getAuthorizedHeader()});
+    public post<T>(url, data, params?: HttpParams) {
+        return this.http.post<T>(url, data, { headers: this.getAuthorizedHeader(), params});
     }
 
     /**
      * Get function that sends the current session token
      */
-    public get<T>(url) {
-        return this.http.get<T>(url, {headers: this.getAuthorizedHeader()});
+    public get<T>(url, params?: HttpParams) {
+        return this.http.get<T>(url, {headers: this.getAuthorizedHeader(), params});
     }
     private getAuthorizedHeader(): HttpHeaders {
         // Headers are immutable so when appending header fields must use new returned object, Took me a while

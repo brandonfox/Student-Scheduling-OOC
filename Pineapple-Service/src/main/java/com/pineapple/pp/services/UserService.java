@@ -87,20 +87,44 @@ public class UserService {
         return userRepository.findUserById(user.getId());
     }
     
-    public List<User> getAllUsers(UserToken token){
+    public List<User> getAllUsers(UserToken token, String searchParam){
+        System.out.println(searchParam);
         try {
-            System.out.println("Retrieving events for user " + token.getUsername());
-            return userRepository.findAll();
+            System.out.print("Retrieving all users for token with username: " + token.getUsername());
+            if(searchParam == null || searchParam.equals("undefined")) {
+                System.out.print("\n");
+                return userRepository.findAll();
+            }
+            else{
+                System.out.print(" and with extra search params: " + searchParam + "\n");
+                return userRepository.findUsersByUsernameContains(searchParam);
+            }
         }catch(NullPointerException ex) {
             return null;
         }
     }
     
-    public User getUserByUsername(UserToken token){
+    public User getUserByToken(UserToken token){
         try {
-            System.out.println("Retrieving events for user " + token.getUsername());
+            System.out.println("Retrieving user for token with username: " + token.getUsername());
             return userRepository.findByUsername(token.getUsername());
         }catch(NullPointerException ex) {
+            return null;
+        }
+    }
+    public List<User> getFriendsOfUser(UserToken token, String searchParam){
+        try{
+            System.out.print("Retrieving friends of token with username: " + token.getUsername());
+            if(searchParam == null || searchParam.equals("undefined")) {
+                System.out.print("\n");
+                return userRepository.findUsersByFriends(getUserByToken(token));
+            }
+            else {
+                System.out.print(" and with extra search params: " + searchParam + "\n");
+                return userRepository.findUsersByFriendsAndUsernameContains(getUserByToken(token), searchParam);
+            }
+
+        }catch(NullPointerException ex){
             return null;
         }
     }

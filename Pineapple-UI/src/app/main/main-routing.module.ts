@@ -6,6 +6,7 @@ import { AddEventComponent } from './add-event/add-event.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { TaskComponent } from '../task/task.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import {FriendListComponent} from './friend-list/friend-list.component';
 
 const routes: Routes = [
     { path: 'main',
@@ -17,7 +18,8 @@ const routes: Routes = [
             { path: 'home', component: HomeComponent},
             { path: 'add', component: AddEventComponent},
             { path: 'tasks', component: TaskComponent },
-            { path: 'add-task', component: AddTaskComponent }
+            { path: 'add-task', component: AddTaskComponent },
+            { path: 'friends', component: FriendListComponent }
         ]
     }
 ];
