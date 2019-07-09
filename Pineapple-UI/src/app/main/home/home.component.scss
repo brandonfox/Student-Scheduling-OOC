@@ -8,10 +8,6 @@
   max-width: 400px;
 }
 
-.card-header {
-  max-height: 50px;
-}
-
 .button-bottom-right {
   position: absolute;
   bottom: 8px;
@@ -32,23 +28,39 @@ button:focus {
 //  text-overflow: ellipsis;
 //}
 
-// todo: text overflow and tooltip boundary control
-
-.task-header {
-  .align-left {
-    text-align: left;
-    float: left;
-  }
-  .align-right {
-    text-align: right;
-    float: right;
-  }
+.task-add-button {
+    float: inside;
+    height: 30px;
+    width: 30px;
+    padding: 10%;
 }
+
+.card-header {
+    height: 50px;
+    padding: 3px;
+    .align-left {
+        padding: 3% 20px;
+        width: 70%;
+        height: 100%;
+        float: left;
+    }
+    .align-right {
+        padding: 5px 5px;
+        width: 30%;
+        height: 100%;
+        float: right;
+        overflow: hidden;
+        object-fit: scale-down;
+    }
+}
+
+// todo: text overflow and tooltip boundary control
 
 .tooltip-container {
   position: relative;
   &:hover {
     .tooltip-content {
+
       visibility: visible;
       opacity: 1;
       transition: opacity 0.4s ease;
