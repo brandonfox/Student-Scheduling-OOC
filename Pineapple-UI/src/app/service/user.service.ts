@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {User} from '../model/user';
 import {AuthenticationService} from './authentication.service';
 
@@ -21,8 +21,8 @@ export class UserService {
         return this.authService.get<User>(this.userUrl + '/user').toPromise();
     }
 
-    public getUsers(): Promise<User[]> {
-        return this.authService.get<User[]>('http://localhost:8080/users').toPromise();
+    public getUsers(params?: HttpParams): Promise<User[]> {
+        return this.authService.get<User[]>('http://localhost:8080/users', params).toPromise();
     }
 
     public editUser(user) {
@@ -34,5 +34,9 @@ export class UserService {
     }
     public attemptLogin(login) {
         return this.http.post(this.userUrl + '/login', login);
+    }
+    // ----------------------Friends stuff section-------------------------
+    public getFriends(params?: HttpParams) {
+        return this.authService.get<User[]>(this.userUrl + '/friends', params);
     }
 }

@@ -16,12 +16,14 @@ import { MainLayoutComponent } from './main/main-layout/main-layout.component';
 import { UserService } from './service/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MainModule } from './main/main.module';
+import { FriendListComponent } from './main/friend-list/friend-list.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full'},
     { path: 'main', component: MainLayoutComponent},
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent }
+    { path: 'register', component: RegisterComponent },
+    // { path: 'main', component: MainLayoutComponent}
 ];
 
 @NgModule({
@@ -39,7 +41,8 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        FriendListComponent
     ],
     providers: [UserService, CookieService],
     bootstrap: [AppComponent]
