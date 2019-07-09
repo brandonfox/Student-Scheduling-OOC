@@ -18,9 +18,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { MainModule } from './main/main.module';
 
 const appRoutes: Routes = [
+    { path: '', redirectTo: 'main', pathMatch: 'full'},
+    { path: 'main', component: MainLayoutComponent},
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    // { path: 'main', component: MainLayoutComponent}
+    { path: 'register', component: RegisterComponent }
 ];
 
 @NgModule({
