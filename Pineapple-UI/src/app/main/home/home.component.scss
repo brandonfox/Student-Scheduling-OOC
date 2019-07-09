@@ -11,9 +11,10 @@
 }
 
 .button-bottom-right {
-  position: absolute;
-  bottom: 8px;
-  right: 16px;
+    position: fixed;
+    bottom: 16px;
+    right: 32px;
+    z-index: 3; // make it stay above everything
 }
 
 mat-icon{
@@ -57,15 +58,32 @@ button:focus {
     background: white;
 }
 
-.task-add-container {
-    background: #212121;
-    width: 70%;
+.task-add-icon {
+    color: #323232;
+    &:hover {
+        color: seagreen;
+        text-shadow: 0 0 5px rgba(54, 161, 70, 0.2);
+    }
+}
+
+.task-add-button {
+    background: inherit;
+    border: none;
+    width: 75%;
     height: 100%;
+    padding: 3px 3px;
+    float:right;
+}
+
+.task-add-container {
+    width: 50%;
+    height: 100%;
+    float: right;
 }
 
 .card-header {
     height: 50px;
-    padding: 3px;
+    padding: 4px;
     .align-left {
         padding: 3% 20px;
         width: 70%;
@@ -73,7 +91,6 @@ button:focus {
         float: left;
     }
     .align-right {
-        background: red;
         padding: 5px 5px;
         width: 30%;
         height: 100%;
