@@ -5,7 +5,9 @@
 }
 
 .card {
-  max-width: 400px;
+    max-width: 350px;
+    min-width: 350px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .button-bottom-right {
@@ -28,11 +30,37 @@ button:focus {
 //  text-overflow: ellipsis;
 //}
 
-.task-add-button {
-    float: inside;
-    height: 30px;
-    width: 30px;
-    padding: 10%;
+
+/* card-text takes care of text overflow*/
+.card-text {
+    overflow: hidden;
+    position: relative;
+    line-height: 1.2em;
+    max-height: 3.6em;
+    text-align: justify;
+    margin-right: -1em;
+    padding-right: 1em;
+}
+.card-text:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.card-text:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: white;
+}
+
+.task-add-container {
+    background: #212121;
+    width: 70%;
+    height: 100%;
 }
 
 .card-header {
@@ -45,6 +73,7 @@ button:focus {
         float: left;
     }
     .align-right {
+        background: red;
         padding: 5px 5px;
         width: 30%;
         height: 100%;
