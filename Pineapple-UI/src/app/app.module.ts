@@ -20,6 +20,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AddeventComponent } from './addevent/addevent.component';
 import {EventListTestComponent} from './event-list-test/event-list-test.component';
 import {EventAddTestComponent} from './event-add-test/event-add-test.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'login', data: { title: 'First Component' }, pathMatch: 'full' },
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'add', component: AddeventComponent }
+      { path: 'add', component: AddeventComponent },
+      { path: 'edit', component: EditEventComponent }
     ]
   }
 ];
@@ -60,6 +62,7 @@ const appRoutes: Routes = [
     AddeventComponent,
     EventAddTestComponent,
     EventListTestComponent,
+    EditEventComponent,
   ],
   providers: [UserService, CookieService],
   bootstrap: [AppComponent]
