@@ -17,10 +17,6 @@ import { UserService } from './service/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MainModule } from './main/main.module';
 import { FriendListComponent } from './main/friend-list/friend-list.component';
-import { AddeventComponent } from './addevent/addevent.component';
-import {EventListTestComponent} from './event-list-test/event-list-test.component';
-import {EventAddTestComponent} from './event-add-test/event-add-test.component';
-import { EditEventComponent } from './edit-event/edit-event.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full'},

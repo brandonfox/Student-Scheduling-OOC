@@ -17,6 +17,12 @@
     z-index: 3; // make it stay above everything
 }
 
+.edit-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 mat-icon{
   color: grey;
 }
