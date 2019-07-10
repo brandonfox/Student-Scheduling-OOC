@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
     }
     toggleAllButtonsDisabled(status: boolean) {
         for (const event of this.events) {
-            (document.getElementById(event.id.toString()) as HTMLButtonElement).disabled = status;
+            (document.getElementById('eventId-' + event.id.toString()) as HTMLButtonElement).disabled = status;
         }
     }
 }
