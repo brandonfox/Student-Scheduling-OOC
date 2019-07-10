@@ -23,8 +23,7 @@ const appRoutes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full'},
     { path: 'main', component: MainLayoutComponent},
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    // { path: 'main', component: MainLayoutComponent}
+    { path: 'register', component: RegisterComponent }
 ];
 
 @NgModule({
