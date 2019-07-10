@@ -14,9 +14,44 @@
             </div>
             <div class="align-right">
                 <div class="task-add-container">
-                    <button class="task-add-button">
+                    <button class="task-add-button" id="taskAddButton" (click)="openTaskAddForm()">
                         <mat-icon class="task-add-icon">add</mat-icon>
                     </button>
+                </div>
+                <div class="task-add-form-popup" id="taskAddForm">
+                    <div class="task-add-form-container">
+                        <button class="task-close-button" id="taskAddClose" (click)="closeTaskAddForm()">
+                            <mat-icon class="task-cancel-icon">cancel</mat-icon>
+                        </button>
+                        <h3>Add a new task</h3>
+                        <form [formGroup]="taskForm" (ngSubmit)="submitTaskAddForm()">
+                            <mat-form-field class="add-title" appearance="legacy">
+                                <label>
+                                    <input
+                                        matInput
+                                        type="text"
+                                        class="control"
+                                        placeholder="New Task"
+                                        formControlName="title">
+                                </label>
+                            </mat-form-field>
+                            <mat-form-field class="add-description" appearance="legacy">
+                                <label>
+                                    <input
+                                        matInput
+                                        type="text"
+                                        class="control"
+                                        placeholder="This is a description of your new task"
+                                        formControlName="description">
+                                </label>
+                            </mat-form-field>
+                            <div class="test">
+                                <button class="task-submit-button">
+                                    <mat-icon class="task-submit-icon">check_circle</mat-icon>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

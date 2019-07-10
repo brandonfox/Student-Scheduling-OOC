@@ -2,6 +2,7 @@ package com.pineapple.pp.controllers;
 
 import com.pineapple.pp.entities.Task;
 import com.pineapple.pp.services.TaskService;
+import com.pineapple.pp.services.TaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,14 +10,14 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 public class TaskController {
 
-    private TaskService taskService;
+    private TaskServiceImpl taskService;
 
     @Autowired
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskServiceImpl taskService) {
         this.taskService = taskService;
     }
 
-    @PostMapping(path = "/create-task")
+    @PostMapping(path = "/tasks")
     public void add(@RequestBody String json) {
         System.out.print("Creating new task " + json + "... ");
         Task task = taskService.add(json);
