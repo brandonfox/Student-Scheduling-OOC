@@ -19,7 +19,6 @@ public class GroupController {
     private GroupService GroupService;
 
     @Autowired
-
     public GroupController(GroupService groupService, UserService userService, GroupService GroupService) {
         this.groupService = groupService;
         this.userService = userService;
