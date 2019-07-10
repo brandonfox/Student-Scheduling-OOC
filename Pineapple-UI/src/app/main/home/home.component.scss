@@ -70,6 +70,32 @@ button:focus {
         color: seagreen;
         text-shadow: 0 0 5px rgba(54, 161, 70, 0.2);
     }
+    &:active {
+        color: #323232;
+    }
+}
+
+.task-cancel-icon {
+    color: #323232;
+    &:hover {
+        color: #d92a3b;
+        text-shadow: 0 0 5px rgba(54, 161, 70, 0.2);
+    }
+    &:active {
+        color: #323232;
+    }
+}
+
+.task-submit-icon {
+    color: #b2b2a9;
+    font-size: 40px;
+    &:hover {
+        color: seagreen;
+        text-shadow: 0 0 5px rgba(54, 161, 70, 0.2);
+    }
+    &:active {
+        color: #323232;
+    }
 }
 
 .task-add-button {
@@ -81,10 +107,55 @@ button:focus {
     float:right;
 }
 
+.task-close-button {
+    background: inherit;
+    border: none;
+    float: right;
+}
+
+.task-submit-button {
+    background: inherit;
+    border: none;
+    float: right;
+}
+
+.test {
+    height: 30px;
+    width: 100%;
+}
+
 .task-add-container {
     width: 50%;
     height: 100%;
     float: right;
+}
+
+.task-add-form-popup {
+    display: none;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    z-index: 3;
+}
+
+.task-add-form-container {
+    min-width: 150px;
+    padding: 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.3);
+}
+
+.add-title {
+    display: block;
+    width: 110px;
+    margin: 10px 0 0;
+}
+
+.add-description {
+    display: block;
+    width: 400px;
+    margin: 10px 0 0;
 }
 
 .card-header {
@@ -101,7 +172,6 @@ button:focus {
         width: 30%;
         height: 100%;
         float: right;
-        overflow: hidden;
         object-fit: scale-down;
     }
 }
