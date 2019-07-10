@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { GroupComponent } from './group/group.component';
+import { CalenderComponent } from './calender/calender.component';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { GroupComponent } from './group/group.component';
         NavigationComponent,
         AddTaskComponent,
         EditEventComponent,
-        GroupComponent
+        GroupComponent,
+        CalenderComponent
     ]
 })
 export class MainModule { }
