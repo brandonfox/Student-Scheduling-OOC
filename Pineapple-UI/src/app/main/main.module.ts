@@ -9,7 +9,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { DemoMaterialModule } from '../core/material-module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddTaskComponent } from './add-task/add-task.component';
-import { TaskComponent } from '../task/task.component';
 
 @NgModule({
     imports: [
@@ -23,7 +22,6 @@ import { TaskComponent } from '../task/task.component';
         HomeComponent,
         MainLayoutComponent,
         NavigationComponent,
-        TaskComponent,
         AddTaskComponent,
     ]
 })

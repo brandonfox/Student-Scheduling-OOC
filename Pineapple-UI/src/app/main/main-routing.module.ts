@@ -4,7 +4,6 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { HomeComponent } from './home/home.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { AuthGuard } from '../guards/auth.guard';
-import { TaskComponent } from '../task/task.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import {FriendListComponent} from './friend-list/friend-list.component';
 
@@ -17,7 +16,6 @@ const routes: Routes = [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent},
             { path: 'add', component: AddEventComponent},
-            { path: 'tasks', component: TaskComponent },
             { path: 'add-task', component: AddTaskComponent },
             { path: 'friends', component: FriendListComponent }
         ]
