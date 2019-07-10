@@ -11,7 +11,7 @@ export class EventService {
   constructor(
     private authService: AuthenticationService,
   ) { }
-  private eventUrl = 'http://localhost:8080/events';
+  private eventUrl = 'http://localhost:8082/events';
   public getEvents(): Promise<Event[]> {
     return this.authService.get<Event[]>(this.eventUrl).toPromise();
   }
