@@ -59,23 +59,23 @@ export class HomeComponent implements OnInit {
     // TODO Change html file to display date in a more human readable format
     // TODO Add a refresh mechanism to display events properly
     /* Pop up form for adding tasks */
-    openTaskAddForm() {
+    openTaskAddForm(thisEvent) {
         this.taskForm.reset(); // todo: does this even work
-        document.getElementById('taskAddForm').style.display = 'block';
+        document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'block';
         this.toggleAllButtonsDisabled(true);
     }
-    closeTaskAddForm() {
-        document.getElementById('taskAddForm').style.display = 'none';
+    closeTaskAddForm(thisEvent) {
+        document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'none';
         this.toggleAllButtonsDisabled(false);
     }
-    submitTaskAddForm() {
+    submitTaskAddForm(thisEvent) {
         console.log('Submitting task form');
         if (this.taskForm.invalid) {
             return;
         }
         this.taskService.createTask(this.taskForm.getRawValue());
         this.getTasks();
-        document.getElementById('taskAddForm').style.display = 'none';
+        document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'none';
         this.toggleAllButtonsDisabled(false);
     }
     toggleAllButtonsDisabled(status: boolean) {

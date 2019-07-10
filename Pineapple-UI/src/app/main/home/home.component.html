@@ -19,17 +19,17 @@
             </div>
             <div class="align-right">
                 <div class="task-add-container">
-                    <button class="task-add-button" id="eventId-{{event.id}}" (click)="openTaskAddForm()">
+                    <button class="task-add-button" id="eventId-{{event.id}}" (click)="openTaskAddForm(event)">
                         <mat-icon class="task-add-icon">add</mat-icon>
                     </button>
                 </div>
-                <div class="task-add-form-popup" id="taskAddForm">
+                <div class="task-add-form-popup" id="addForm-eventId-{{event.id}}">
                     <div class="task-add-form-container">
-                        <button class="task-close-button" id="taskAddClose" (click)="closeTaskAddForm()">
+                        <button class="task-close-button" id="taskAddClose" (click)="closeTaskAddForm(event)">
                             <mat-icon class="task-cancel-icon">cancel</mat-icon>
                         </button>
                         <h3>Add a new task</h3>
-                        <form [formGroup]="taskForm" (ngSubmit)="submitTaskAddForm()">
+                        <form [formGroup]="taskForm" (ngSubmit)="submitTaskAddForm(event)">
                             <mat-form-field class="add-title" appearance="legacy">
                                 <label>
                                     <input
