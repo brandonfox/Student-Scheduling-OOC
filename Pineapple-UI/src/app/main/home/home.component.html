@@ -1,0 +1,58 @@
+<section class="header">
+    <h2>Your Events</h2>
+</section>
+
+<div class="card-deck">
+    <div class="card" *ngFor="let event of events">
+        <div class="card-body">
+            <h5 class="card-title">{{event.name}}</h5>
+            <div class="card-text">{{event.description}}</div>
+        </div>
+        <div class="card-header">
+            <div class="align-left">
+                <h5>Tasks</h5>
+            </div>
+            <div class="align-right">
+                <div class="task-add-container">
+                    <button class="task-add-button">
+                        <mat-icon class="task-add-icon">add</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="list-group list-group-flush" *ngFor="let task of tasks">
+            <div class="list-group-item tooltip-container list-group-item-action">
+                {{task.title}}
+                <div class="tooltip-content">
+                    <h6>{{task.title}}</h6>
+                    <p>{{task.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">{{event.startTime}}</small>
+            <small class="text-muted">{{event.endTime}}</small>
+        </div>
+    </div>
+</div>
+
+<div>
+    {{ now | date: 'HH:mm:ss'}}
+</div>
+<div class="eventItem">
+    <span>{{user.username}}</span>
+    <br>
+    <span>{{user.password}}</span>
+    <br>
+    <span>{{user.email}}</span>
+    <br>
+    <span>{{user.id}}</span>
+</div>
+
+<button
+    class="button-bottom-right"
+    style="background-color: antiquewhite"
+    routerLink="/main/add"
+    mat-fab>
+    <mat-icon>add</mat-icon>
+</button>

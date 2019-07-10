@@ -1,0 +1,23 @@
+<div class="d-inline-flex" style="min-width: 100%;">
+    <mat-tab-group (selectedTabChange)="tabChange($event)" style="flex: 9;">
+        <mat-tab style="flex:1;" label="Your friends" aria-label="friends">
+            List of friends (Temporary until better layout made)
+            <div *ngFor="let friend of friends">
+                {{friend.username}}
+            </div>
+        </mat-tab>
+        <mat-tab style="flex:1;" label="All users" aria-label="users">
+            List of users (Temporary until better layout made)
+            <div *ngFor="let friend of friends">
+                {{friend.username}}
+            </div>
+        </mat-tab>
+<!--        <mat-tab style="flex:1;" label="People from your groups" aria-label="groups">-->
+<!--            Group users here-->
+<!--        </mat-tab>-->
+    </mat-tab-group>
+    <mat-form-field style="flex: 1;" class="input">
+        <input [(ngModel)]="searchBar" (ngModelChange)="searchChange()" matInput placeholder="Search" >
+    </mat-form-field>
+</div>
+

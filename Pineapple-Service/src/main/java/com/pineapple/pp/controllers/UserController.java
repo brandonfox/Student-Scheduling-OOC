@@ -3,11 +3,14 @@ package com.pineapple.pp.controllers;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.pineapple.pp.entities.User;
+import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.services.SecurityService;
 import com.pineapple.pp.services.UserService;
 import com.pineapple.pp.utils.QueryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -20,9 +23,24 @@ public class UserController {
         this.userService = userService;
     }
     
+    @GetMapping("/users")
+    public List<User> getUsersInfo(@RequestHeader("authorization") String token, @RequestParam(value = "search", required = false) String search) {
+        System.out.println("Retrieved request to get users. Parsing token");
+        UserToken userDetails = SecurityService.parseToken(token);
+        return userService.getAllUsers(userDetails, search);
+    }
+
+    
+    @GetMapping("/user")
+    public User getUserInfo(@RequestHeader("authorization") String token) {
+        System.out.println("Retrieved request to get users. Parsing token");
+        UserToken userDetails = SecurityService.parseToken(token);
+        return userService.getUserByToken(userDetails);
+    }
+    
     @PostMapping(path = "/register")
-    public @ResponseBody
-    QueryResponse add(@RequestBody String json) {
+    @ResponseBody
+    public QueryResponse add(@RequestBody String json) {
         System.out.print("Creating new user " + json + "... ");
         User user = userService.add(json);
         if (user == null) {
@@ -71,7 +89,11 @@ public class UserController {
     
     @PostMapping("/update")
     public User editUser(@RequestBody String json) {
-
         return userService.editUser(json);
+    }
+
+    @GetMapping("/friends")
+    public List<User> getFriends(@RequestParam("search") String searchParam, @RequestHeader("authorization") String token){
+        return userService.getFriendsOfUser(SecurityService.parseToken(token),searchParam);
     }
 }
