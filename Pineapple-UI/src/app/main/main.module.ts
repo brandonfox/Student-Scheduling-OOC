@@ -9,7 +9,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { DemoMaterialModule } from '../core/material-module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddTaskComponent } from './add-task/add-task.component';
-import {EditEventComponent} from './edit-event/edit-event.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
+import { GroupComponent } from './group/group.component';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import {EditEventComponent} from './edit-event/edit-event.component';
         MainLayoutComponent,
         NavigationComponent,
         AddTaskComponent,
-        EditEventComponent
+        EditEventComponent,
+        GroupComponent
     ]
 })
 export class MainModule { }
