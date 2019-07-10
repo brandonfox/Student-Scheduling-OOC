@@ -15,7 +15,7 @@ export class UserService {
         private authService: AuthenticationService) {
     }
 
-  private userUrl = 'http://localhost:8082/';
+  private userUrl = 'http://localhost:8080/';
 
     public getUser(): Promise<User> {
         return this.authService.get<User>(this.userUrl + '/user').toPromise();
