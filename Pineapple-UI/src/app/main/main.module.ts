@@ -11,7 +11,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { GroupComponent } from './group/group.component';
-import { CalenderComponent } from './calender/calender.component';
+import { CalendarComponent } from './calendar/calendar.component';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -40,7 +40,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         AddTaskComponent,
         EditEventComponent,
         GroupComponent,
-        CalenderComponent,
+        CalendarComponent,
     ]
 })
 export class MainModule { }
