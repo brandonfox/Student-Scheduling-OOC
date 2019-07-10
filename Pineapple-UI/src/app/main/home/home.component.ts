@@ -5,7 +5,7 @@ import { UserService } from '../../service/user.service';
 import { Event } from '../../model/event';
 import { Task } from '../../model/task';
 import { TaskService } from '../../service/task.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-home',
