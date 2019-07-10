@@ -62,11 +62,11 @@ export class HomeComponent implements OnInit {
     openTaskAddForm() {
         this.taskForm.reset(); // todo: does this even work
         document.getElementById('taskAddForm').style.display = 'block';
-        (document.getElementById('taskAddButton') as HTMLButtonElement).disabled = true;
+        this.toggleAllButtonsDisabled(true);
     }
     closeTaskAddForm() {
         document.getElementById('taskAddForm').style.display = 'none';
-        (document.getElementById('taskAddButton') as HTMLButtonElement).disabled = false;
+        this.toggleAllButtonsDisabled(false);
     }
     submitTaskAddForm() {
         console.log('Submitting task form');
@@ -76,6 +76,11 @@ export class HomeComponent implements OnInit {
         this.taskService.createTask(this.taskForm.getRawValue());
         this.getTasks();
         document.getElementById('taskAddForm').style.display = 'none';
-        (document.getElementById('taskAddButton') as HTMLButtonElement).disabled = false;
+        this.toggleAllButtonsDisabled(false);
+    }
+    toggleAllButtonsDisabled(status: boolean) {
+        for (const event of this.events) {
+            (document.getElementById(event.id.toString()) as HTMLButtonElement).disabled = status;
+        }
     }
 }
