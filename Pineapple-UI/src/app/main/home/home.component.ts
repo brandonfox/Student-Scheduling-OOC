@@ -42,11 +42,15 @@ export class HomeComponent implements OnInit {
         this.eventService.getEvents().then(data => {
             this.events = data;
         });
+        this.getTasks();
+        console.log(this.user.valueOf());
+        this.getUserInfo().then(data => this.user = data);
+    }
+
+    getTasks() {
         this.taskService.getTasks().then(data => {
             this.tasks = data;
         });
-        console.log(this.user.valueOf());
-        this.getUserInfo().then(data => this.user = data);
     }
 
     getUserInfo() {
@@ -70,6 +74,7 @@ export class HomeComponent implements OnInit {
             return;
         }
         this.taskService.createTask(this.taskForm.getRawValue());
+        this.getTasks();
         document.getElementById('taskAddForm').style.display = 'none';
         (document.getElementById('taskAddButton') as HTMLButtonElement).disabled = false;
     }
