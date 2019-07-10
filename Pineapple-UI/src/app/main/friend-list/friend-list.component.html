@@ -8,9 +8,15 @@
         </mat-tab>
         <mat-tab style="flex:1;" label="All users" aria-label="users">
             List of users (Temporary until better layout made)
-            <div *ngFor="let friend of friends">
-                {{friend.username}}
-            </div>
+            <mat-list *ngIf="friends">
+                <mat-list-item *ngFor="let user of users" >
+                    <div class="flex-fill">{{user.username}}</div>
+                    <div *ngIf="!friendIds.has(user.id)">
+                        <p-button label="Add Friend" (click)="addFriend(user)"></p-button>
+                    </div>
+                    <mat-divider></mat-divider>
+                </mat-list-item>
+            </mat-list>
         </mat-tab>
 <!--        <mat-tab style="flex:1;" label="People from your groups" aria-label="groups">-->
 <!--            Group users here-->

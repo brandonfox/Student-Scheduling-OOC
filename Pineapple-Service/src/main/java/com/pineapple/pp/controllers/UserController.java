@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -93,7 +94,12 @@ public class UserController {
     }
 
     @GetMapping("/friends")
-    public List<User> getFriends(@RequestParam("search") String searchParam, @RequestHeader("authorization") String token){
+    public Set<User> getFriends(@RequestParam(value = "search", required = false) String searchParam, @RequestHeader("authorization") String token){
         return userService.getFriendsOfUser(SecurityService.parseToken(token),searchParam);
+    }
+    @PostMapping("/friends")
+    public boolean addFriend(@RequestHeader("authorization") String token, @RequestBody String userJson){
+        User friend = userService.getUserFromJson(userJson);
+        return userService.addFriend(SecurityService.parseToken(token),friend);
     }
 }
