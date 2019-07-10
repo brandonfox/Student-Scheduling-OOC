@@ -7,17 +7,30 @@ import { HomeComponent } from './home/home.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { DemoMaterialModule } from '../core/material-module';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { GroupComponent } from './group/group.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
     imports: [
         CommonModule,
         MainRoutingModule,
         DemoMaterialModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgbModalModule,
+        FlatpickrModule.forRoot(),
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory
+        }),
+        FormsModule
     ],
     declarations: [
         AddEventComponent,
@@ -26,7 +39,8 @@ import { GroupComponent } from './group/group.component';
         NavigationComponent,
         AddTaskComponent,
         EditEventComponent,
-        GroupComponent
+        GroupComponent,
+        CalendarComponent,
     ]
 })
 export class MainModule { }
