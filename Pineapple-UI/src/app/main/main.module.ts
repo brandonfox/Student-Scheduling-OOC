@@ -36,7 +36,6 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         HomeComponent,
         MainLayoutComponent,
         NavigationComponent,
-        AddTaskComponent,
         EditEventComponent,
         GroupComponent,
         CalendarComponent,
