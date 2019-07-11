@@ -8,7 +8,6 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { DemoMaterialModule } from '../core/material-module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { AddTaskComponent } from './add-task/add-task.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { GroupComponent } from './group/group.component';
 import { CalendarComponent } from './calendar/calendar.component';
