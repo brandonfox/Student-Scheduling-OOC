@@ -2,6 +2,7 @@ package com.pineapple.pp.repositories;
 
 import com.pineapple.pp.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
@@ -23,7 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByUsername(String username);
 
-    List<User> findUsersByFriendsAndUsernameContains(User user, String contains);
+    List<User> findAllByFriends(User user);
 
     List<User> findUsersByUsernameContains(String contains);
 
