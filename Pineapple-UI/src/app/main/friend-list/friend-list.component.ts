@@ -3,6 +3,8 @@ import {UserService} from '../../service/user.service';
 import {User} from '../../model/user';
 import {MatTabChangeEvent} from '@angular/material';
 import {HttpParams} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../../service/authentication.service';
 
 @Component({
   selector: 'app-friend-list',
@@ -17,12 +19,16 @@ export class FriendListComponent implements OnInit {
     friendIds: Set<bigint>;
     searchBar;
     currentTab;
+    loggedUser: User;
 
   constructor(
       private userService: UserService,
+      private router: Router,
+      private authService: AuthenticationService,
   ) { }
 
   ngOnInit() {
+      this.getLoggedUser();
       this.getFriends(); // Make sure the starting active tab is the friends tab
   }
   setFriends(friends) {
@@ -62,5 +68,11 @@ export class FriendListComponent implements OnInit {
       const ids = new Set<bigint>();
       this.friends.forEach(user => ids.add(user.id));
       this.friendIds = ids;
+  }
+  userClicked(user: User) {
+      this.router.navigate(['user/' + user.username]);
+  }
+  getLoggedUser() {
+      this.authService.getLoggedUser().then(data => this.loggedUser = data);
   }
 }

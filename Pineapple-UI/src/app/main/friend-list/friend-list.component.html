@@ -2,20 +2,25 @@
     <mat-tab-group (selectedTabChange)="tabChange($event)" style="flex: 9;">
         <mat-tab style="flex:1;" label="Your friends" aria-label="friends">
             List of friends (Temporary until better layout made)
-            <div *ngFor="let friend of friends">
-                {{friend.username}}
-            </div>
+            <mat-list>
+                <mat-list-item *ngFor="let friend of friends">
+                    <div class="flex-fill" (click)="userClicked(friend)" class="user-list-item">{{friend.username}}</div>
+                    <mat-divider></mat-divider>
+                </mat-list-item>
+            </mat-list>
         </mat-tab>
         <mat-tab style="flex:1;" label="All users" aria-label="users">
             List of users (Temporary until better layout made)
-            <mat-list *ngIf="friends">
-                <mat-list-item *ngFor="let user of users" >
+            <mat-list *ngIf="friends && loggedUser">
+                <div *ngFor="let user of users">
+                <mat-list-item *ngIf="user.username !== loggedUser.username" (click)="userClicked(user)" class="user-list-item">
                     <div class="flex-fill">{{user.username}}</div>
                     <div *ngIf="!friendIds.has(user.id)">
                         <p-button label="Add Friend" (click)="addFriend(user)"></p-button>
                     </div>
                     <mat-divider></mat-divider>
                 </mat-list-item>
+                </div>
             </mat-list>
         </mat-tab>
 <!--        <mat-tab style="flex:1;" label="People from your groups" aria-label="groups">-->

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import { CookieService} from 'ngx-cookie-service';
 import {Router} from '@angular/router';
+import {User} from '../model/user';
 
 @Injectable({
     providedIn: 'root'
@@ -79,5 +80,12 @@ export class AuthenticationService {
         this.clearAuthToken();
         console.log('User not authorized... Redirecting');
         this.router.navigate(['login']);
+    }
+
+    /**
+     * Get User information for the currently logged in user
+     */
+    public getLoggedUser(): Promise<User> {
+        return this.get<User>(this.authenticationUrl + '/loggedUserInfo').toPromise();
     }
 }
