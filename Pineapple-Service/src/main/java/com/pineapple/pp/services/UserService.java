@@ -145,8 +145,10 @@ public class UserService {
     }
     public boolean addFriend(UserToken user, User friend){
         try{
-            //TODO Make sure user cant add himself as friend and also add the same friend multiple times
             System.out.println("Adding friend for user: " + user.getUsername() + " ,Friend: " + friend.getUsername());
+            if(user.getUsername().equals(friend.getUsername())){
+                return false;
+            }
             User us = getUserByToken(user);
             us.addFriend(friend);
             userRepository.save(us);
