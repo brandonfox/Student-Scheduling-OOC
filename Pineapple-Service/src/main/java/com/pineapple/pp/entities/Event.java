@@ -2,6 +2,7 @@ package com.pineapple.pp.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -28,12 +29,22 @@ public class Event {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
 
-    @ManyToOne
-    @JoinTable(name = "join_group_event",
-            inverseJoinColumns = @JoinColumn(name = "group_id"),
+    @OneToMany
+    @JoinTable(name = "event_tasks",
+            inverseJoinColumns = @JoinColumn(name = "task_id"),
             joinColumns = @JoinColumn(name = "event_id")
     )
+    private List<Task> tasks;
+
+
+//    @ManyToOne
+//    @JoinTable(name = "join_group_event",
+//            inverseJoinColumns = @JoinColumn(name = "group_id"),
+//            joinColumns = @JoinColumn(name = "event_id")
+//    )
 //    private UserGroup userGroup = new UserGroup();
+
+
 
     /* Getters and Setters */
 
@@ -44,6 +55,8 @@ public class Event {
     public Date getStartTime() { return startTime; }
     public Date getEndTime() { return endTime; }
     public User getUser(){ return user; }
+    public List<Task> getTasks() { return tasks; }
+
 //    public UserGroup getUserGroup() { return userGroup; }
 
     public void setId(Long id) { this.id = id; }
@@ -53,5 +66,6 @@ public class Event {
     public void setStartTime(Date startTime) { this.startTime = startTime; }
     public void setEndTime(Date endTime) { this.endTime = endTime; }
     public void setUser(User user){this.user = user;}
+    public void setTasks(List<Task> tasks) { this.tasks = tasks; }
 //    public void setUserGroup(UserGroup userGroup) { this.userGroup = userGroup; }
 }

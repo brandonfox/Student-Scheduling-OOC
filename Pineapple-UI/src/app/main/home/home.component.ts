@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
     // TODO Add a refresh mechanism to display events properly
     /* Pop up form for adding tasks */
     openTaskAddForm(thisEvent) {
-        this.taskForm.reset(); // todo: does this even work
+        this.taskForm.reset();
         document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'block';
         this.toggleAllButtonsDisabled(true);
     }
