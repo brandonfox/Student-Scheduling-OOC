@@ -1,0 +1,29 @@
+.header {
+  padding-top: 10px;
+  text-align: center;
+  font-family: Ubuntu, serif;
+}
+
+.card {
+  max-width: 400px;
+}
+
+.button-bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+.edit-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+mat-icon{
+  color: grey;
+}
+
+button:focus {
+  outline:0;
+}

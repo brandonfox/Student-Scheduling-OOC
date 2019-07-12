@@ -5,6 +5,7 @@ import { UserService } from '../../service/user.service';
 import { Event } from '../../model/event';
 import { Task } from '../../model/task';
 import { TaskService } from '../../service/task.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-home',
@@ -19,8 +20,10 @@ export class HomeComponent implements OnInit {
     private user;
     events: Event[];
     tasks: Task[];
+    taskForm: FormGroup;
 
     constructor(
+        private formBuilder: FormBuilder,
         private authService: AuthenticationService,
         private userService: UserService,
         private eventService: EventService,
@@ -32,14 +35,22 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.taskForm = this.formBuilder.group({
+            title: ['', Validators.required],
+            description: ['']
+        });
         this.eventService.getEvents().then(data => {
             this.events = data;
         });
+        this.getTasks();
+        console.log(this.user.valueOf());
+        this.getUserInfo().then(data => this.user = data);
+    }
+
+    getTasks() {
         this.taskService.getTasks().then(data => {
             this.tasks = data;
         });
-        console.log(this.user.valueOf());
-        this.getUserInfo().then(data => this.user = data);
     }
 
     getUserInfo() {
@@ -47,4 +58,29 @@ export class HomeComponent implements OnInit {
     }
     // TODO Change html file to display date in a more human readable format
     // TODO Add a refresh mechanism to display events properly
+    /* Pop up form for adding tasks */
+    openTaskAddForm(thisEvent) {
+        this.taskForm.reset(); // todo: does this even work
+        document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'block';
+        this.toggleAllButtonsDisabled(true);
+    }
+    closeTaskAddForm(thisEvent) {
+        document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'none';
+        this.toggleAllButtonsDisabled(false);
+    }
+    submitTaskAddForm(thisEvent) {
+        console.log('Submitting task form');
+        if (this.taskForm.invalid) {
+            return;
+        }
+        this.taskService.createTask(this.taskForm.getRawValue());
+        this.getTasks();
+        document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'none';
+        this.toggleAllButtonsDisabled(false);
+    }
+    toggleAllButtonsDisabled(status: boolean) {
+        for (const event of this.events) {
+            (document.getElementById('eventId-' + event.id.toString()) as HTMLButtonElement).disabled = status;
+        }
+    }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AuthenticationService} from './authentication.service';
 import {Task} from '../model/task';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class TaskService {
   }
 
   public createTask(task) {
-    return this.authService.post<Task>(this.taskUrl, task).toPromise();
+    return this.authService.post(this.taskUrl, task).toPromise();
+  }
+
+  public editTask(task) {
+      return this.authService.post(this.taskUrl, task).toPromise();
   }
 }
