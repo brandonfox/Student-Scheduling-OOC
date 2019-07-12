@@ -9,13 +9,15 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService {
     
-    private UserRepository userRepository;
     private final Gson gson;
+    private UserRepository userRepository;
     
     @Autowired
     public UserService(UserRepository userRepository, Gson gson) {
@@ -67,7 +69,12 @@ public class UserService {
     public User findByEmail(String email) {
         return getUserRepository().findByEmail(email);
     }
-    
+
+    /**
+     * @deprecated Use getUserByToken
+     * @param token token
+     * @return User from token
+     */
     public User getUser(UserToken token){
         return getUser(token.getUsername());
     }
@@ -88,7 +95,6 @@ public class UserService {
     }
     
     public List<User> getAllUsers(UserToken token, String searchParam){
-        System.out.println(searchParam);
         try {
             System.out.print("Retrieving all users for token with username: " + token.getUsername());
             if(searchParam == null || searchParam.equals("undefined")) {
@@ -112,20 +118,45 @@ public class UserService {
             return null;
         }
     }
-    public List<User> getFriendsOfUser(UserToken token, String searchParam){
+    public Set<User> getFriendsOfUser(UserToken token, String searchParam){
         try{
+            //TODO Limit sizes of lists and pages system
+            User user = getUserByToken(token);
             System.out.print("Retrieving friends of token with username: " + token.getUsername());
+            Set<User> friends = new HashSet<>(user.getFriends());
+            friends.addAll(userRepository.findAllByFriends(user));
             if(searchParam == null || searchParam.equals("undefined")) {
                 System.out.print("\n");
-                return userRepository.findUsersByFriends(getUserByToken(token));
+                return friends;
             }
             else {
                 System.out.print(" and with extra search params: " + searchParam + "\n");
-                return userRepository.findUsersByFriendsAndUsernameContains(getUserByToken(token), searchParam);
+                Set<User> sortedFriends = new HashSet<>();
+                friends.iterator().forEachRemaining(x -> {
+                    if(x.getUsername().contains(searchParam))
+                        sortedFriends.add(x);
+                });
+                return sortedFriends;
             }
 
         }catch(NullPointerException ex){
             return null;
         }
     }
+    public boolean addFriend(UserToken user, User friend){
+        try{
+            System.out.println("Adding friend for user: " + user.getUsername() + " ,Friend: " + friend.getUsername());
+            if(user.getUsername().equals(friend.getUsername())){
+                return false;
+            }
+            User us = getUserByToken(user);
+            us.addFriend(friend);
+            userRepository.save(us);
+            return true;
+        }
+        catch(Exception ex){
+            return false;
+        }
+    }
+
 }

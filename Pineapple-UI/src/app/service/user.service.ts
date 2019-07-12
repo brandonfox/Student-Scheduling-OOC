@@ -15,7 +15,7 @@ export class UserService {
         private authService: AuthenticationService) {
     }
 
-  private userUrl = 'http://localhost:8082/';
+  private userUrl = 'http://localhost:8080';
 
     public getUser(): Promise<User> {
         return this.authService.get<User>(this.userUrl + '/user').toPromise();
@@ -36,7 +36,10 @@ export class UserService {
         return this.http.post(this.userUrl + '/login', login);
     }
     // ----------------------Friends stuff section-------------------------
-    public getFriends(params?: HttpParams) {
-        return this.authService.get<User[]>(this.userUrl + '/friends', params);
+    public getFriends(params?: HttpParams): Promise<User[]> {
+        return this.authService.get<User[]>(this.userUrl + '/friends', params).toPromise();
+    }
+    public addFriend(user) {
+        return this.authService.post<boolean>(this.userUrl + '/friends', user).toPromise();
     }
 }

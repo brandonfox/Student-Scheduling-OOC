@@ -1,6 +1,6 @@
 export class User {
 
-  id: string;
+  id: bigint;
   username: string;
   firstname: string;
   lastname: string;

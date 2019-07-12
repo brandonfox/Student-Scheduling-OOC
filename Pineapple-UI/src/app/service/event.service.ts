@@ -15,7 +15,7 @@ export class EventService {
   ) {
   }
 
-  private eventUrl = 'http://localhost:8082/events';
+  private eventUrl = 'http://localhost:8080/events';
   public getEvents(): Promise<Event[]> {
     return this.authService.get<Event[]>(this.eventUrl).toPromise();
   }
