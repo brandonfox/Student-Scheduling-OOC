@@ -1,6 +1,9 @@
+import {Event} from './event';
+
 export class Task {
 
-  id: string;
+  id: bigint;
   title: string;
   description: string;
+  event: Event;
 }

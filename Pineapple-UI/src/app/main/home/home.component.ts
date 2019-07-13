@@ -6,6 +6,7 @@ import { Event } from '../../model/event';
 import { Task } from '../../model/task';
 import { TaskService } from '../../service/task.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {HttpParams} from '@angular/common/http';
 
 @Component({
     selector: 'app-home',
@@ -37,19 +38,22 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.taskForm = this.formBuilder.group({
             title: ['', Validators.required],
-            description: ['']
+            description: [''],
+            event: null
         });
-        this.eventService.getEvents().then(data => {
+        this.eventService.getEvents().subscribe(data => {
             this.events = data;
+            for (const event of this.events) {
+                this.getTasksByEventId(event);
+            }
         });
-        this.getTasks();
         console.log(this.user.valueOf());
         this.getUserInfo().then(data => this.user = data);
     }
 
-    getTasks() {
-        this.taskService.getTasks().then(data => {
-            this.tasks = data;
+    getTasksByEventId(event) {
+        this.taskService.getTasksByEventId(event.id).subscribe(data => {
+            event.tasks = data;
         });
     }
 
@@ -58,23 +62,30 @@ export class HomeComponent implements OnInit {
     }
     // TODO Change html file to display date in a more human readable format
     // TODO Add a refresh mechanism to display events properly
+
     /* Pop up form for adding tasks */
     openTaskAddForm(thisEvent) {
         this.taskForm.reset();
         document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'block';
         this.toggleAllButtonsDisabled(true);
     }
+
     closeTaskAddForm(thisEvent) {
         document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'none';
         this.toggleAllButtonsDisabled(false);
     }
+
     submitTaskAddForm(thisEvent) {
         console.log('Submitting task form');
         if (this.taskForm.invalid) {
             return;
         }
-        this.taskService.createTask(this.taskForm.getRawValue());
-        this.getTasks();
+        this.taskForm.patchValue({
+            event: thisEvent
+        });
+        this.taskService.createTask(this.taskForm.getRawValue()).then(
+            data => this.getTasksByEventId(thisEvent)
+        );
         document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'none';
         this.toggleAllButtonsDisabled(false);
     }

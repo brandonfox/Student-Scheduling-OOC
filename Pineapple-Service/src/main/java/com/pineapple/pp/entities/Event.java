@@ -1,5 +1,8 @@
 package com.pineapple.pp.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +37,7 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "task_id"),
             joinColumns = @JoinColumn(name = "event_id")
     )
+    @JsonIgnore
     private List<Task> tasks;
 
 

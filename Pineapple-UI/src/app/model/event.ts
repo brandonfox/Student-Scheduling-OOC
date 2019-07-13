@@ -1,4 +1,5 @@
 import {User} from './user';
+import {Task} from './task';
 
 export class Event {
     id: bigint;
@@ -8,4 +9,5 @@ export class Event {
     user: User;
     startTime: Date;
     endTime: Date;
+    tasks: Task[];
 }

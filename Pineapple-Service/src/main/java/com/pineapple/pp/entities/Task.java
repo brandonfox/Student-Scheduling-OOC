@@ -1,5 +1,6 @@
 package com.pineapple.pp.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;

@@ -1,6 +1,7 @@
 package com.pineapple.pp.services;
 
 import com.google.gson.Gson;
+import com.pineapple.pp.entities.Event;
 import com.pineapple.pp.entities.Task;
 import com.pineapple.pp.repositories.TaskRepository;
 
@@ -8,6 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskService {
+
+    TaskRepository getTaskRepository();
+
+    default List<Task> findTasksByEvent(Event event) {
+        System.out.println("In findTasksByEvent() in TaskService.java");
+        return getTaskRepository().findTasksByEvent(event);
+    }
 
     default List<Task> list() {
         System.out.println("In list() in TaskService.java");
@@ -18,8 +26,6 @@ public interface TaskService {
         }
         return userList;
     }
-
-    TaskRepository getTaskRepository();
 
     Gson getGson();
 

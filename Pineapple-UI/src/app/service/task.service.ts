@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
 import {AuthenticationService} from './authentication.service';
 import {Task} from '../model/task';
-import { BehaviorSubject } from 'rxjs';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(
+      private authService: AuthenticationService,
+      private http: HttpClient
+  ) { }
 
   private taskUrl = 'http://localhost:8080/tasks';
 
   public getTasks(): Promise<Task[]> {
     return this.authService.get<Task[]>(this.taskUrl).toPromise();
+  }
+
+  public getTasksByEventId(eventId: bigint): Observable<Task[]> {
+      return this.http.get<Task[]>(this.taskUrl + '/by-event' + '/' + eventId);
   }
 
   public createTask(task) {
