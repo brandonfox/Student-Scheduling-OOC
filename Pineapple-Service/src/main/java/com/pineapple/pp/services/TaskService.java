@@ -33,5 +33,7 @@ public interface TaskService {
         return taskFromDB;
     }
 
-    // todo: remove task
+    default void removeTaskById(Long id) {
+        getTaskRepository().deleteTaskById(id);
+    }
 }

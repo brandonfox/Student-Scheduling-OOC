@@ -17,4 +17,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     boolean existsById(Long id);
 
     List<Task> findTasksByEvent(Event event);
+
+    void deleteTaskById(Long id);
 }

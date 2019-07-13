@@ -43,6 +43,11 @@ public class TaskController {
         }
     }
 
+    @GetMapping("/tasks/remove-task/{taskId}")
+    public void removeTaskById(@PathVariable("taskId") Long taskId) {
+        taskService.removeTaskById(taskId);
+    }
+
     @PostMapping("/edit-task")
     public Task editTask(@RequestBody String json) {
         return taskService.editTask(json);
