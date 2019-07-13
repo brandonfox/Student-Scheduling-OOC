@@ -3,10 +3,8 @@ import { AuthenticationService } from '../../service/authentication.service';
 import { EventService } from '../../service/event.service';
 import { UserService } from '../../service/user.service';
 import { Event } from '../../model/event';
-import { Task } from '../../model/task';
 import { TaskService } from '../../service/task.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {HttpParams} from '@angular/common/http';
 
 @Component({
     selector: 'app-home',
@@ -93,5 +91,9 @@ export class HomeComponent implements OnInit {
         for (const event of this.events) {
             (document.getElementById('eventId-' + event.id.toString()) as HTMLButtonElement).disabled = status;
         }
+    }
+
+    public setCurrentEvent(event) {
+        this.eventService.currentEvent = event;
     }
 }
