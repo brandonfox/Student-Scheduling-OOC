@@ -16,8 +16,8 @@ import java.util.Set;
 @Service
 public class UserService {
     
-    private UserRepository userRepository;
     private final Gson gson;
+    private UserRepository userRepository;
     
     @Autowired
     public UserService(UserRepository userRepository, Gson gson) {
@@ -120,17 +120,17 @@ public class UserService {
     }
     public Set<User> getFriendsOfUser(UserToken token, String searchParam){
         try{
-            //TODO Consider putting this in the frontend instead (May be insecure as everyone has a copy of the database in memory)
             //TODO Limit sizes of lists and pages system
             User user = getUserByToken(token);
             System.out.print("Retrieving friends of token with username: " + token.getUsername());
+            Set<User> friends = new HashSet<>(user.getFriends());
+            friends.addAll(userRepository.findAllByFriends(user));
             if(searchParam == null || searchParam.equals("undefined")) {
                 System.out.print("\n");
-                return user.getFriends();
+                return friends;
             }
             else {
                 System.out.print(" and with extra search params: " + searchParam + "\n");
-                Set<User> friends = user.getFriends();
                 Set<User> sortedFriends = new HashSet<>();
                 friends.iterator().forEachRemaining(x -> {
                     if(x.getUsername().contains(searchParam))
@@ -145,10 +145,12 @@ public class UserService {
     }
     public boolean addFriend(UserToken user, User friend){
         try{
-            //TODO Make sure user cant add himself as friend and also add the same friend multiple times
             System.out.println("Adding friend for user: " + user.getUsername() + " ,Friend: " + friend.getUsername());
+            if(user.getUsername().equals(friend.getUsername())){
+                return false;
+            }
             User us = getUserByToken(user);
-            us.getFriends().add(friend);
+            us.addFriend(friend);
             userRepository.save(us);
             return true;
         }

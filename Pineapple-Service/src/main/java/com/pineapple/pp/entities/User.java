@@ -53,4 +53,5 @@ public class User {
     public void setAge(Integer age) { this.age = age; }
     public void setPhoneNumber(Long phoneNumber) { this.phoneNumber = phoneNumber; }
     public void setFriends(Set<User> friends) { this.friends = friends; }
+    public void addFriend(User friend){ friends.add(friend); }
 }
