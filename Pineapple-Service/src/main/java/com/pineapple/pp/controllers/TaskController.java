@@ -32,12 +32,6 @@ public class TaskController {
         else System.out.println("Task created!");
     }
 
-    @GetMapping("/tasks")
-    public Iterable<Task> findAll() {
-        System.out.println("Retrieving all tasks");
-        return taskService.list();
-    }
-
     @GetMapping("/tasks/by-event/{eventId}")
     public List<Task> findTasksByEvent(@PathVariable("eventId") Long eventId) {
         try {

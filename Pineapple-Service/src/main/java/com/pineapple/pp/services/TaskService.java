@@ -13,18 +13,7 @@ public interface TaskService {
     TaskRepository getTaskRepository();
 
     default List<Task> findTasksByEvent(Event event) {
-        System.out.println("In findTasksByEvent() in TaskService.java");
         return getTaskRepository().findTasksByEvent(event);
-    }
-
-    default List<Task> list() {
-        System.out.println("In list() in TaskService.java");
-        List<Task> userList = new ArrayList<>();
-        for (Task task : getTaskRepository().findAll()) {
-            System.out.println(task.getTitle());
-            userList.add(task);
-        }
-        return userList;
     }
 
     Gson getGson();

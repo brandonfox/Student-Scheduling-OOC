@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
     private users;
     private user;
     events: Event[];
-    tasks: Task[];
     taskForm: FormGroup;
 
     constructor(
@@ -89,6 +88,7 @@ export class HomeComponent implements OnInit {
         document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'none';
         this.toggleAllButtonsDisabled(false);
     }
+
     toggleAllButtonsDisabled(status: boolean) {
         for (const event of this.events) {
             (document.getElementById('eventId-' + event.id.toString()) as HTMLButtonElement).disabled = status;
