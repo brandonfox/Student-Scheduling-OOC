@@ -5,6 +5,7 @@ import com.pineapple.pp.entities.Event;
 import com.pineapple.pp.entities.Task;
 import com.pineapple.pp.repositories.TaskRepository;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public interface TaskService {
         return taskFromDB;
     }
 
+    @Transactional
     default void removeTaskById(Long id) {
         getTaskRepository().deleteTaskById(id);
     }

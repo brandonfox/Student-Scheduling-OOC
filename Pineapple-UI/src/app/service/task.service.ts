@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {AuthenticationService} from './authentication.service';
 import {Task} from '../model/task';
 import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +24,9 @@ export class TaskService {
 
   public editTask(task) {
       return this.authService.post(this.taskUrl, task).toPromise();
+  }
+
+  public removeTask(taskId: bigint) {
+      return this.authService.delete(this.taskUrl + '/remove-task' + '/' + taskId);
   }
 }

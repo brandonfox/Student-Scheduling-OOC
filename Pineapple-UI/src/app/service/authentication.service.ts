@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { CookieService} from 'ngx-cookie-service';
 import {Router} from '@angular/router';
 import {User} from '../model/user';
@@ -68,6 +68,11 @@ export class AuthenticationService {
     public get<T>(url, params?: HttpParams) {
         return this.http.get<T>(url, {headers: this.getAuthorizedHeader(), params});
     }
+
+    public delete<T>(url, params?: HttpParams) {
+        return this.http.delete<T>(url, {headers: this.getAuthorizedHeader(), params});
+    }
+
     private getAuthorizedHeader(): HttpHeaders {
         // Headers are immutable so when appending header fields must use new returned object, Took me a while
         return new HttpHeaders().append('authorization', this.getAuthToken());

@@ -43,8 +43,9 @@ public class TaskController {
         }
     }
 
-    @GetMapping("/tasks/remove-task/{taskId}")
+    @DeleteMapping("/tasks/remove-task/{taskId}")
     public void removeTaskById(@PathVariable("taskId") Long taskId) {
+        System.out.println("in remove task! " + taskId);
         taskService.removeTaskById(taskId);
     }
 

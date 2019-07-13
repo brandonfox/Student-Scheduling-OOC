@@ -25,7 +25,7 @@
                 </div>
                 <div class="task-form-popup" id="addForm-eventId-{{event.id}}">
                     <div class="task-form-container">
-                        <button class="task-close-button" id="taskAddClose" (click)="closeTaskAddForm(event)">
+                        <button class="task-close-button" id="taskAddClose" (click)="closeTaskAddForm(event.id)">
                             <mat-icon class="task-cancel-icon">cancel</mat-icon>
                         </button>
                         <h3>Add a new task</h3>
@@ -68,16 +68,16 @@
                     <p>{{task.description}}</p>
                 </div>
                 <div class="lgi-settings">
-                    <button class="task-settings-button" id="taskId-{{task.id}}" (click)="openTaskSettings(task)">
+                    <button class="task-settings-button" id="taskId-{{task.id}}" (click)="openTaskSettings(task.id)">
                         <mat-icon class="task-settings-icon">settings</mat-icon>
                     </button>
                     <div class="task-form-popup" id="editForm-taskId-{{task.id}}">
                         <div class="task-form-container">
-                            <button class="task-close-button" id="taskEditClose" (click)="closeTaskSettings(task)">
+                            <button class="task-close-button" id="taskEditClose" (click)="closeTaskSettings(task.id)">
                                 <mat-icon class="task-cancel-icon">cancel</mat-icon>
                             </button>
                             <h3>Edit task</h3>
-                            <form [formGroup]="taskEditForm" (ngSubmit)="submitTaskEditForm()">
+                            <form [formGroup]="taskEditForm" (ngSubmit)="submitTaskEditForm(task.id)">
                                 <mat-form-field class="title-field" appearance="legacy">
                                     <label>
                                         <input
@@ -100,7 +100,7 @@
                                     <button type="submit" class="task-submit-button">
                                         <mat-icon class="task-submit-icon">check_circle</mat-icon>
                                     </button>
-                                    <button type="button" class="task-delete-button" (click)="removeTask()">
+                                    <button type="button" class="task-delete-button" (click)="removeTask(task.id, event)">
                                         <mat-icon class="task-delete-icon">delete</mat-icon>
                                     </button>
                                 </div>

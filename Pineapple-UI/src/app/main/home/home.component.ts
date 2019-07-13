@@ -66,13 +66,13 @@ export class HomeComponent implements OnInit {
     // TODO Add a refresh mechanism to display events properly
 
     /* Pop up form for adding tasks */
-    openTaskAddForm(thisEvent) {
+    openTaskAddForm(eventId) {
         this.taskAddForm.reset();
-        this.togglePopup('addForm-eventId-' + thisEvent.id, 'block', true);
+        this.togglePopup('addForm-eventId-' + eventId, 'block', true);
     }
 
-    closeTaskAddForm(thisEvent) {
-        this.togglePopup('addForm-eventId-' + thisEvent.id, 'none', false);
+    closeTaskAddForm(eventId) {
+        this.togglePopup('addForm-eventId-' + eventId, 'none', false);
     }
 
     submitTaskAddForm(thisEvent) {
@@ -86,8 +86,7 @@ export class HomeComponent implements OnInit {
         this.taskService.createTask(this.taskAddForm.getRawValue()).then(
             data => this.getTasksByEventId(thisEvent)
         );
-        document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'none';
-        this.toggleAllButtonsDisabled(false);
+        this.togglePopup('addForm-eventId-' + thisEvent.id, 'none', false);
     }
 
     toggleAllButtonsDisabled(status: boolean) {
@@ -108,24 +107,29 @@ export class HomeComponent implements OnInit {
         this.toggleAllButtonsDisabled(disable);
     }
 
-    openTaskSettings(task) {
+    openTaskSettings(taskId) {
         this.taskEditForm.reset();
-        this.togglePopup('editForm-taskId-' + task.id, 'block', true);
+        this.togglePopup('editForm-taskId-' + taskId, 'block', true);
     }
 
-    closeTaskSettings(task) {
-        this.togglePopup('editForm-taskId-' + task.id, 'none', false);
+    closeTaskSettings(taskId) {
+        this.togglePopup('editForm-taskId-' + taskId, 'none', false);
     }
 
-    submitTaskEditForm() {
+    submitTaskEditForm(taskId) {
         console.log('Submitting task edit form');
         if (this.taskAddForm.invalid) {
             return;
         }
+        this.togglePopup('editForm-taskId-' + taskId, 'none', false);
     }
 
-    removeTask() {
+    removeTask(taskId, event) {
         console.log('Removing task!');
+        this.taskService.removeTask(taskId).subscribe(
+            data => this.getTasksByEventId(event)
+        );
+        this.togglePopup('editForm-taskId-' + taskId, 'none', false);
     }
 
     public setCurrentEvent(event) {
