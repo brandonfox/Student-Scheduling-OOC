@@ -31,21 +31,26 @@ button:focus {
   outline:0;
 }
 
-.list-group-item-text {
-    overflow: hidden; // these two must be true for text-overflow to work
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    float: left;
-    width: 80%;
-}
-
 .list-group-item {
     position: relative;
     display: block;
-    padding: 0.75rem 0.5rem 0.75rem 1.5rem;
-    margin-bottom: -1px;
+    padding: 0.75rem 0.55rem 0.75rem 1.5rem;
     background-color: #FFF;
     border: 1px solid rgba(0, 0, 0, 0.125);
+    .lgi-text {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding: 0.15rem 0.1rem 0.15rem 0.1rem;
+        float: left;
+        width: 80%;
+        min-height: 90%;
+    }
+    .lgi-settings {
+        padding: 0 0.6rem 0.4rem 1rem;
+        float: right;
+        width: 20%;
+    }
 }
 
 /* card-text takes care of text overflow*/
@@ -108,6 +113,18 @@ button:focus {
     }
 }
 
+.task-delete-icon {
+    color: #b2b2a9;
+    font-size: 40px;
+    &:hover {
+        color: #d7123a;
+        text-shadow: 0 0 5px rgba(54, 161, 70, 0.2);
+    }
+    &:active {
+        color: #323232;
+    }
+}
+
 .task-add-button {
     background: inherit;
     border: none;
@@ -129,7 +146,25 @@ button:focus {
     float: right;
 }
 
-.test {
+.task-settings-button {
+    background: inherit;
+    border: none;
+    float:right;
+}
+
+.task-settings-icon {
+    color: #b2b2a9;
+    font-size: 30px;
+    float: right;
+    &:hover {
+        color: #323232;
+    }
+    &:active {
+        color: seagreen;
+    }
+}
+
+.task-submit-button-container {
     height: 30px;
     width: 100%;
 }
@@ -140,14 +175,20 @@ button:focus {
     float: right;
 }
 
-.task-add-form-popup {
+.task-delete-button {
+    background: inherit;
+    border: none;
+    float: left;
+}
+
+.task-form-popup {
     display: none;
     position: absolute;
     left: 102%;
     z-index: 3;
 }
 
-.task-add-form-container {
+.task-form-container {
     min-width: 150px;
     padding: 20px;
     background: white;
@@ -155,13 +196,13 @@ button:focus {
     box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.3);
 }
 
-.add-title {
+.title-field {
     display: block;
     width: 110px;
     margin: 10px 0 0;
 }
 
-.add-description {
+.description-field {
     display: block;
     width: 400px;
     margin: 10px 0 0;
@@ -199,6 +240,7 @@ button:focus {
     }
   }
 }
+
 .tooltip-content {
   visibility: hidden;
   opacity: 0;

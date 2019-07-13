@@ -18,7 +18,8 @@ export class HomeComponent implements OnInit {
     private users;
     private user;
     events: Event[];
-    taskForm: FormGroup;
+    taskAddForm: FormGroup;
+    taskEditForm: FormGroup;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -33,10 +34,14 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.taskForm = this.formBuilder.group({
+        this.taskAddForm = this.formBuilder.group({
             title: ['', Validators.required],
             description: [''],
             event: null
+        });
+        this.taskEditForm = this.formBuilder.group({
+            title: [''],
+            description: ['']
         });
         this.eventService.getEvents().subscribe(data => {
             this.events = data;
@@ -62,25 +67,23 @@ export class HomeComponent implements OnInit {
 
     /* Pop up form for adding tasks */
     openTaskAddForm(thisEvent) {
-        this.taskForm.reset();
-        document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'block';
-        this.toggleAllButtonsDisabled(true);
+        this.taskAddForm.reset();
+        this.togglePopup('addForm-eventId-' + thisEvent.id, 'block', true);
     }
 
     closeTaskAddForm(thisEvent) {
-        document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'none';
-        this.toggleAllButtonsDisabled(false);
+        this.togglePopup('addForm-eventId-' + thisEvent.id, 'none', false);
     }
 
     submitTaskAddForm(thisEvent) {
         console.log('Submitting task form');
-        if (this.taskForm.invalid) {
+        if (this.taskAddForm.invalid) {
             return;
         }
-        this.taskForm.patchValue({
+        this.taskAddForm.patchValue({
             event: thisEvent
         });
-        this.taskService.createTask(this.taskForm.getRawValue()).then(
+        this.taskService.createTask(this.taskAddForm.getRawValue()).then(
             data => this.getTasksByEventId(thisEvent)
         );
         document.getElementById('addForm-eventId-' + thisEvent.id).style.display = 'none';
@@ -88,9 +91,41 @@ export class HomeComponent implements OnInit {
     }
 
     toggleAllButtonsDisabled(status: boolean) {
-        for (const event of this.events) {
-            (document.getElementById('eventId-' + event.id.toString()) as HTMLButtonElement).disabled = status;
+        document.querySelectorAll('*[id^="eventId"').forEach(
+            button => {
+                (button as HTMLButtonElement).disabled = status;
+            }
+        );
+        document.querySelectorAll('*[id^="taskId"').forEach(
+            button => {
+                (button as HTMLButtonElement).disabled = status;
+            }
+        );
+    }
+
+    togglePopup(elementId, displayType: string, disable: boolean) {
+        document.getElementById(elementId).style.display = displayType;
+        this.toggleAllButtonsDisabled(disable);
+    }
+
+    openTaskSettings(task) {
+        this.taskEditForm.reset();
+        this.togglePopup('editForm-taskId-' + task.id, 'block', true);
+    }
+
+    closeTaskSettings(task) {
+        this.togglePopup('editForm-taskId-' + task.id, 'none', false);
+    }
+
+    submitTaskEditForm() {
+        console.log('Submitting task edit form');
+        if (this.taskAddForm.invalid) {
+            return;
         }
+    }
+
+    removeTask() {
+        console.log('Removing task!');
     }
 
     public setCurrentEvent(event) {

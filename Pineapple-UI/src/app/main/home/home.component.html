@@ -23,14 +23,14 @@
                         <mat-icon class="task-add-icon">add</mat-icon>
                     </button>
                 </div>
-                <div class="task-add-form-popup" id="addForm-eventId-{{event.id}}">
-                    <div class="task-add-form-container">
+                <div class="task-form-popup" id="addForm-eventId-{{event.id}}">
+                    <div class="task-form-container">
                         <button class="task-close-button" id="taskAddClose" (click)="closeTaskAddForm(event)">
                             <mat-icon class="task-cancel-icon">cancel</mat-icon>
                         </button>
                         <h3>Add a new task</h3>
-                        <form [formGroup]="taskForm" (ngSubmit)="submitTaskAddForm(event)">
-                            <mat-form-field class="add-title" appearance="legacy">
+                        <form [formGroup]="taskAddForm" (ngSubmit)="submitTaskAddForm(event)">
+                            <mat-form-field class="title-field" appearance="legacy">
                                 <label>
                                     <input
                                         matInput
@@ -40,7 +40,7 @@
                                         formControlName="title">
                                 </label>
                             </mat-form-field>
-                            <mat-form-field class="add-description" appearance="legacy">
+                            <mat-form-field class="description-field" appearance="legacy">
                                 <label>
                                     <input
                                         matInput
@@ -50,8 +50,8 @@
                                         formControlName="description">
                                 </label>
                             </mat-form-field>
-                            <div class="test">
-                                <button class="task-submit-button">
+                            <div class="task-submit-button-container">
+                                <button type="submit" class="task-submit-button">
                                     <mat-icon class="task-submit-icon">check_circle</mat-icon>
                                 </button>
                             </div>
@@ -62,10 +62,51 @@
         </div>
         <div class="list-group list-group-flush" *ngFor="let task of event.tasks">
             <div class="list-group-item tooltip-container list-group-item-action">
-                <div class="list-group-item-text">{{task.title}}</div>
+                <div class="lgi-text">{{task.title}}</div>
                 <div class="tooltip-content">
                     <h6>{{task.title}}</h6>
                     <p>{{task.description}}</p>
+                </div>
+                <div class="lgi-settings">
+                    <button class="task-settings-button" id="taskId-{{task.id}}" (click)="openTaskSettings(task)">
+                        <mat-icon class="task-settings-icon">settings</mat-icon>
+                    </button>
+                    <div class="task-form-popup" id="editForm-taskId-{{task.id}}">
+                        <div class="task-form-container">
+                            <button class="task-close-button" id="taskEditClose" (click)="closeTaskSettings(task)">
+                                <mat-icon class="task-cancel-icon">cancel</mat-icon>
+                            </button>
+                            <h3>Edit task</h3>
+                            <form [formGroup]="taskEditForm" (ngSubmit)="submitTaskEditForm()">
+                                <mat-form-field class="title-field" appearance="legacy">
+                                    <label>
+                                        <input
+                                            matInput
+                                            type="text"
+                                            placeholder="Task title"
+                                            value="{{task.title}}">
+                                    </label>
+                                </mat-form-field>
+                                <mat-form-field class="description-field" appearance="legacy">
+                                    <label>
+                                        <input
+                                            matInput
+                                            type="text"
+                                            placeholder="Task description"
+                                            value="{{task.description}}">
+                                    </label>
+                                </mat-form-field>
+                                <div class="task-submit-button-container">
+                                    <button type="submit" class="task-submit-button">
+                                        <mat-icon class="task-submit-icon">check_circle</mat-icon>
+                                    </button>
+                                    <button type="button" class="task-delete-button" (click)="removeTask()">
+                                        <mat-icon class="task-delete-icon">delete</mat-icon>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
