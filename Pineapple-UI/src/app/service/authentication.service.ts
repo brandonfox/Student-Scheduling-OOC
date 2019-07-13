@@ -73,6 +73,10 @@ export class AuthenticationService {
         return this.http.delete<T>(url, {headers: this.getAuthorizedHeader(), params});
     }
 
+    public put<T>(url, data, params?: HttpParams) {
+        return this.http.put<T>(url, data, {headers: this.getAuthorizedHeader(), params});
+    }
+
     private getAuthorizedHeader(): HttpHeaders {
         // Headers are immutable so when appending header fields must use new returned object, Took me a while
         return new HttpHeaders().append('authorization', this.getAuthToken());

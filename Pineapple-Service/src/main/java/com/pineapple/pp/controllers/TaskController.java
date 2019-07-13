@@ -3,12 +3,10 @@ package com.pineapple.pp.controllers;
 import com.pineapple.pp.entities.Event;
 import com.pineapple.pp.entities.Task;
 import com.pineapple.pp.services.EventService;
-import com.pineapple.pp.services.TaskService;
 import com.pineapple.pp.services.TaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Null;
 import java.util.List;
 
 @RestController
@@ -49,8 +47,8 @@ public class TaskController {
         taskService.removeTaskById(taskId);
     }
 
-    @PostMapping("/edit-task")
-    public Task editTask(@RequestBody String json) {
-        return taskService.editTask(json);
+    @PutMapping("/tasks/edit-task/{taskId}")
+    public void editTask(@PathVariable("taskId") Long taskId, @RequestBody String json) {
+        taskService.editTask(taskId, json);
     }
 }

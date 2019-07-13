@@ -4,7 +4,7 @@ import { EventService } from '../../service/event.service';
 import { UserService } from '../../service/user.service';
 import { Event } from '../../model/event';
 import { TaskService } from '../../service/task.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-home',
@@ -21,6 +21,9 @@ export class HomeComponent implements OnInit {
     taskAddForm: FormGroup;
     taskEditForm: FormGroup;
 
+    titleBeingEdited = new FormControl('');
+    descriptionBeingEdited = new FormControl('');
+
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthenticationService,
@@ -36,12 +39,8 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.taskAddForm = this.formBuilder.group({
             title: ['', Validators.required],
-            description: [''],
+            description: '',
             event: null
-        });
-        this.taskEditForm = this.formBuilder.group({
-            title: [''],
-            description: ['']
         });
         this.eventService.getEvents().subscribe(data => {
             this.events = data;
@@ -107,21 +106,35 @@ export class HomeComponent implements OnInit {
         this.toggleAllButtonsDisabled(disable);
     }
 
-    openTaskSettings(taskId) {
-        this.taskEditForm.reset();
-        this.togglePopup('editForm-taskId-' + taskId, 'block', true);
+    openTaskSettings(task) {
+        this.titleBeingEdited.setValue(task.title);
+        this.descriptionBeingEdited.setValue(task.description);
+        this.togglePopup('editForm-taskId-' + task.id, 'block', true);
     }
 
     closeTaskSettings(taskId) {
         this.togglePopup('editForm-taskId-' + taskId, 'none', false);
+        this.titleBeingEdited.setValue('');
+        this.descriptionBeingEdited.setValue('');
     }
 
-    submitTaskEditForm(taskId) {
-        console.log('Submitting task edit form');
-        if (this.taskAddForm.invalid) {
-            return;
+    buildTaskEditForm() {
+        return this.formBuilder.group({
+            title: this.titleBeingEdited.value,
+            description: this.descriptionBeingEdited.value
+        });
+    }
+
+    submitTaskEditForm(task, event) {
+        if (this.titleBeingEdited.value !== task.title || this.descriptionBeingEdited.value !== task.description) {
+            console.log('Submitting task edit form');
+            this.taskService.editTask(task.id, this.buildTaskEditForm().getRawValue()).then(
+                data => this.getTasksByEventId(event)
+            );
         }
-        this.togglePopup('editForm-taskId-' + taskId, 'none', false);
+        this.togglePopup('editForm-taskId-' + task.id, 'none', false);
+        this.titleBeingEdited.setValue('');
+        this.descriptionBeingEdited.setValue('');
     }
 
     removeTask(taskId, event) {

@@ -22,8 +22,8 @@ export class TaskService {
     return this.authService.post(this.taskUrl, task).toPromise();
   }
 
-  public editTask(task) {
-      return this.authService.post(this.taskUrl, task).toPromise();
+  public editTask(taskId, form) {
+      return this.authService.put(this.taskUrl + '/edit-task' + '/' + taskId, form).toPromise();
   }
 
   public removeTask(taskId: bigint) {
