@@ -1,24 +1,27 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="side" class="sidenav" [ngStyle]="{ 'width.em': sidenavWidth }" opened="true">
-    <mat-nav-list>
-      <mat-list-item routerLink="1" routerLinkActive="active" >
-        <mat-icon>list</mat-icon>
-      </mat-list-item>
-        <mat-list-item routerLink="/main/friends" routerLinkActive="active">
-            <mat-icon>people</mat-icon>
-        </mat-list-item>
-      <mat-list-item routerLink="2" routerLinkActive="active">
-        <mat-icon>face</mat-icon>
-      </mat-list-item>
-      <mat-list-item routerLink="/main/home" routerLinkActive="active">
-        <mat-icon>home</mat-icon>
-      </mat-list-item>
-      <mat-list-item class="logout" (click)="logout()">
-        <mat-icon>logout</mat-icon>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-sidenav>
-  <div class="sidenav-content">
-    <router-outlet></router-outlet>
-  </div>
+    <mat-sidenav mode="side" class="sidenav" [ngStyle]="{ 'width.em': sidenavWidth }" opened="true">
+        <mat-nav-list>
+            <mat-list-item routerLink="/main/home" routerLinkActive="active">
+                <mat-icon>home</mat-icon>
+            </mat-list-item>
+            <mat-list-item routerLink="2" routerLinkActive="active">
+                <mat-icon>face</mat-icon>
+            </mat-list-item>
+            <mat-list-item routerLink="/main/friends" routerLinkActive="active">
+                <mat-icon>people</mat-icon>
+            </mat-list-item>
+            <mat-list-item routerLink="1" routerLinkActive="active" >
+                <mat-icon>book</mat-icon>
+            </mat-list-item>
+            <mat-list-item routerLink="/main/calendar" routerLinkActive="active" >
+                <mat-icon>calendar_today</mat-icon>
+            </mat-list-item>
+            <mat-list-item class="logout" (click)="logout()">
+                <mat-icon>logout</mat-icon>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <div class="sidenav-content">
+        <router-outlet></router-outlet>
+    </div>
 </mat-sidenav-container>
