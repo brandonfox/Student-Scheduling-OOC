@@ -15,21 +15,41 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatDatepickerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
+
+import { MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
+import { MomentUtcDateAdapter } from './add-event/moment-utc-date-adapter';
 
 
 @NgModule({
+    providers: [
+        { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+        { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+        { provide: DateAdapter, useClass: MomentUtcDateAdapter },
+    ],
     imports: [
         CommonModule,
         MainRoutingModule,
+        BrowserModule,
+        FormsModule,
+        MatDatepickerModule,
+        MatMomentDateModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
         DemoMaterialModule,
         ReactiveFormsModule,
         NgbModalModule,
+        BrowserModule,
         FlatpickrModule.forRoot(),
         CalendarModule.forRoot({
             provide: DateAdapter,
             useFactory: adapterFactory
-        }),
-        FormsModule
+        })
     ],
     declarations: [
         AddEventComponent,
@@ -39,6 +59,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         EditEventComponent,
         GroupComponent,
         CalendarComponent,
-    ]
+    ],
+    bootstrap: [ AddEventComponent ]
 })
 export class MainModule { }

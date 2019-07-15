@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../service/authentication.service';
 import {EventService} from '../../service/event.service';
 import {Router} from '@angular/router';
-import DateTimeFormat = Intl.DateTimeFormat;
+import {MatDatepicker} from '@angular/material';
+import { Moment } from 'moment';
 
 @Component({
     selector: 'app-add-event',
@@ -11,6 +12,17 @@ import DateTimeFormat = Intl.DateTimeFormat;
     styleUrls: ['./add-event.component.scss']
 })
 export class AddEventComponent implements OnInit {
+
+    name = 'Angular 4';
+    @ViewChild(MatDatepicker, {static: false}) picker: MatDatepicker<Moment>;
+    isValidMoment = false;
+
+    serializedDate = new FormControl((new Date()).toISOString());
+
+    date = new FormControl(new Date());
+    form: FormGroup;
+
+    events: Date[] = [];
     eventForm: FormGroup;
     loading = false;
     submitted = false;
@@ -21,16 +33,17 @@ export class AddEventComponent implements OnInit {
         private formBuilder: FormBuilder,
         private authService: AuthenticationService,
         private eventService: EventService,
-        private router: Router,
-    ) { }
+        private router: Router
+    ) {}
 
     ngOnInit() {
         this.eventForm = this.formBuilder.group({
             name: ['', Validators.required],
-            startTime: [DateTimeFormat()],
-            endTime: [DateTimeFormat()],
+            startDate: [''],
+            endDate: [''],
             allDay: [Boolean],
-            description: [''],
+            location: [''],
+            description: ['']
         });
     }
 
@@ -43,6 +56,7 @@ export class AddEventComponent implements OnInit {
             this.submitted = false;
             return;
         }
+        console.log(this.eventForm.getRawValue());
         this.eventService.addEvent(this.eventForm.getRawValue());
         this.router.navigate(['main/home']);
     }

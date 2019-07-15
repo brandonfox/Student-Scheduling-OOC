@@ -7,7 +7,7 @@ export class Event {
     description: string;
     location: string;
     user: User;
-    startTime: Date;
-    endTime: Date;
+    startDate: Date;
+    endDate: Date;
     tasks: Task[];
 }

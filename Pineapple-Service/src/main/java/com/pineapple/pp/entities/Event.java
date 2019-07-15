@@ -1,6 +1,5 @@
 package com.pineapple.pp.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -26,11 +25,11 @@ public class Event {
     @JoinColumn(name="user_id")
     private User user;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startTime;
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
 
     @OneToMany
     @JoinTable(name = "event_tasks",
@@ -56,8 +55,8 @@ public class Event {
     public String getName() { return name; }
     public String getDescription() { return description; }
     public String getLocation() { return location; }
-    public Date getStartTime() { return startTime; }
-    public Date getEndTime() { return endTime; }
+    public Date getStartDate() { return startDate; }
+    public Date getEndDate() { return endDate; }
     public User getUser(){ return user; }
     public List<Task> getTasks() { return tasks; }
 
@@ -67,8 +66,8 @@ public class Event {
     public void setName(String name) { this.name = name; }
     public void setDescription(String description) { this.description = description; }
     public void setLocation(String location) { this.location = location; }
-    public void setStartTime(Date startTime) { this.startTime = startTime; }
-    public void setEndTime(Date endTime) { this.endTime = endTime; }
+    public void setStartDate(Date startDate) { this.startDate = startDate; }
+    public void setEndDate(Date endDate) { this.endDate = endDate; }
     public void setUser(User user){this.user = user;}
     public void setTasks(List<Task> tasks) { this.tasks = tasks; }
 //    public void setUserGroup(UserGroup userGroup) { this.userGroup = userGroup; }

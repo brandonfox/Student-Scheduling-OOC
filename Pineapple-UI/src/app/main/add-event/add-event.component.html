@@ -20,7 +20,7 @@
     <div class="form-group">
       <mat-form-field class="date-picker">
         <label>
-          <input matInput formControlName="startTime" [matDatepicker]="picker" placeholder="Choose a date">
+          <input matInput formControlName="startDate" type="date" [matDatepicker]="picker" placeholder="Choose a date">
         </label>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -35,7 +35,7 @@
       <span class="date-picker"> to </span>
       <mat-form-field class="date-picker">
         <label>
-          <input matInput formControlName="endTime" [matDatepicker]="picker2" placeholder="Choose a date">
+          <input matInput formControlName="endDate" [matDatepicker]="picker2" placeholder="Choose a date">
         </label>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
