@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {User} from '../model/user';
 import {AuthenticationService} from './authentication.service';
+import {FriendRequest} from '../model/friend-request';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -41,5 +42,11 @@ export class UserService {
     }
     public addFriend(user) {
         return this.authService.post<boolean>(this.userUrl + '/friends', user).toPromise();
+    }
+    public getSentFriendRequests(): Promise<User[]> {
+        return this.authService.get<User[]>(this.userUrl + '/friends/requests/sent').toPromise();
+    }
+    public getReceivedFriendRequests(): Promise<User[]> {
+        return this.authService.get<User[]>(this.userUrl + '/friends/requests/received').toPromise();
     }
 }

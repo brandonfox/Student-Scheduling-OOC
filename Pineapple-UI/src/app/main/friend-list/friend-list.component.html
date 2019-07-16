@@ -11,13 +11,23 @@
         </mat-tab>
         <mat-tab style="flex:1;" label="All users" aria-label="users">
             List of users (Temporary until better layout made)
-            <mat-list *ngIf="friends && loggedUser">
+            <mat-list *ngIf="friends && loggedUser && sentFriendRequests && receivedFriendRequests">
                 <div *ngFor="let user of users">
                 <mat-list-item *ngIf="user.username !== loggedUser.username" (click)="userClicked(user)" class="user-list-item">
                     <div class="flex-fill">{{user.username}}</div>
-                    <div *ngIf="!friendIds.has(user.id)">
-                        <p-button label="Add Friend" (click)="addFriend(user)"></p-button>
+                    <div *ngIf="sentFRIds.has(user.id); else checkReceiver">
+                        <p-button label="Friend request sent."></p-button>
                     </div>
+                    <ng-template #checkReceiver>
+                        <div *ngIf="receivedFRIds.has(user.id); else checkFriend">
+                            <p-button label="Confirm friend request" (onClick)="addFriend(user)"></p-button>
+                        </div>
+                        <ng-template #checkFriend>
+                            <div *ngIf="!friendIds.has(user.id)">
+                                <p-button label="Add Friend" (click)="addFriend(user)"></p-button>
+                            </div>
+                        </ng-template>
+                    </ng-template>
                     <mat-divider></mat-divider>
                 </mat-list-item>
                 </div>
