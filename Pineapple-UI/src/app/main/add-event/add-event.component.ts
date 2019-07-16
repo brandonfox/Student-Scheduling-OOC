@@ -30,7 +30,6 @@ export class AddEventComponent implements OnInit {
             startTime: [''],
             endDate: [''],
             endTime: [''],
-            allDay: [Boolean],
             location: [''],
             description: ['']
         });
@@ -38,6 +37,10 @@ export class AddEventComponent implements OnInit {
 
     public onSubmit() {
         console.log('Submitting form');
+        console.log(this.disableSelect.value);
+        this.eventForm.addControl(
+            'allDay',
+            new FormControl(this.disableSelect.value));
         this.loading = true;
         this.submitted = true;
         if (this.eventForm.invalid) {
@@ -48,5 +51,6 @@ export class AddEventComponent implements OnInit {
         this.eventService.addEvent(this.eventForm.getRawValue());
         this.router.navigate(['main/home']);
     }
+
     get f() {return this.eventForm.controls; }
 }

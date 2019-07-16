@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.time.DateUtils;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,14 @@ public class Event {
 
     @Temporal(TemporalType.DATE)
     private Date endDate;
+    
+    @Basic
+    private String startTime;
+    
+    @Basic
+    private String endTime;
+    
+    private Boolean allDay;
 
     @OneToMany
     @JoinTable(name = "event_tasks",
@@ -60,9 +69,13 @@ public class Event {
     public Date getEndDate() { return endDate; }
     public User getUser(){ return user; }
     public List<Task> getTasks() { return tasks; }
-
-//    public UserGroup getUserGroup() { return userGroup; }
-
+    public String getStartTime() { return startTime; }
+    public String getEndTime() { return endTime; }
+    public Boolean getAllDay() { return allDay; }
+    //    public UserGroup getUserGroup() { return userGroup; }
+    public void setAllDay(Boolean allDay) { this.allDay = allDay; }
+    public void setStartTime(String startTime) { this.startTime = startTime; }
+    public void setEndTime(String endTime) { this.endTime = endTime; }
     public void setId(Long id) { this.id = id; }
     public void setName(String name) { this.name = name; }
     public void setDescription(String description) { this.description = description; }
