@@ -1,6 +1,7 @@
 package com.pineapple.pp.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.lang3.time.DateUtils;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -66,8 +67,12 @@ public class Event {
     public void setName(String name) { this.name = name; }
     public void setDescription(String description) { this.description = description; }
     public void setLocation(String location) { this.location = location; }
-    public void setStartDate(Date startDate) { this.startDate = startDate; }
-    public void setEndDate(Date endDate) { this.endDate = endDate; }
+    public void setStartDate(Date startDate) {
+        startDate = DateUtils.addDays(startDate, 1);
+        this.startDate = startDate; }
+    public void setEndDate(Date endDate) {
+        endDate = DateUtils.addDays(endDate, 1);
+        this.endDate = endDate; }
     public void setUser(User user){this.user = user;}
     public void setTasks(List<Task> tasks) { this.tasks = tasks; }
 //    public void setUserGroup(UserGroup userGroup) { this.userGroup = userGroup; }

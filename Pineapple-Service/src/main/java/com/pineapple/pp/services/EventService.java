@@ -55,6 +55,8 @@ public class EventService {
     public Event addEvent(String json, User user){
         Event event = gson.fromJson(json,Event.class);
         //TODO Add system for checking event conflicts or ignore (If multiple events are a thing)
+        event.setStartDate(event.getStartDate());
+        event.setEndDate(event.getEndDate());
         event.setUser(user);
         eventRepository.save(event);
         return event;

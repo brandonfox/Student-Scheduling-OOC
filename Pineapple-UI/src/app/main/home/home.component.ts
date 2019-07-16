@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit {
                 this.getTasksByEventId(event);
             }
         });
-        console.log(this.user.valueOf());
         this.getUserInfo().then(data => this.user = data);
     }
 
