@@ -1,10 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../service/authentication.service';
 import {EventService} from '../../service/event.service';
 import {Router} from '@angular/router';
-import {MatDatepicker} from '@angular/material';
-import { Moment } from 'moment';
 
 @Component({
     selector: 'app-add-event',
@@ -12,17 +10,6 @@ import { Moment } from 'moment';
     styleUrls: ['./add-event.component.scss']
 })
 export class AddEventComponent implements OnInit {
-
-    name = 'Angular 4';
-    @ViewChild(MatDatepicker, {static: false}) picker: MatDatepicker<Moment>;
-    isValidMoment = false;
-
-    serializedDate = new FormControl((new Date()).toISOString());
-
-    date = new FormControl(new Date());
-    form: FormGroup;
-
-    events: Date[] = [];
     eventForm: FormGroup;
     loading = false;
     submitted = false;
@@ -56,7 +43,6 @@ export class AddEventComponent implements OnInit {
             this.submitted = false;
             return;
         }
-        console.log(this.eventForm.getRawValue());
         this.eventService.addEvent(this.eventForm.getRawValue());
         this.router.navigate(['main/home']);
     }

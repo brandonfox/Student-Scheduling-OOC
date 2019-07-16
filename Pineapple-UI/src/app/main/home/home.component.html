@@ -1,5 +1,5 @@
 <section class="header">
-    <h2>Your Events</h2>
+    <h2>{{user.firstname}}'s Events</h2>
 </section>
 
 <div class="card-deck">
@@ -120,15 +120,6 @@
 
 <div>
     {{ now | date: 'HH:mm:ss'}}
-</div>
-<div class="eventItem">
-    <span>{{user.username}}</span>
-    <br>
-    <span>{{user.password}}</span>
-    <br>
-    <span>{{user.email}}</span>
-    <br>
-    <span>{{user.id}}</span>
 </div>
 
 <button

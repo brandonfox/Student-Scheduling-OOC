@@ -27,12 +27,12 @@
 //    /* Getters and Setters */
 //
 //    public Long getId() { return id; }
-//    public String getName() { return name; }
+//    public String getFirstname() { return name; }
 //    public String getDescription() { return description; }
 //    public Set<Event> getEvents() { return events; }
 //
 //    public void setId(Long id) { this.id = id; }
-//    public void setName(String name) { this.name = name; }
+//    public void setFirstname(String name) { this.name = name; }
 //    public void setDescription(String description) { this.description = description; }
 //    public void setEvents(Set<Event> events) { this.events = events; }
 //}
