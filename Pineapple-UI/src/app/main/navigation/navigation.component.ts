@@ -17,6 +17,6 @@ export class NavigationComponent implements OnInit {
   }
 
   logout() {
-    this.authService.doUnauthorizedUserStuff();
+    this.authService.clearAuthToken();
   }
 }

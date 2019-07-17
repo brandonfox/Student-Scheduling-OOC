@@ -1,26 +1,32 @@
 import { Injectable } from '@angular/core';
 import {AuthenticationService} from './authentication.service';
 import {Task} from '../model/task';
-import { BehaviorSubject } from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(
+      private authService: AuthenticationService,
+  ) { }
 
   private taskUrl = 'http://localhost:8080/tasks';
 
-  public getTasks(): Promise<Task[]> {
-    return this.authService.get<Task[]>(this.taskUrl).toPromise();
+  public getTasksByEventId(eventId: bigint): Observable<Task[]> {
+      return this.authService.get<Task[]>(this.taskUrl + '/by-event' + '/' + eventId);
   }
 
   public createTask(task) {
     return this.authService.post(this.taskUrl, task).toPromise();
   }
 
-  public editTask(task) {
-      return this.authService.post(this.taskUrl, task).toPromise();
+  public editTask(taskId, form) {
+      return this.authService.put(this.taskUrl + '/edit-task' + '/' + taskId, form).toPromise();
+  }
+
+  public removeTask(taskId: bigint) {
+      return this.authService.delete(this.taskUrl + '/remove-task' + '/' + taskId);
   }
 }

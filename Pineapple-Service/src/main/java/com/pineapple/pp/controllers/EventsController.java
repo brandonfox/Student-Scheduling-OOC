@@ -38,7 +38,7 @@ public class EventsController {
         //Authorization token should be in header
         UserToken userDetails = SecurityService.parseToken(token);
         System.out.print("Adding an event for user " + userDetails.getUsername() + ": ");
-        User user = userService.getUser(userDetails);
+        User user = userService.getUserByToken(userDetails);
         Event event = eventService.addEvent(form,user);
         if(event == null){
             //Something went wrong

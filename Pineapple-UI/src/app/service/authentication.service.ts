@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { CookieService} from 'ngx-cookie-service';
-import {Router} from '@angular/router';
 import {User} from '../model/user';
 
 @Injectable({
@@ -13,25 +12,18 @@ export class AuthenticationService {
 
     constructor(
         private cookieService: CookieService,
-        private http: HttpClient,
-        private router: Router,
+        private http: HttpClient
     ) { }
-
-    public checkAuthToken(): Promise<boolean> {
-        return this.http.post<boolean>(this.authenticationUrl, this.getAuthToken()).toPromise();
-    }
 
     /**
      * Function to check if the current session is valid (User is logged in)
      * If session is invalid will delete the authentication cookie and redirect to the login screen
      */
-    public authenticateUser(): Promise<boolean> {
+    public authenticateUser(): boolean {
         const check = this.checkAuthToken();
-        check.then(data => {
-            if (!data) {
-                this.doUnauthorizedUserStuff();
-            }
-        });
+        if (!check) {
+            this.logout();
+        }
         return check;
     }
 
@@ -44,14 +36,14 @@ export class AuthenticationService {
     }
 
     public clearAuthToken() {
-        this.cookieService.delete('authToken', '/');
+        return this.cookieService.delete('authToken', '/');
     }
 
     public getAuthToken(): string {
         return this.cookieService.get('authToken');
     }
 
-    public checkToken(): boolean {
+    public checkAuthToken(): boolean {
         return this.cookieService.check('authToken');
     }
 
@@ -68,18 +60,23 @@ export class AuthenticationService {
     public get<T>(url, params?: HttpParams) {
         return this.http.get<T>(url, {headers: this.getAuthorizedHeader(), params});
     }
+
+    public delete<T>(url, params?: HttpParams) {
+        return this.http.delete<T>(url, {headers: this.getAuthorizedHeader(), params});
+    }
+
+    public put<T>(url, data, params?: HttpParams) {
+        return this.http.put<T>(url, data, {headers: this.getAuthorizedHeader(), params});
+    }
+
     private getAuthorizedHeader(): HttpHeaders {
         // Headers are immutable so when appending header fields must use new returned object, Took me a while
         return new HttpHeaders().append('authorization', this.getAuthToken());
     }
+
     public logout() {
-        this.doUnauthorizedUserStuff();
-    }
-    // This should probably be renamed to logout
-    public doUnauthorizedUserStuff() {
         this.clearAuthToken();
         console.log('User not authorized... Redirecting');
-        this.router.navigate(['login']);
     }
 
     /**

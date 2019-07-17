@@ -25,22 +25,16 @@ export class LoginComponent implements OnInit {
         private authService: AuthenticationService
     ) {
         this.router.navigate(['/login']);
+        this.authService.clearAuthToken();
     }
 
     ngOnInit() {
         console.log('Initializing...');
-        console.log(this.authService.getAuthToken());
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
-
-        // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-        // this.authService.checkAuthToken().then(data => {
-        // if (data) {
-        //   this.router.navigate(['main']);
-        // }});
     }
 
     // convenience getter for easy access to form fields
@@ -56,9 +50,9 @@ export class LoginComponent implements OnInit {
         // stop here if form is invalid
         if (this.loginForm.invalid) {
             this.loading = false;
+            this.submitted = false;
             return;
         }
-        console.log('Valid form');
         this.userService.attemptLogin(this.loginForm.getRawValue()).subscribe(data => this.processLoginResponse(data));
     }
     processLoginResponse(data) {
