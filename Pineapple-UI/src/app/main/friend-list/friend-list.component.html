@@ -20,7 +20,8 @@
                     </div>
                     <ng-template #checkReceiver>
                         <div *ngIf="receivedFRIds.has(user.id); else checkFriend">
-                            <p-button label="Confirm friend request" (onClick)="addFriend(user)"></p-button>
+                            <p-button label="Accept" (onClick)="addFriend(user)"></p-button>
+                            <p-button label="Reject" (onClick)="denyRequest(user)"></p-button>
                         </div>
                         <ng-template #checkFriend>
                             <div *ngIf="!friendIds.has(user.id)">
@@ -33,9 +34,18 @@
                 </div>
             </mat-list>
         </mat-tab>
-<!--        <mat-tab style="flex:1;" label="People from your groups" aria-label="groups">-->
-<!--            Group users here-->
-<!--        </mat-tab>-->
+        <mat-tab style="flex:1;" label="Friend Requests" aria-label="groups">
+<!--            Friend requests here              -->
+            <mat-list>
+                <div *ngFor="let request of receivedFriendRequests">
+                    <mat-list-item (click)="userClicked(request)" class="user-list-item">
+                        <div class="flex-fill">{{request.username}}</div>
+                        <p-button label="Accept" (onClick)="addFriend(request)"></p-button>
+                        <p-button label="Reject" (onClick)="denyRequest(request)"></p-button>
+                    </mat-list-item>
+                </div>
+            </mat-list>
+        </mat-tab>
     </mat-tab-group>
     <mat-form-field style="flex: 1;" class="input">
         <input [(ngModel)]="searchBar" (ngModelChange)="searchChange()" matInput placeholder="Search" >

@@ -81,7 +81,10 @@ export class FriendListComponent implements OnInit {
       this.getData();
   }
   addFriend(user) {
-      this.userService.addFriend(user).then(data => this.getFriends());
+      this.userService.addFriend(user).then(() => this.getFriends());
+  }
+  denyRequest(user) {
+      this.userService.denyRequest(user).then(() => this.getFriends());
   }
   updateIds() {
       const ids = new Set<bigint>();

@@ -86,6 +86,16 @@ public class FriendService {
         return true;
     }
 
+    public boolean denyRequest(User denier, User deniee){
+        try {
+            FriendRequest request = fRRepo.findBySendingUserAndRecievingUser(deniee, denier);
+            fRRepo.delete(request);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+
     public Set<User> getRequestedFriendsBy(User user){
         Set<FriendRequest> requests = fRRepo.findAllBySendingUser(user);
         Set<User> users = new HashSet<>();
