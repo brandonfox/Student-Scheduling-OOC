@@ -5,6 +5,7 @@ import {MatTabChangeEvent} from '@angular/material';
 import {HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../service/authentication.service';
+import {FriendRequest} from '../../model/friend-request';
 
 @Component({
   selector: 'app-friend-list',
@@ -16,7 +17,12 @@ import {AuthenticationService} from '../../service/authentication.service';
 export class FriendListComponent implements OnInit {
     friends: User[];
     users: User[];
+    sentFriendRequests: User[];
+    receivedFriendRequests: User[];
+    sentFRIds: Set<bigint>;
+    receivedFRIds: Set<bigint>;
     friendIds: Set<bigint>;
+
     searchBar;
     currentTab;
     loggedUser: User;
@@ -35,8 +41,22 @@ export class FriendListComponent implements OnInit {
       this.friends = friends;
       this.updateIds();
   }
+  setSentRequests(data: User[]) {
+      this.sentFriendRequests = data;
+      const ids = new Set<bigint>();
+      this.sentFriendRequests.forEach(user => ids.add(user.id));
+      this.sentFRIds = ids;
+  }
+  setReceivedRequests(data: User[]) {
+      this.receivedFriendRequests = data;
+      const ids = new Set<bigint>();
+      this.receivedFriendRequests.forEach(user => ids.add(user.id));
+      this.receivedFRIds = ids;
+  }
   getFriends() {
      this.userService.getFriends(this.getSearchParams()).then(data => this.setFriends(data));
+     this.userService.getSentFriendRequests().then(data => this.setSentRequests(data));
+     this.userService.getReceivedFriendRequests().then(data => this.setReceivedRequests(data));
   }
   getUsers() {
       this.userService.getUsers(this.getSearchParams()).then(data => this.users = data);

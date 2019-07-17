@@ -25,9 +25,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     }
 
     checkLogin(): boolean {
-        console.log('Checking Authentication...');
-        if (this.authService.checkToken()) {
-            console.log('Authentication Granted.');
+        if (this.authService.checkAuthToken()) {
             return true;
         }
         this.router.navigate(['/login']);

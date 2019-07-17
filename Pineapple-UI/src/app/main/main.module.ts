@@ -19,18 +19,10 @@ import {MatDatepickerModule, MatFormFieldModule, MatInputModule} from '@angular/
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
-
-import { MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
-import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
-import { MomentUtcDateAdapter } from './add-event/moment-utc-date-adapter';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
-    providers: [
-        { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
-        { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-        { provide: DateAdapter, useClass: MomentUtcDateAdapter },
-    ],
     imports: [
         CommonModule,
         MainRoutingModule,
@@ -59,7 +51,7 @@ import { MomentUtcDateAdapter } from './add-event/moment-utc-date-adapter';
         EditEventComponent,
         GroupComponent,
         CalendarComponent,
-    ],
-    bootstrap: [ AddEventComponent ]
+        UserProfileComponent,
+    ]
 })
 export class MainModule { }
