@@ -126,4 +126,10 @@ public class UserController {
         User deniee = userService.getUserFromJson(user);
         return friendService.denyRequest(denier,deniee);
     }
+    @PostMapping("/friends/remove")
+    public boolean removeFriend(@RequestHeader("authorization") String token, @RequestBody String user){
+        User remover = userService.getUserByToken(SecurityService.parseToken(token));
+        User removee = userService.getUserFromJson(user);
+        return friendService.removeFriend(remover,removee);
+    }
 }

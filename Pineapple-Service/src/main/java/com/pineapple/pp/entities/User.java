@@ -61,4 +61,5 @@ public class User {
     public void setPhoneNumber(Long phoneNumber) { this.phoneNumber = phoneNumber; }
     public void setFriends(Set<User> friends) { this.friends = friends; }
     public void addFriend(User friend){ friends.add(friend); }
+    public void removeFriend(User friend) {friends.remove(friend);}
 }

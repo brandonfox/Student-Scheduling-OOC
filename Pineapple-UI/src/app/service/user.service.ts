@@ -51,4 +51,7 @@ export class UserService {
     public denyRequest(user) {
         return this.authService.post(this.userUrl + '/friends/requests/deny', user).toPromise();
     }
+    public removeFriend(friend) {
+        return this.authService.post(this.userUrl + '/friends/remove', friend).toPromise();
+    }
 }

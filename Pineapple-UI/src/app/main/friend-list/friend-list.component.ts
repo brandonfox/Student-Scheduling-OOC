@@ -36,6 +36,9 @@ export class FriendListComponent implements OnInit {
       this.getLoggedUser();
       this.getFriends(); // Make sure the starting active tab is the friends tab
   }
+  removeFriend(friend) {
+      this.userService.removeFriend(friend).then(() => this.getFriends());
+  }
   setFriends(friends) {
       this.friends = friends;
       this.updateIds();
