@@ -10,7 +10,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pineapple</groupId>
-	<artifactId>Pineapple-Servive</artifactId>
+	<artifactId>Pineapple-Service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Pineapple-Service</name>
 	<description>Demo project for Spring Boot</description>
