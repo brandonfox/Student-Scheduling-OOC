@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {User} from '../model/user';
 import {AuthenticationService} from './authentication.service';
-import {FriendRequest} from '../model/friend-request';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

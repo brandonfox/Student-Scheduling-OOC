@@ -5,7 +5,6 @@ import {MatTabChangeEvent} from '@angular/material';
 import {HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../service/authentication.service';
-import {FriendRequest} from '../../model/friend-request';
 
 @Component({
   selector: 'app-friend-list',
