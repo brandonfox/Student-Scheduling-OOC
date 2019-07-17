@@ -6,7 +6,6 @@ import { AddEventComponent } from './add-event/add-event.component';
 import { AuthGuard } from '../guards/auth.guard';
 import {FriendListComponent} from './friend-list/friend-list.component';
 import {EditEventComponent} from './edit-event/edit-event.component';
-import {GroupComponent} from './group/group.component';
 import {CalendarComponent} from './calendar/calendar.component';
 
 const routes: Routes = [
@@ -20,7 +19,6 @@ const routes: Routes = [
             { path: 'add', component: AddEventComponent},
             { path: 'friends', component: FriendListComponent },
             { path: 'edit', component: EditEventComponent},
-            { path: 'group', component: GroupComponent},
             { path: 'calendar', component: CalendarComponent}
         ]
     }

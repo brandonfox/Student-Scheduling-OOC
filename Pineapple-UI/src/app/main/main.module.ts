@@ -9,7 +9,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { DemoMaterialModule } from '../core/material-module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EditEventComponent } from './edit-event/edit-event.component';
-import { GroupComponent } from './group/group.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -49,7 +48,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
         MainLayoutComponent,
         NavigationComponent,
         EditEventComponent,
-        GroupComponent,
         CalendarComponent,
         UserProfileComponent,
     ]
