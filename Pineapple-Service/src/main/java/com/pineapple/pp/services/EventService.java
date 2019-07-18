@@ -8,6 +8,7 @@ import com.pineapple.pp.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -32,7 +33,7 @@ public class EventService {
     public List<Event> getEventsFor(String identificationString){
         System.out.println("Retrieving events for '" + identificationString + "'");
         User user = userService.getUserFromJson(identificationString);
-        return eventRepository.findAllByUser(user);
+        return eventRepository.findEventsByUser(user);
     }
     /**
      * Get all events for a specific user
@@ -42,18 +43,29 @@ public class EventService {
     public List<Event> getEventsFor(UserToken token){
         try {
             System.out.println("Retrieving events for user " + token.getUsername());
-            return eventRepository.findAllByUser(userService.getUser(token));
+            return eventRepository.findEventsByUser(userService.getUser(token));
         }catch(NullPointerException ex) {
             return null;
         }
+    }
+
+    public Event getEventById(Long eventId){
+        return eventRepository.findEventById(eventId);
     }
     
     public Event addEvent(String json, User user){
         Event event = gson.fromJson(json,Event.class);
         //TODO Add system for checking event conflicts or ignore (If multiple events are a thing)
+        event.setStartDate(event.getStartDate());
+        event.setEndDate(event.getEndDate());
         event.setUser(user);
         eventRepository.save(event);
         return event;
+    }
+
+    @Transactional
+    public void deleteEvent(Long id){
+        eventRepository.deleteEventById(id);
     }
     
 }

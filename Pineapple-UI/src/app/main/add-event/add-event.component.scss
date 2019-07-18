@@ -1,48 +1,54 @@
 mat-form-field {
-  font-family: Ubuntu, sans-serif;
+    font-family: Ubuntu, sans-serif;
 }
 
 .add-title {
-  display: block;
-  width: 50vw;
-  margin: 10px 0 0;
+    display: block;
+    width: 50vw;
+    margin: 10px 0 0;
 }
 
 button:focus {
-  outline: 0;
-  border: none;
+    outline: 0;
+    border: none;
 }
 
 mat-icon{
-  color: grey;
+    color: grey;
 }
 
 .form-container,
 .raised-button,
 .date-picker,
 .time-picker{
-  margin-right: 8px;
-  font-family: Ubuntu, sans-serif;
+    //margin-right: 8px;
+    font-family: Ubuntu, sans-serif;
+}
+//
+//.date-picker,
+.time-picker {
+    width: 4cm;
 }
 
-.date-picker {
-  width: 3cm;
+.to {
+    margin: 25px;
+}
+
+.form-group {
+    display: flex;
 }
 
 .button-bottom-right-check,
 .button-bottom-right-close {
-  position: absolute;
-  bottom: 10px;
+    position: fixed;
+    bottom: 16px;
 }
 
 .button-bottom-right-close {
-  right: 90px;
+    right: 90px;
 }
 
 .button-bottom-right-check {
-  right: 16px;
+    right: 16px;
 }
 
-.time-picker {
-  display: inline-block;
-}

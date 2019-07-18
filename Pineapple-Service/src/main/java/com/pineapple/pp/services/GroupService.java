@@ -34,6 +34,22 @@ public class GroupService {
         }
     }
 
+//    public boolean addUserToGroup(User friend, UserGroup group){
+//        try{
+//            System.out.println("Adding" + friend.getUsername() + "to group: " + group.getName());
+//            if(user.getUsername().equals(friend.getUsername())){
+//                return false;
+//            }
+//            User us = getUserByToken(user);
+//            us.addFriend(friend);
+//            userRepository.save(us);
+//            return true;
+//        }
+//        catch(Exception ex){
+//            return false;
+//        }
+//    }
+
 
 
 }

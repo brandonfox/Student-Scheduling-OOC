@@ -16,7 +16,12 @@ import {AuthenticationService} from '../../service/authentication.service';
 export class FriendListComponent implements OnInit {
     friends: User[];
     users: User[];
+    sentFriendRequests: User[];
+    receivedFriendRequests: User[];
+    sentFRIds: Set<bigint>;
+    receivedFRIds: Set<bigint>;
     friendIds: Set<bigint>;
+
     searchBar;
     currentTab;
     loggedUser: User;
@@ -31,12 +36,29 @@ export class FriendListComponent implements OnInit {
       this.getLoggedUser();
       this.getFriends(); // Make sure the starting active tab is the friends tab
   }
+  removeFriend(friend) {
+      this.userService.removeFriend(friend).then(() => this.getFriends());
+  }
   setFriends(friends) {
       this.friends = friends;
       this.updateIds();
   }
+  setSentRequests(data: User[]) {
+      this.sentFriendRequests = data;
+      const ids = new Set<bigint>();
+      this.sentFriendRequests.forEach(user => ids.add(user.id));
+      this.sentFRIds = ids;
+  }
+  setReceivedRequests(data: User[]) {
+      this.receivedFriendRequests = data;
+      const ids = new Set<bigint>();
+      this.receivedFriendRequests.forEach(user => ids.add(user.id));
+      this.receivedFRIds = ids;
+  }
   getFriends() {
      this.userService.getFriends(this.getSearchParams()).then(data => this.setFriends(data));
+     this.userService.getSentFriendRequests().then(data => this.setSentRequests(data));
+     this.userService.getReceivedFriendRequests().then(data => this.setReceivedRequests(data));
   }
   getUsers() {
       this.userService.getUsers(this.getSearchParams()).then(data => this.users = data);
@@ -62,7 +84,10 @@ export class FriendListComponent implements OnInit {
       this.getData();
   }
   addFriend(user) {
-      this.userService.addFriend(user).then(data => this.getFriends());
+      this.userService.addFriend(user).then(() => this.getFriends());
+  }
+  denyRequest(user) {
+      this.userService.denyRequest(user).then(() => this.getFriends());
   }
   updateIds() {
       const ids = new Set<bigint>();

@@ -22,7 +22,7 @@
     <div class="form-group">
       <mat-form-field class="date-picker">
         <label>
-          <input matInput formControlName="startTime" [matDatepicker]="picker" placeholder="Choose a date"> [(ngModel)] = currentEvent.startTime
+          <input matInput formControlName="startTime" [matDatepicker]="picker" placeholder="Choose a date" [(value)] = "currentEvent.startTime">
         </label>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -68,7 +68,7 @@
         <mat-label>Description</mat-label>
         <label>
           <textarea
-            matInput formControlName="description"></textarea>
+            matInput formControlName="description" [(ngModel)] = "currentEvent.description"></textarea>
         </label>
       </mat-form-field>
     </div>
@@ -83,13 +83,14 @@
   <button
     type="submit"
     class="button-bottom-right-check"
+    routerLink="/main/home"
     style="background-color: antiquewhite"
     mat-fab>
     <mat-icon>check</mat-icon>
   </button>
   <button
     class="button-bottom-right-close"
-    routerLink="/main/add"
+    routerLink="/main/edit"
     style="background-color: white"
     mat-fab>
     <mat-icon>close</mat-icon>

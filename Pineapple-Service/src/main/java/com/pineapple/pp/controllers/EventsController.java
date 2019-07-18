@@ -38,7 +38,7 @@ public class EventsController {
         //Authorization token should be in header
         UserToken userDetails = SecurityService.parseToken(token);
         System.out.print("Adding an event for user " + userDetails.getUsername() + ": ");
-        User user = userService.getUser(userDetails);
+        User user = userService.getUserByToken(userDetails);
         Event event = eventService.addEvent(form,user);
         if(event == null){
             //Something went wrong
@@ -48,5 +48,13 @@ public class EventsController {
         }
         System.out.print("success!\n");
         return new QueryResponse(true);
+    }
+
+    @DeleteMapping("/events/remove-event/{eventId}")
+    public List<Event> deleteEvent(@RequestHeader("authorization") String token, @PathVariable Long eventId){
+        UserToken userDetails = SecurityService.parseToken(token);
+        System.out.println("Deleting an event for user " + userDetails.getUsername() + ": ");
+        eventService.deleteEvent(eventId);
+        return eventService.getEventsFor(userDetails);
     }
 }

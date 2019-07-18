@@ -1,25 +1,20 @@
 package com.pineapple.pp.services;
 
 import com.google.gson.Gson;
+import com.pineapple.pp.entities.Event;
 import com.pineapple.pp.entities.Task;
 import com.pineapple.pp.repositories.TaskRepository;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface TaskService {
 
-    default List<Task> list() {
-        System.out.println("In list() in TaskService.java");
-        List<Task> userList = new ArrayList<>();
-        for (Task task : getTaskRepository().findAll()) {
-            System.out.println(task.getTitle());
-            userList.add(task);
-        }
-        return userList;
-    }
-
     TaskRepository getTaskRepository();
+
+    default List<Task> findTasksByEvent(Event event) {
+        return getTaskRepository().findTasksByEvent(event);
+    }
 
     Gson getGson();
 
@@ -29,14 +24,18 @@ public interface TaskService {
         return task;
     }
 
-    default Task editTask(String json) {
+    @Transactional
+    default Task editTask(Long taskId, String json) {
         Task task = getGson().fromJson(json, Task.class);
-        Task taskFromDB = getTaskRepository().findTaskById(task.getId());
+        Task taskFromDB = getTaskRepository().findTaskById(taskId);
         taskFromDB.setTitle(task.getTitle());
         taskFromDB.setDescription(task.getDescription());
         getTaskRepository().save(taskFromDB);
         return taskFromDB;
     }
 
-    // todo: remove task
+    @Transactional
+    default void removeTaskById(Long id) {
+        getTaskRepository().deleteTaskById(id);
+    }
 }

@@ -49,3 +49,4 @@ public class UserGroup {
         this.membership = membership;
     }
 }
+
