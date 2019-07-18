@@ -54,7 +54,7 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "group_id"),
             joinColumns = @JoinColumn(name = "event_id")
     )
-    private userGroup userGroup;
+    private UserGroup userGroup;
 
 
 
@@ -72,7 +72,7 @@ public class Event {
     public String getEndTime() { return endTime; }
     public Boolean getAllDay() { return allDay; }
 
-    public userGroup getUserGroup() {
+    public UserGroup getUserGroup() {
         return userGroup;
     }
 
@@ -92,7 +92,7 @@ public class Event {
     public void setUser(User user){this.user = user;}
     public void setTasks(List<Task> tasks) { this.tasks = tasks; }
 
-    public void setUserGroup(userGroup userGroup) {
+    public void setUserGroup(UserGroup userGroup) {
         this.userGroup = userGroup;
     }
 }

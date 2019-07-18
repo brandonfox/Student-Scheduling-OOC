@@ -2,7 +2,7 @@ package com.pineapple.pp.services;
 
 import com.google.gson.Gson;
 import com.pineapple.pp.entities.Event;
-import com.pineapple.pp.entities.userGroup;
+import com.pineapple.pp.entities.UserGroup;
 import com.pineapple.pp.entities.User;
 import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.repositories.EventRepository;
@@ -52,11 +52,11 @@ public class EventService {
         }
     }
     /**
-     * Get all events for a specific userGroup
-     * @param userGroup the specific userGroup
-     * @return a list of events for userGroup
+     * Get all events for a specific UserGroup
+     * @param userGroup the specific UserGroup
+     * @return a list of events for UserGroup
      */
-    public List<Event> getEventsForGroup(userGroup userGroup){
+    public List<Event> getEventsForGroup(UserGroup userGroup){
         System.out.println("Retrieving events for '" + userGroup.getName() + "'");
         return eventRepository.findEventsByUserGroup(userGroup);
     }

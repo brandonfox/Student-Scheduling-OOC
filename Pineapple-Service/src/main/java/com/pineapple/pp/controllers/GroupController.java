@@ -1,7 +1,7 @@
 package com.pineapple.pp.controllers;
 
 import com.pineapple.pp.entities.Event;
-import com.pineapple.pp.entities.userGroup;
+import com.pineapple.pp.entities.UserGroup;
 import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.repositories.GroupRepository;
 import com.pineapple.pp.services.EventService;
@@ -28,7 +28,7 @@ public class GroupController {
     }
 
     @GetMapping("/groups")
-    public List<userGroup> getGroups(@RequestHeader("authorization") String token){
+    public List<UserGroup> getGroups(@RequestHeader("authorization") String token){
         System.out.println("Retrieved request to get Groups. Parsing token");
         UserToken userDetails = SecurityService.parseToken(token);
         return groupService.getGroupsFor(userDetails);
@@ -36,8 +36,8 @@ public class GroupController {
 
     @GetMapping("/groups/{groupId}")
     public List<Event> getEvents(@PathVariable("groupId")Long groupId){
-        System.out.println("Retrieved request to get events by userGroup ID.");
-        userGroup userGroup = groupRepository.findGroupById(groupId);
+        System.out.println("Retrieved request to get events by UserGroup ID.");
+        UserGroup userGroup = groupRepository.findGroupById(groupId);
         return eventService.getEventsForGroup(userGroup);
     }
 
