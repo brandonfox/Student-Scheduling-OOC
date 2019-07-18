@@ -1,7 +1,6 @@
 package com.pineapple.pp.controllers;
 //
 import com.pineapple.pp.repositories.EventRepository;
-//import com.pineapple.pp.repositories.GroupRepository;
 import com.pineapple.pp.repositories.GroupRepository;
 import com.pineapple.pp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,6 @@ public class OrmController {
 
     @Autowired
     private UserRepository userRepository;
-
-//    @Autowired
-//    private GroupMembershipRepository groupMembershipRepository;
 
     @Autowired
     private GroupRepository groupRepository;

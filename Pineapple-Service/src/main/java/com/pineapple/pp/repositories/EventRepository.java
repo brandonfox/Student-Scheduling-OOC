@@ -1,7 +1,8 @@
 package com.pineapple.pp.repositories;
 
 import com.pineapple.pp.entities.Event;
-import com.pineapple.pp.entities.Group;
+//import com.pineapple.pp.entities.userGroup;
+import com.pineapple.pp.entities.userGroup;
 import com.pineapple.pp.entities.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,6 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     void deleteEventById(Long id);
 
-    List<Event> findEventsByGroup(Group group);
+    List<Event> findEventsByUserGroup(userGroup userGroup);
 
 }

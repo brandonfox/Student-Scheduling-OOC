@@ -1,15 +1,17 @@
 package com.pineapple.pp.services;
 
 import com.google.gson.Gson;
-import com.pineapple.pp.entities.Event;
-import com.pineapple.pp.entities.Group;
+import com.pineapple.pp.entities.userGroup;
 import com.pineapple.pp.entities.User;
 import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.repositories.GroupRepository;
 import com.pineapple.pp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class GroupService {
     private GroupRepository groupRepository;
     private UserRepository userRepository;
@@ -30,7 +32,7 @@ public class GroupService {
      * @param token The token of a specific user
      * @return a list of groups for user
      */
-    public List<Group> getGroupsFor(UserToken token) {
+    public List<userGroup> getGroupsFor(UserToken token) {
         try {
             System.out.println("Retrieving events for '" + token.getUsername() + "'");
             return groupRepository.findGroupsByMembership(userService.getUser(token));
@@ -39,28 +41,28 @@ public class GroupService {
         }
     }
 
-    public Group add(String json) {
-        Group group = gson.fromJson(json, Group.class);
-        if (groupRepository.existsByName(group.getName())) {
+    public userGroup add(String json) {
+        userGroup userGroup = gson.fromJson(json, userGroup.class);
+        if (groupRepository.existsByName(userGroup.getName())) {
             return null;
         }
-        groupRepository.save(group);
-        return group;
+        groupRepository.save(userGroup);
+        return userGroup;
     }
 
-    public Group getGroupFromJson(String json) {
-        Group group = gson.fromJson(json, Group.class);
-        return groupRepository.findGroupByName(group.getName());
+    public userGroup getGroupFromJson(String json) {
+        userGroup userGroup = gson.fromJson(json, userGroup.class);
+        return groupRepository.findGroupByName(userGroup.getName());
     }
 
     //   public void removeGroup()
 
-    public boolean addMembership(User friend, Group group) {
+    public boolean addMembership(User friend, userGroup userGroup) {
         try {
-            System.out.println("Adding" + friend.getUsername() + "to group: " + group.getName());
-            friend.addMembership(group);
-            group.addMembership(friend);
-            groupRepository.save(group);
+            System.out.println("Adding" + friend.getUsername() + "to userGroup: " + userGroup.getName());
+            friend.addMembership(userGroup);
+            userGroup.addMembership(friend);
+            groupRepository.save(userGroup);
             userRepository.save(friend);
             return true;
         } catch (Exception ex) {
@@ -68,18 +70,15 @@ public class GroupService {
         }
     }
 
-    public boolean removeMembership(Group group, User user) {
-        System.out.println("Removing user: " + user.getUsername() + ", for Group: " + group.getName());
-        group.removeMember(user);
-        user.addMembership(group);
+    public boolean removeMembership(userGroup userGroup, User user) {
+        System.out.println("Removing user: " + user.getUsername() + ", for userGroup: " + userGroup.getName());
+        userGroup.removeMember(user);
+        user.addMembership(userGroup);
         userRepository.save(user);
-        groupRepository.save(group);
+        groupRepository.save(userGroup);
         return true;
     }
 
-    public Group getGroupByEvent(Event event){
-        return groupRepository.findGroupByEvents(event);
-    }
 
 
 

@@ -1,5 +1,7 @@
 package com.pineapple.pp.entities;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +9,7 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-public class Group {
+public class userGroup {
 
     @Id
     @GeneratedValue(strategy=IDENTITY)
