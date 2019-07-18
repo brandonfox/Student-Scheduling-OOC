@@ -49,8 +49,8 @@ public class EventsController {
         return new QueryResponse(true);
     }
 
-    @PutMapping("/events/edit-event/{eventId}")
-    public QueryResponse editEvent(@RequestHeader("authorization") String token, @PathVariable Long eventId, @RequestBody String form) {
+    @PutMapping("/events/edit-event")
+    public QueryResponse editEvent(@RequestHeader("authorization") String token, @RequestParam("event-id") long eventId, @RequestBody String form) {
         UserToken userDetails = SecurityService.parseToken(token);
         System.out.println("Editing an event for user " + userDetails.getUsername() + ": ");
         Event event = eventService.editEvent(form, eventId);
@@ -64,11 +64,11 @@ public class EventsController {
         return new QueryResponse(true);
     }
 
-    @DeleteMapping("/events/remove-event/{eventId}")
-    public List<Event> deleteEvent(@RequestHeader("authorization") String token, @PathVariable Long eventId){
+    @DeleteMapping("/events/remove-event")
+    public List<Event> deleteEvent(@RequestParam("event-id") long id, @RequestHeader("authorization") String token){
         UserToken userDetails = SecurityService.parseToken(token);
         System.out.println("Deleting an event for user " + userDetails.getUsername() + ": ");
-        eventService.deleteEvent(eventId);
+        eventService.deleteEvent(id);
         return eventService.getEventsFor(userDetails);
     }
 }

@@ -3,6 +3,7 @@ import {AuthenticationService} from './authentication.service';
 import { Event} from '../model/event';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
+import {HttpParams} from '@angular/common/http';
 
 
 @Injectable({
@@ -30,10 +31,13 @@ export class EventService {
     }
 
     public editEvent(eventId, form) {
-        return this.authService.put(this.eventUrl + '/edit-event/' + eventId, form).toPromise();
+        return this.authService.put(this.eventUrl + '/edit-event/', this.getIdParam(eventId), form).toPromise();
     }
 
     public deleteEvent(eventId: bigint): Observable<Event[]> {
-        return this.authService.delete(this.eventUrl + '/remove-event/' + eventId);
+        return this.authService.delete(this.eventUrl + '/remove-event/', this.getIdParam(eventId) );
+    }
+    private getIdParam(eventId: bigint): HttpParams {
+        return new HttpParams().append('event-id', eventId.toString());
     }
 }
