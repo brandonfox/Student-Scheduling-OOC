@@ -49,4 +49,12 @@ public class EventsController {
         System.out.print("success!\n");
         return new QueryResponse(true);
     }
+
+    @DeleteMapping("/events/remove-event/{eventId}")
+    public List<Event> deleteEvent(@RequestHeader("authorization") String token, @PathVariable Long eventId){
+        UserToken userDetails = SecurityService.parseToken(token);
+        System.out.println("Deleting an event for user " + userDetails.getUsername() + ": ");
+        eventService.deleteEvent(eventId);
+        return eventService.getEventsFor(userDetails);
+    }
 }

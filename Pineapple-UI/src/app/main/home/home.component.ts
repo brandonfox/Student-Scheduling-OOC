@@ -147,4 +147,11 @@ export class HomeComponent implements OnInit {
     public setCurrentEvent(event) {
         this.eventService.currentEvent = event;
     }
+
+    deleteEvent(eventId) {
+        console.log('Deleting event...');
+        this.eventService.deleteEvent(eventId).subscribe(
+            data => this.events = data
+        );
+    }
 }
