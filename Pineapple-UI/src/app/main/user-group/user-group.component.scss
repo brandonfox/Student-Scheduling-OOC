@@ -1,0 +1,15 @@
+.button-bottom-right {
+    position: fixed;
+    bottom: 16px;
+    right: 32px;
+    z-index: 3; // make it stay above everything
+}
+
+.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 350px;
+    min-width: 350px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+}
