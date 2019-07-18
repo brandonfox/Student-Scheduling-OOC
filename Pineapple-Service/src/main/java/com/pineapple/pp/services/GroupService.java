@@ -6,11 +6,13 @@ import com.pineapple.pp.entities.Group;
 import com.pineapple.pp.entities.User;
 import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.repositories.GroupRepository;
+import com.pineapple.pp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 public class GroupService {
     private GroupRepository groupRepository;
+    private UserRepository userRepository;
     private UserService userService;
     private final Gson gson;
 
@@ -56,8 +58,10 @@ public class GroupService {
     public boolean addMembership(User friend, Group group) {
         try {
             System.out.println("Adding" + friend.getUsername() + "to group: " + group.getName());
+            friend.addMembership(group);
             group.addMembership(friend);
             groupRepository.save(group);
+            userRepository.save(friend);
             return true;
         } catch (Exception ex) {
             return false;
@@ -67,6 +71,8 @@ public class GroupService {
     public boolean removeMembership(Group group, User user) {
         System.out.println("Removing user: " + user.getUsername() + ", for Group: " + group.getName());
         group.removeMember(user);
+        user.addMembership(group);
+        userRepository.save(user);
         groupRepository.save(group);
         return true;
     }
@@ -74,6 +80,8 @@ public class GroupService {
     public Group getGroupByEvent(Event event){
         return groupRepository.findGroupByEvents(event);
     }
+
+
 
 
 }

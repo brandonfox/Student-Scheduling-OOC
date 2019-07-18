@@ -42,4 +42,6 @@ public class GroupController {
         return eventService.getEventsForGroup(group);
     }
 
+
+
 }

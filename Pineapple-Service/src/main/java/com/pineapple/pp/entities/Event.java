@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.time.DateUtils;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -50,12 +49,12 @@ public class Event {
     private List<Task> tasks;
 
 
-//    @ManyToOne
-//    @JoinTable(name = "join_group_event",
-//            inverseJoinColumns = @JoinColumn(name = "group_id"),
-//            joinColumns = @JoinColumn(name = "event_id")
-//    )
-//    private Group group = new Group();
+    @ManyToOne
+    @JoinTable(name = "join_group_event",
+            inverseJoinColumns = @JoinColumn(name = "group_id"),
+            joinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Group> groupEvents;
 
 
 
@@ -72,7 +71,7 @@ public class Event {
     public String getStartTime() { return startTime; }
     public String getEndTime() { return endTime; }
     public Boolean getAllDay() { return allDay; }
-    //    public Group getGroup() { return group; }
+    public List<Group> getGroupEvents() { return groupEvents; }
     public void setAllDay(Boolean allDay) { this.allDay = allDay; }
     public void setStartTime(String startTime) { this.startTime = startTime; }
     public void setEndTime(String endTime) { this.endTime = endTime; }
@@ -88,5 +87,11 @@ public class Event {
         this.endDate = endDate; }
     public void setUser(User user){this.user = user;}
     public void setTasks(List<Task> tasks) { this.tasks = tasks; }
-//    public void setGroup(Group group) { this.group = group; }
+    public void setGroupEvents(List<Group> groupEvents) { this.groupEvents = groupEvents;}
+
+    /*Adders and Remover*/
+    public void addGroupEvent(Group group) { groupEvents.add(group);}
+
+    public void removeGroupEvent(Group group) { groupEvents.remove(group);}
+
 }
