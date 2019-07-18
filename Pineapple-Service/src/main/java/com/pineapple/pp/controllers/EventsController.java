@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "0.0.0.0:4200")
 public class EventsController {
 
     private EventService eventService;
