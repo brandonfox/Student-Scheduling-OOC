@@ -1,8 +1,8 @@
 package com.pineapple.pp.services;
 
 import com.google.gson.Gson;
+import com.pineapple.pp.entities.Group;
 import com.pineapple.pp.entities.User;
-import com.pineapple.pp.entities.UserGroup;
 import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.repositories.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +27,17 @@ public class GroupService {
      * @param token The token of a specific user
      * @return a list of groups for user
      */
-    public List<UserGroup> getGroupsFor(UserToken token) {
+    public List<Group> getGroupsFor(UserToken token) {
         try {
             System.out.println("Retrieving events for '" + token.getUsername() + "'");
-            return groupRepository.findUserGroupsByMembership(userService.getUser(token));
+            return groupRepository.findGroupsByMembership(userService.getUser(token));
         } catch (NullPointerException e) {
             return null;
         }
     }
 
-    public UserGroup add(String json) {
-        UserGroup group = gson.fromJson(json, UserGroup.class);
+    public Group add(String json) {
+        Group group = gson.fromJson(json, Group.class);
         if (groupRepository.existsByName(group.getName())) {
             return null;
         }
@@ -45,14 +45,14 @@ public class GroupService {
         return group;
     }
 
-    public UserGroup getGroupFromJson(String json) {
-        UserGroup group = gson.fromJson(json, UserGroup.class);
-        return groupRepository.findUserGroupByName(group.getName());
+    public Group getGroupFromJson(String json) {
+        Group group = gson.fromJson(json, Group.class);
+        return groupRepository.findGroupByName(group.getName());
     }
 
     //   public void removeGroup()
 
-    public boolean addMembership(User friend, UserGroup group) {
+    public boolean addMembership(User friend, Group group) {
         try {
             System.out.println("Adding" + friend.getUsername() + "to group: " + group.getName());
             group.addMembership(friend);
@@ -63,7 +63,7 @@ public class GroupService {
         }
     }
 
-    public boolean removeMembership(UserGroup group, User user) {
+    public boolean removeMembership(Group group, User user) {
         System.out.println("Removing user: " + user.getUsername() + ", for Group: " + group.getName());
         group.removeMember(user);
         groupRepository.save(group);

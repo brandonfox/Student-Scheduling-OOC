@@ -26,7 +26,7 @@ public class User {
 
 
     // todo: Figure out how to join table AND add an extra column
-//    private Set<UserGroup> groups = new HashSet<>();
+//    private Set<Group> groups = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "friendship",

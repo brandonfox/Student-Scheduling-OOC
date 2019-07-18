@@ -7,7 +7,7 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-public class UserGroup {
+public class Group {
 
     @Id
     @GeneratedValue(strategy=IDENTITY)
