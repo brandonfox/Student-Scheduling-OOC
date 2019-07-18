@@ -26,7 +26,13 @@ public class User {
 
 
     // todo: Figure out how to join table AND add an extra column
-//    private Set<UserGroup> groups = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "group_membership",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private Set<UserGroup> membership = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "friendship",
@@ -60,6 +66,11 @@ public class User {
     public void setAge(Integer age) { this.age = age; }
     public void setPhoneNumber(Long phoneNumber) { this.phoneNumber = phoneNumber; }
     public void setFriends(Set<User> friends) { this.friends = friends; }
+
+    /* Adder and Remover */
     public void addFriend(User friend){ friends.add(friend); }
+    public void addMembership(UserGroup userGroup) {membership.add(userGroup);}
+
     public void removeFriend(User friend) {friends.remove(friend);}
+    public void removeMembership(UserGroup userGroup) {membership.remove(userGroup);}
 }

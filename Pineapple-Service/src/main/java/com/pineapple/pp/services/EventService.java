@@ -2,6 +2,7 @@ package com.pineapple.pp.services;
 
 import com.google.gson.Gson;
 import com.pineapple.pp.entities.Event;
+import com.pineapple.pp.entities.UserGroup;
 import com.pineapple.pp.entities.User;
 import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.repositories.EventRepository;
@@ -16,12 +17,14 @@ public class EventService {
 
     private final EventRepository eventRepository;
     private final UserService userService;
+    private final GroupService groupService;
     private final Gson gson;
 
     @Autowired
-    public EventService(EventRepository eventRepo, UserService userRepo){
+    public EventService(EventRepository eventRepo, UserService userRepo, GroupService groupRepo){
         eventRepository = eventRepo;
         userService = userRepo;
+        groupService =  groupRepo;
         this.gson = new Gson();
     }
 
@@ -43,10 +46,19 @@ public class EventService {
     public List<Event> getEventsFor(UserToken token){
         try {
             System.out.println("Retrieving events for user " + token.getUsername());
-            return eventRepository.findEventsByUser(userService.getUser(token));
+            return eventRepository.findEventsByUser(userService.getUserByToken(token));
         }catch(NullPointerException ex) {
             return null;
         }
+    }
+    /**
+     * Get all events for a specific UserGroup
+     * @param userGroup the specific UserGroup
+     * @return a list of events for UserGroup
+     */
+    public List<Event> getEventsForGroup(UserGroup userGroup){
+        System.out.println("Retrieving events for '" + userGroup.getName() + "'");
+        return eventRepository.findEventsByUserGroup(userGroup);
     }
 
     public Event getEventById(Long eventId){
@@ -82,5 +94,7 @@ public class EventService {
     public void deleteEvent(Long id){
         eventRepository.deleteEventById(id);
     }
+
+    
 
 }
