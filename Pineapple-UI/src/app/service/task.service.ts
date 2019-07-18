@@ -14,7 +14,8 @@ export class TaskService {
       private globals: Globals,
   ) { }
 
-  private taskUrl = this.globals.ip + ':8080/tasks';
+  // private taskUrl = this.globals.ip + ':8080/tasks';
+    private taskUrl = 'http://localhost:8080/tasks';
 
   public getTasksByEventId(eventId: bigint): Promise<Task[]> {
       return this.authService.get<Task[]>(this.taskUrl + '/by-event' + '/' + eventId).toPromise();

@@ -15,6 +15,6 @@ export class UserGroupService {
     private groupUrl = 'http://localhost:8080/user-groups';
 
     public getUserGroupsByUserId(userId: bigint): Promise<UserGroup[]> {
-        return this.authService.get<UserGroup[]>(this.groupUrl + '/by-user-id' + '/' + userId).toPromise();
+        return this.authService.get<UserGroup[]>(this.groupUrl + '/by-user-id/' + userId).toPromise();
     }
 }

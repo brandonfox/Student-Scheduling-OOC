@@ -9,7 +9,8 @@ import {Globals} from '../model/globals';
 })
 export class AuthenticationService {
 
-    private authenticationUrl = this.globals.ip + '/authenticate';
+    // private authenticationUrl = this.globals.ip + '/authenticate';
+    private authenticationUrl = 'http://localhost:8080/authenticate';
 
     constructor(
         private cookieService: CookieService,

@@ -12,7 +12,7 @@ import {User} from '../../model/user';
 })
 export class UserGroupComponent implements OnInit {
 
-    private user: User;
+    user: User;
     userGroups: UserGroup[];
 
     constructor(
@@ -21,13 +21,14 @@ export class UserGroupComponent implements OnInit {
         private groupService: UserGroupService
     ) {
         this.authService.authenticateUser();
-        authService.getLoggedUser().then(
-            data => this.user = data
-        );
     }
 
     ngOnInit() {
-        this.getUserGroupsById(this.user);
+        this.authService.getLoggedUser().then(
+            data => {
+                this.user = data;
+                this.getUserGroupsById(this.user);
+            });
     }
 
     getUserGroupsById(user) {

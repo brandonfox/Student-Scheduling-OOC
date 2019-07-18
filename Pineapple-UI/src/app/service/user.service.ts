@@ -18,7 +18,8 @@ export class UserService {
         ) {
     }
 
-  private userUrl = this.globals.ip + ':8080';
+  // private userUrl = this.globals.ip + ':8080';
+    private userUrl = 'http://localhost:8080';
 
     public getUser(): Promise<User> {
         return this.authService.get<User>(this.userUrl + '/user').toPromise();

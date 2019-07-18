@@ -21,7 +21,7 @@ import {ButtonModule} from 'primeng/button';
 import { UserGroupComponent } from './main/user-group/user-group.component';
 import { AddMemberComponent } from './add-member/add-member.component';
 import { ProfileComponent } from './profile/profile.component';
-import { GroupEventComponent } from './group-event/group-event.component';
+import {Globals} from './model/globals';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -53,9 +53,8 @@ const appRoutes: Routes = [
         ProfileComponent,
         UserGroupComponent,
         AddMemberComponent,
-        GroupEventComponent
     ],
-    providers: [UserService, CookieService],
+    providers: [UserService, CookieService, Globals],
     bootstrap: [AppComponent]
 })
 

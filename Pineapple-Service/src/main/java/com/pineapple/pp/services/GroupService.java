@@ -41,6 +41,15 @@ public class GroupService {
         }
     }
 
+    public List<UserGroup> getGroupsByUser(User user) {
+        try {
+            System.out.println("Getting groups for: " + user.getUsername());
+            return groupRepository.findGroupsByMembership(user);
+        } catch(NullPointerException ex) {
+            return null;
+        }
+    }
+
     public UserGroup add(String json) {
         UserGroup userGroup = gson.fromJson(json, UserGroup.class);
         if (groupRepository.existsByName(userGroup.getName())) {

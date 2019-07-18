@@ -150,7 +150,7 @@ export class HomeComponent implements OnInit {
     }
 
     getAll() {
-        this.eventService.getEvents().then(data => {
+        this.eventService.getEvents().subscribe(data => {
             this.events = data;
             for (const event of this.events) {
                 this.getTasksByEventId(event);
