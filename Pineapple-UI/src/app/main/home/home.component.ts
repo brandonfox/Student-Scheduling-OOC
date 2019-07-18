@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
     now: number;
 
     private users;
-    private user;
+    user;
     events: Event[];
     taskAddForm: FormGroup;
     taskEditForm: FormGroup;

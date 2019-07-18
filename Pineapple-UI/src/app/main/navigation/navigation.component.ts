@@ -7,7 +7,7 @@ import {AuthenticationService} from '../../service/authentication.service';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
-  private sidenavWidth: 4;
+  sidenavWidth: 4;
 
   constructor(
     private authService: AuthenticationService

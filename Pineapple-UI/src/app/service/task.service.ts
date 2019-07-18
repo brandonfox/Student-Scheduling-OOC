@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AuthenticationService} from './authentication.service';
 import {Task} from '../model/task';
 import {Observable} from 'rxjs';
+import { Globals } from '../model/globals';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,10 @@ export class TaskService {
 
   constructor(
       private authService: AuthenticationService,
+      private globals: Globals,
   ) { }
 
-  private taskUrl = 'http://localhost:8080/tasks';
+  private taskUrl = this.globals.ip + ':8080/tasks';
 
   public getTasksByEventId(eventId: bigint): Observable<Task[]> {
       return this.authService.get<Task[]>(this.taskUrl + '/by-event' + '/' + eventId);

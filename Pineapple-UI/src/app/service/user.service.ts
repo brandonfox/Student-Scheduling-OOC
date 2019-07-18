@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {User} from '../model/user';
 import {AuthenticationService} from './authentication.service';
+import {Globals} from '../model/globals';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,10 +13,12 @@ export class UserService {
 
     constructor(
         private http: HttpClient,
-        private authService: AuthenticationService) {
+        private authService: AuthenticationService,
+        private globals: Globals,
+        ) {
     }
 
-  private userUrl = 'http://localhost:8080';
+  private userUrl = this.globals.ip + ':8080';
 
     public getUser(): Promise<User> {
         return this.authService.get<User>(this.userUrl + '/user').toPromise();
