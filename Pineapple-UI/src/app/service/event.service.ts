@@ -19,6 +19,7 @@ export class EventService {
     }
 
     private eventUrl = environment.backendUrl + '/events';
+
     public getEvents(): Observable<Event[]> {
         return this.authService.get<Event[]>(this.eventUrl);
     }

@@ -91,6 +91,10 @@ public class UserService {
         User user = getUserFromJson(jason);
         return userRepository.findUserById(user.getId());
     }
+
+    public User getUserById(Long id) {
+        return userRepository.findUserById(id);
+    }
     
     public List<User> getAllUsers(UserToken token, String searchParam){
         try {

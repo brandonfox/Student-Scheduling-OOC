@@ -15,8 +15,8 @@ export class TaskService {
 
   private taskUrl = environment.backendUrl + '/tasks';
 
-  public getTasksByEventId(eventId: bigint): Observable<Task[]> {
-      return this.authService.get<Task[]>(this.taskUrl + '/by-event' + '/' + eventId);
+  public getTasksByEventId(eventId: bigint): Promise<Task[]> {
+      return this.authService.get<Task[]>(this.taskUrl + '/by-event' + '/' + eventId).toPromise();
   }
 
   public createTask(task) {

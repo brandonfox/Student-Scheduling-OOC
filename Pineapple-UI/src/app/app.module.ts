@@ -18,9 +18,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { MainModule } from './main/main.module';
 import { FriendListComponent } from './main/friend-list/friend-list.component';
 import {ButtonModule} from 'primeng/button';
-import { GroupComponent } from './group/group.component';
+import { UserGroupComponent } from './main/user-group/user-group.component';
 import { AddMemberComponent } from './add-member/add-member.component';
-import { GroupEventComponent } from './group-event/group-event.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -47,9 +47,11 @@ const appRoutes: Routes = [
         LoginComponent,
         RegisterComponent,
         FriendListComponent,
-        GroupComponent,
+        UserGroupComponent,
         AddMemberComponent,
-        GroupEventComponent
+        ProfileComponent,
+        UserGroupComponent,
+        AddMemberComponent,
     ],
     providers: [UserService, CookieService],
     bootstrap: [AppComponent]

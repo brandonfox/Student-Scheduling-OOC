@@ -1,12 +1,10 @@
 import {User} from './user';
 import {Event} from './event';
 
-export class Group {
-
+export class UserGroup {
     id: bigint;
     name: string;
     description: string;
-    user: User[];
-    event: Event[];
-
+    users: User[];
+    events: Event[];
 }

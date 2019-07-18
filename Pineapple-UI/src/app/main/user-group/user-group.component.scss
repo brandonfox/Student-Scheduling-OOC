@@ -1,0 +1,60 @@
+.button-bottom-right {
+    position: fixed;
+    bottom: 16px;
+    right: 32px;
+    z-index: 3; // make it stay above everything
+}
+
+.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 350px;
+    min-width: 350px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.group-form-popup {
+    display: none;
+    position: absolute;
+    right: 200px;
+    bottom: 200px;
+    z-index: 3;
+}
+
+.group-form-container {
+    min-width: 150px;
+    padding: 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.3);
+}
+
+.group-close-button {
+    background: inherit;
+    border: none;
+    float: right;
+}
+
+.group-submit-button {
+    background: inherit;
+    border: none;
+    float: right;
+}
+
+.group-submit-button-container {
+    height: 30px;
+    width: 100%;
+}
+
+.group-submit-icon {
+    color: #b2b2a9;
+    font-size: 40px;
+    &:hover {
+        color: seagreen;
+        text-shadow: 0 0 5px rgba(54, 161, 70, 0.2);
+    }
+    &:active {
+        color: #323232;
+    }
+}

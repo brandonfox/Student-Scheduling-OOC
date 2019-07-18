@@ -1,0 +1,63 @@
+<section class="header">
+    <h2 *ngIf="user">{{user.firstname}}'s Groups</h2>
+</section>
+
+<div class="card-deck">
+<!--    <div class="card">-->
+<!--        <div class="card-body">-->
+<!--            <h5 class="card-title">sadsadfads</h5>-->
+<!--        </div>-->
+<!--        <div class="card-footer">-->
+<!--            <div class="text-muted">hjkjhjk</div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="card" *ngFor="let userGroup of userGroups">
+        <div class="card-body">
+            <h5 class="card-title">{{userGroup.name}}</h5>
+        </div>
+        <div class="card-footer">
+            <div class="text-muted">{{userGroup.description}}</div>
+        </div>
+    </div>
+</div>
+
+<button
+    class="button-bottom-right"
+    style="background-color: antiquewhite"
+    routerLink="/main/add"
+    mat-fab>
+    <mat-icon>add</mat-icon>
+</button>
+<div class="group-form-popup" id="add-group-form">
+    <div class="group-form-container">
+        <button class="group-close-button" id="groupAddClose" (click)="closeGroupAddForm(thisEvent.id)">
+            <mat-icon class="task-cancel-icon">cancel</mat-icon>
+        </button>
+        <h3>Add a new task</h3>
+        <form [formGroup]="groupAddForm" (ngSubmit)="submitGroupAddForm()">
+            <mat-form-field class="title-field" appearance="legacy">
+                <label>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="New Task"
+                        formControlName="title">
+                </label>
+            </mat-form-field>
+            <mat-form-field class="description-field" appearance="legacy">
+                <label>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="This is a description of your new task"
+                        formControlName="description">
+                </label>
+            </mat-form-field>
+            <div class="group-submit-button-container">
+                <button type="submit" class="group-submit-button">
+                    <mat-icon class="group-submit-icon">check_circle</mat-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
