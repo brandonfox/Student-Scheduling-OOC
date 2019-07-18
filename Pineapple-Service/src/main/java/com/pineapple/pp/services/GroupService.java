@@ -1,6 +1,7 @@
 package com.pineapple.pp.services;
 
 import com.google.gson.Gson;
+import com.pineapple.pp.entities.Event;
 import com.pineapple.pp.entities.Group;
 import com.pineapple.pp.entities.User;
 import com.pineapple.pp.entities.UserToken;
@@ -68,6 +69,10 @@ public class GroupService {
         group.removeMember(user);
         groupRepository.save(group);
         return true;
+    }
+
+    public Group getGroupByEvent(Event event){
+        return groupRepository.findGroupByEvents(event);
     }
 
 

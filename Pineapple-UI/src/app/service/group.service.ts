@@ -4,15 +4,15 @@ import {Observable} from 'rxjs';
 import {Group} from '../model/group';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class GroupService {
 
-  constructor(
-      private authService: AuthenticationService
-  ) {}
+    constructor(
+        private authService: AuthenticationService
+    ) {}
 
-  private groupUrl = 'http://localhost:8080/groups';
+    private groupUrl = 'http://localhost:8080/groups';
 
     public getGroups(): Observable<Group[]> {
         return this.authService.get<Group[]>(this.groupUrl);

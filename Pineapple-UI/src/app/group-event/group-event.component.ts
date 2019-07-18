@@ -5,6 +5,7 @@ import {UserService} from "../service/user.service";
 import {EventService} from "../service/event.service";
 import {TaskService} from "../service/task.service";
 import {GroupService} from "../service/group.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-group-event',
@@ -31,7 +32,7 @@ export class GroupEventComponent implements OnInit {
         private taskService: TaskService
     ) {
         this.authService.authenticateUser();
-        this.group = groupService.getGroup();
+        this.group = groupService.getGroups();
     }
 
     ngOnInit() {
@@ -41,7 +42,7 @@ export class GroupEventComponent implements OnInit {
             event: null
         });
         this.getAll();
-        this.getUserInfo().then(data => this.user = data);
+        this.getGroupInfo().then(data => this.group = data);
     }
 
     getTasksByEventId(event) {
@@ -51,7 +52,7 @@ export class GroupEventComponent implements OnInit {
     }
 
     getGroupInfo() {
-        return this.groupService.getGroup();
+        return this.groupService.getGroups();
     }
     // TODO Change html file to display date in a more human readable format
     // TODO Add a refresh mechanism to display events properly

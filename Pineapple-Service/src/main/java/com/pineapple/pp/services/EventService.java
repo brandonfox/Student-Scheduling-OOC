@@ -2,6 +2,7 @@ package com.pineapple.pp.services;
 
 import com.google.gson.Gson;
 import com.pineapple.pp.entities.Event;
+import com.pineapple.pp.entities.Group;
 import com.pineapple.pp.entities.User;
 import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.repositories.EventRepository;
@@ -16,12 +17,14 @@ public class EventService {
 
     private final EventRepository eventRepository;
     private final UserService userService;
+    private final GroupService groupService;
     private final Gson gson;
 
     @Autowired
-    public EventService(EventRepository eventRepo, UserService userRepo){
+    public EventService(EventRepository eventRepo, UserService userRepo, GroupService groupRepo){
         eventRepository = eventRepo;
         userService = userRepo;
+        groupService =  groupRepo;
         this.gson = new Gson();
     }
 
@@ -47,6 +50,15 @@ public class EventService {
         }catch(NullPointerException ex) {
             return null;
         }
+    }
+    /**
+     * Get all events for a specific group
+     * @param group the specific group
+     * @return a list of events for group
+     */
+    public List<Event> getEventsForGroup(Group group){
+        System.out.println("Retrieving events for '" + group.getName() + "'");
+        return eventRepository.findEventsByGroup(group);
     }
 
     public Event getEventById(Long eventId){
