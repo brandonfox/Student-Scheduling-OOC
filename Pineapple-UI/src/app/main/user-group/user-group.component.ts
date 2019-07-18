@@ -47,12 +47,12 @@ export class UserGroupComponent implements OnInit {
     }
 
     /* Pop up form for adding tasks */
-    openTaskAddForm(eventId) {
+    openGroupAddForm() {
         this.groupAddForm.reset();
         this.togglePopup('add-group-form', 'block', true);
     }
 
-    closeGroupAddForm(eventId) {
+    closeGroupAddForm() {
         this.togglePopup('add-group-form', 'none', false);
     }
 

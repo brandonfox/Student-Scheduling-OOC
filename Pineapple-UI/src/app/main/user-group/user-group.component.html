@@ -24,13 +24,12 @@
 <button
     class="button-bottom-right"
     style="background-color: antiquewhite"
-    routerLink="/main/add"
-    mat-fab>
+    mat-fab (click)="openGroupAddForm()">
     <mat-icon>add</mat-icon>
 </button>
 <div class="group-form-popup" id="add-group-form">
     <div class="group-form-container">
-        <button class="group-close-button" id="groupAddClose" (click)="closeGroupAddForm(thisEvent.id)">
+        <button class="group-close-button" id="groupAddClose" (click)="closeGroupAddForm()">
             <mat-icon class="task-cancel-icon">cancel</mat-icon>
         </button>
         <h3>Add a new task</h3>
