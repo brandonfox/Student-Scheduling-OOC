@@ -48,5 +48,8 @@ public class UserGroup {
     public void setMembership(Set<User> membership) {
         this.membership = membership;
     }
+    public void addMembership(User user){
+        this.membership.add(user);
+    }
 }
 

@@ -6,6 +6,7 @@ import com.pineapple.pp.entities.UserGroup;
 import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.repositories.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.List;
 
@@ -14,8 +15,10 @@ public class GroupService {
     private UserService userService;
     private final Gson gson;
 
+
     @Autowired
-    public GroupService(GroupRepository g){
+    public GroupService(GroupRepository g, UserService u){
+        this.userService = u;
         this.groupRepository = g;
         this.gson = new Gson();
     }
@@ -34,21 +37,33 @@ public class GroupService {
         }
     }
 
-//    public boolean addUserToGroup(User friend, UserGroup group){
-//        try{
-//            System.out.println("Adding" + friend.getUsername() + "to group: " + group.getName());
-//            if(user.getUsername().equals(friend.getUsername())){
-//                return false;
-//            }
-//            User us = getUserByToken(user);
-//            us.addFriend(friend);
-//            userRepository.save(us);
-//            return true;
-//        }
-//        catch(Exception ex){
-//            return false;
-//        }
-//    }
+    public UserGroup add(String json) {
+        UserGroup group = gson.fromJson(json, UserGroup.class);
+        if (groupRepository.existsByName(group.getName())) {
+            return null;
+        }
+        groupRepository.save(group);
+        return group;
+    }
+
+    public UserGroup getGroupFromJson(String json) {
+        UserGroup group = gson.fromJson(json, UserGroup.class);
+        return groupRepository.findUserGroupByName(group.getName());
+    }
+
+    //   public void removeGroup()
+
+    public boolean addUserToGroup(User friend, UserGroup group){
+        try{
+            System.out.println("Adding" + friend.getUsername() + "to group: " + group.getName());
+            group.addMembership(friend);
+            groupRepository.save(group);
+            return true;
+        }
+        catch(Exception ex){
+            return false;
+        }
+    }
 
 
 
