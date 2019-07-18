@@ -32,7 +32,7 @@ public class User {
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<userGroup> membership = new HashSet<>();
+    private Set<UserGroup> membership = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "friendship",
@@ -69,8 +69,8 @@ public class User {
 
     /* Adder and Remover */
     public void addFriend(User friend){ friends.add(friend); }
-    public void addMembership(userGroup userGroup) {membership.add(userGroup);}
+    public void addMembership(UserGroup userGroup) {membership.add(userGroup);}
 
     public void removeFriend(User friend) {friends.remove(friend);}
-    public void removeMembership(userGroup userGroup) {membership.remove(userGroup);}
+    public void removeMembership(UserGroup userGroup) {membership.remove(userGroup);}
 }
