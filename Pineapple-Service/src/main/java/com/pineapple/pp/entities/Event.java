@@ -41,7 +41,7 @@ public class Event {
     
     private Boolean allDay;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinTable(name = "event_tasks",
             inverseJoinColumns = @JoinColumn(name = "task_id"),
             joinColumns = @JoinColumn(name = "event_id")

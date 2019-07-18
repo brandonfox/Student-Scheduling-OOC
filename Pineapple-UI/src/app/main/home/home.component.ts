@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../service/authentication.service';
-import { EventService } from '../../service/event.service';
-import { UserService } from '../../service/user.service';
-import { Event } from '../../model/event';
-import { TaskService } from '../../service/task.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from '../../service/authentication.service';
+import {EventService} from '../../service/event.service';
+import {UserService} from '../../service/user.service';
+import {Event} from '../../model/event';
+import {TaskService} from '../../service/task.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
     now: number;
 
     private users;
-    private user;
+    user;
     events: Event[];
     taskAddForm: FormGroup;
     taskEditForm: FormGroup;
@@ -42,12 +42,7 @@ export class HomeComponent implements OnInit {
             description: '',
             event: null
         });
-        this.eventService.getEvents().subscribe(data => {
-            this.events = data;
-            for (const event of this.events) {
-                this.getTasksByEventId(event);
-            }
-        });
+        this.getAll();
         this.getUserInfo().then(data => this.user = data);
     }
 
@@ -151,7 +146,16 @@ export class HomeComponent implements OnInit {
     deleteEvent(eventId) {
         console.log('Deleting event...');
         this.eventService.deleteEvent(eventId).subscribe(
-            data => this.events = data
+            data => this.getAll()
         );
+    }
+
+    getAll() {
+        this.eventService.getEvents().subscribe(data => {
+            this.events = data;
+            for (const event of this.events) {
+                this.getTasksByEventId(event);
+            }
+        });
     }
 }

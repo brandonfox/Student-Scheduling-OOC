@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 public class EventsController {
 
     private EventService eventService;
@@ -40,6 +39,21 @@ public class EventsController {
         System.out.print("Adding an event for user " + userDetails.getUsername() + ": ");
         User user = userService.getUserByToken(userDetails);
         Event event = eventService.addEvent(form,user);
+        if(event == null){
+            //Something went wrong
+            //TODO More detailed error report (Check user or event stuff)
+            System.out.print("failed..\n");
+            return new QueryResponse(false);
+        }
+        System.out.print("success!\n");
+        return new QueryResponse(true);
+    }
+
+    @PutMapping("/events/edit-event/{eventId}")
+    public QueryResponse editEvent(@RequestHeader("authorization") String token, @PathVariable Long eventId, @RequestBody String form) {
+        UserToken userDetails = SecurityService.parseToken(token);
+        System.out.println("Editing an event for user " + userDetails.getUsername() + ": ");
+        Event event = eventService.editEvent(form, eventId);
         if(event == null){
             //Something went wrong
             //TODO More detailed error report (Check user or event stuff)
