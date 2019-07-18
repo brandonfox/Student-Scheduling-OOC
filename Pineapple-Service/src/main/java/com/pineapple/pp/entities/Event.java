@@ -28,9 +28,15 @@ public class Event {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
 
+
     @ManyToOne
     @JoinTable(name = "join_group_event",
             inverseJoinColumns = @JoinColumn(name = "group_id"),
+
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinTable(name = "event_tasks",
+            inverseJoinColumns = @JoinColumn(name = "task_id"),
+
             joinColumns = @JoinColumn(name = "event_id")
     )
 //    private UserGroup userGroup = new UserGroup();
