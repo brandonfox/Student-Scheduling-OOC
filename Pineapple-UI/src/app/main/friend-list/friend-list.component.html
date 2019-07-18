@@ -4,7 +4,8 @@
             List of friends (Temporary until better layout made)
             <mat-list>
                 <mat-list-item *ngFor="let friend of friends">
-                    <div class="flex-fill" (click)="userClicked(friend)" class="user-list-item">{{friend.username}}</div>
+                    <div class="flex-fill user-list-item" (click)="userClicked(friend)">{{friend.username}}</div>
+                    <p-button label="Remove Friend" (click)="removeFriend(friend)"></p-button>
                     <mat-divider></mat-divider>
                 </mat-list-item>
             </mat-list>
@@ -24,9 +25,12 @@
                             <p-button label="Reject" (onClick)="denyRequest(user)"></p-button>
                         </div>
                         <ng-template #checkFriend>
-                            <div *ngIf="!friendIds.has(user.id)">
+                            <div *ngIf="!friendIds.has(user.id); else defaultUser">
                                 <p-button label="Add Friend" (click)="addFriend(user)"></p-button>
                             </div>
+                            <ng-template #defaultUser>
+                                <p-button label="Remove Friend" (click)="removeFriend(user)"></p-button>
+                            </ng-template>
                         </ng-template>
                     </ng-template>
                     <mat-divider></mat-divider>
