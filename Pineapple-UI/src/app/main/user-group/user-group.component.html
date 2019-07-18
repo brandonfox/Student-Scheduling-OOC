@@ -28,3 +28,36 @@
     mat-fab>
     <mat-icon>add</mat-icon>
 </button>
+<div class="group-form-popup" id="add-group-form">
+    <div class="group-form-container">
+        <button class="group-close-button" id="groupAddClose" (click)="closeGroupAddForm(thisEvent.id)">
+            <mat-icon class="task-cancel-icon">cancel</mat-icon>
+        </button>
+        <h3>Add a new task</h3>
+        <form [formGroup]="groupAddForm" (ngSubmit)="submitGroupAddForm()">
+            <mat-form-field class="title-field" appearance="legacy">
+                <label>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="New Task"
+                        formControlName="title">
+                </label>
+            </mat-form-field>
+            <mat-form-field class="description-field" appearance="legacy">
+                <label>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="This is a description of your new task"
+                        formControlName="description">
+                </label>
+            </mat-form-field>
+            <div class="group-submit-button-container">
+                <button type="submit" class="group-submit-button">
+                    <mat-icon class="group-submit-icon">check_circle</mat-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
