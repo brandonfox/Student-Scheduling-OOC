@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Event} from "../model/event";
-import {AuthenticationService} from "../service/authentication.service";
-import {UserService} from "../service/user.service";
-import {EventService} from "../service/event.service";
-import {TaskService} from "../service/task.service";
-import {GroupService} from "../service/group.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Event} from '../model/event';
+import {AuthenticationService} from '../service/authentication.service';
+import {UserService} from '../service/user.service';
+import {EventService} from '../service/event.service';
+import {TaskService} from '../service/task.service';
+import {GroupService} from '../service/group.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-group-event',
@@ -16,7 +16,7 @@ export class GroupEventComponent implements OnInit {
 
     now: number;
 
-    private group;
+    group;
     events: Event[];
     taskAddForm: FormGroup;
     taskEditForm: FormGroup;
