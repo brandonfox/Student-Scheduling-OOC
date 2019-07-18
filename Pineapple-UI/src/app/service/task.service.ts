@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AuthenticationService} from './authentication.service';
 import {Task} from '../model/task';
 import {Observable} from 'rxjs';
-import { Globals } from '../model/globals';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,9 @@ export class TaskService {
 
   constructor(
       private authService: AuthenticationService,
-      private globals: Globals,
   ) { }
 
-  // private taskUrl = this.globals.ip + ':8080/tasks';
-    private taskUrl = 'http://localhost:8080/tasks';
+  private taskUrl = environment.backendUrl + '/tasks';
 
   public getTasksByEventId(eventId: bigint): Promise<Task[]> {
       return this.authService.get<Task[]>(this.taskUrl + '/by-event' + '/' + eventId).toPromise();

@@ -49,7 +49,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
         NavigationComponent,
         EditEventComponent,
         CalendarComponent,
-        UserProfileComponent,
+        UserProfileComponent
     ],
     exports: [CalendarComponent]
 })

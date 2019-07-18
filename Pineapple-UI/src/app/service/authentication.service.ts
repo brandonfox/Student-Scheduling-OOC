@@ -2,20 +2,18 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { CookieService} from 'ngx-cookie-service';
 import {User} from '../model/user';
-import {Globals} from '../model/globals';
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthenticationService {
 
-    // private authenticationUrl = this.globals.ip + '/authenticate';
-    private authenticationUrl = 'http://localhost:8080/authenticate';
+    private authenticationUrl = environment.backendUrl + '/authenticate';
 
     constructor(
         private cookieService: CookieService,
         private http: HttpClient,
-        private globals: Globals,
     ) { }
 
     /**
