@@ -6,14 +6,14 @@
     <div class="card" *ngFor="let thisEvent of events">
         <div class="card-body">
             <div class="edit-button">
-<!--                <button mat-icon-button [matMenuTriggerFor]="menu">-->
-<!--                    <mat-icon>more_vert</mat-icon>-->
-<!--                    <mat-menu #menu="matMenu">-->
-<!--                        <button mat-menu-item routerLink="/main/edit"><mat-icon>edit</mat-icon>Edit Event</button>-->
-<!--                        <button mat-menu-item (click)="deleteEvent(thisEvent.id)"><mat-icon>delete</mat-icon>Delete Event</button>-->
-<!--                    </mat-menu>-->
-<!--                </button>-->
-                <button mat-icon-button routerLink="/main/edit"><mat-icon>edit</mat-icon></button>
+                <!--                <button mat-icon-button [matMenuTriggerFor]="menu">-->
+                <!--                    <mat-icon>more_vert</mat-icon>-->
+                <!--                    <mat-menu #menu="matMenu">-->
+                <!--                        <button mat-menu-item routerLink="/main/edit"><mat-icon>edit</mat-icon>Edit Event</button>-->
+                <!--                        <button mat-menu-item (click)="deleteEvent(thisEvent.id)"><mat-icon>delete</mat-icon>Delete Event</button>-->
+                <!--                    </mat-menu>-->
+                <!--                </button>-->
+                <button mat-icon-button (click)="setCurrentEvent(thisEvent)" routerLink="/main/edit"><mat-icon>edit</mat-icon></button>
                 <button mat-icon-button (click)="deleteEvent(thisEvent.id)"><mat-icon>delete</mat-icon></button>
             </div>
             <h5 class="card-title">{{thisEvent.name}}</h5>
