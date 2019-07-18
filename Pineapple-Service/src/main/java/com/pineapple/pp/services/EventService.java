@@ -46,7 +46,7 @@ public class EventService {
     public List<Event> getEventsFor(UserToken token){
         try {
             System.out.println("Retrieving events for user " + token.getUsername());
-            return eventRepository.findEventsByUser(userService.getUser(token));
+            return eventRepository.findEventsByUser(userService.getUserByToken(token));
         }catch(NullPointerException ex) {
             return null;
         }
