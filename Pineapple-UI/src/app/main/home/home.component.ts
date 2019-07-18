@@ -147,7 +147,7 @@ export class HomeComponent implements OnInit {
         console.log('Deleting event...');
         this.eventService.deleteEvent(eventId).subscribe(
             data => this.getAll()
-        )
+        );
     }
 
     getAll() {

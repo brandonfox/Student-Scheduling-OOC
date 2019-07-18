@@ -19,7 +19,7 @@ public class Task {
 
     private String description;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinTable(name = "event_tasks",
             inverseJoinColumns = @JoinColumn(name = "event_id"),
             joinColumns = @JoinColumn(name = "task_id")
