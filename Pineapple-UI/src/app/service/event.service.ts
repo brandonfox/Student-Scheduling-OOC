@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AuthenticationService} from './authentication.service';
 import { Event} from '../model/event';
 import {Observable} from 'rxjs';
+import { Globals} from '../model/globals';
 
 
 @Injectable({
@@ -13,12 +14,13 @@ export class EventService {
 
     constructor(
         private authService: AuthenticationService,
+        private globals: Globals,
     ) {
     }
 
-    private eventUrl = 'http://localhost:8080/events';
-    public getEvents(): Promise<Event[]> {
-        return this.authService.get<Event[]>(this.eventUrl).toPromise();
+    private eventUrl = this.globals.ip + ':8080/events';
+    public getEvents(): Observable<Event[]> {
+        return this.authService.get<Event[]>(this.eventUrl);
     }
 
     public addEvent(form) {

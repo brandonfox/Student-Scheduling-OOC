@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { DemoMaterialModule } from '../core/material-module';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { FlatpickrModule } from 'angularx-flatpickr';
@@ -50,6 +50,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
         EditEventComponent,
         CalendarComponent,
         UserProfileComponent,
-    ]
+    ],
+    exports: [CalendarComponent]
 })
 export class MainModule { }
