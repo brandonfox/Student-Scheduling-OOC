@@ -1,83 +1,89 @@
 <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
-    <div class="form-container">
-        <div class="form-group">
-            <mat-form-field class="add-title" appearance="legacy">
-                <label>
-                    <input
-                        matInput
-                        type="text"
-                        class="control"
-                        placeholder="Add Title"
-                        style="font-size: 30px;"
-                        formControlName="name">
-                </label>
-                <div *ngIf="submitted && f.name.errors.required">Name is required</div>
-            </mat-form-field>
-        </div>
+  <div class="form-container">
+    <div class="form-group">
+      <mat-form-field class="add-title" appearance="legacy">
+        <label>
+          <input
+            matInput
+            type="text"
+            class="control"
+            placeholder="Add Title"
+            style="font-size: 30px;"
+            formControlName="name">
+        </label>
+        <div *ngIf="submitted && f.name.errors.required">Name is required</div>
+      </mat-form-field>
     </div>
+  </div>
 
-    <div class="form-container">
-        <div class="form-group">
-            <mat-form-field class="date-picker" appearance="outline">
-                <label>
-                    <input matInput formControlName="startDate" type="date" placeholder="Choose a date">
-                </label>
-            </mat-form-field>
-            <mat-form-field class="time-picker" [style.display]="disableSelect.value ? 'none' : 'block'" appearance="outline">
-                <label>
-                    <input matInput formControlName="startTime" type="time" placeholder="Choose a date">
-                </label>
-            </mat-form-field>
-            <div class="to">To</div>
-            <mat-form-field class="date-picker" appearance="outline">
-                <label>
-                    <input matInput formControlName="endDate" type="date" placeholder="Choose a date">
-                </label>
-            </mat-form-field>
-            <mat-form-field class="time-picker" [style.display]="disableSelect.value ? 'none' : 'block'" appearance="outline">
-                <label>
-                    <input matInput formControlName="endTime" type="time" placeholder="Choose a date">
-                </label>
-            </mat-form-field>
-        </div>
+  <div class="form-container">
+    <div class="form-group">
+      <mat-form-field class="date-picker">
+        <label>
+          <input matInput formControlName="startTime" [matDatepicker]="picker" placeholder="Choose a date">
+        </label>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <button type="button" class="raised-button" mat-raised-button (click)="picker.open()">Open</button>
+      <div
+        class="time-picker">
+        <ngb-timepicker
+          [style.display]="disableSelect.value ? 'none' : 'block' "
+          [spinners]="false">
+        </ngb-timepicker>
+      </div>
+      <span class="date-picker"> to </span>
+      <mat-form-field class="date-picker">
+        <label>
+          <input matInput formControlName="endTime" [matDatepicker]="picker2" placeholder="Choose a date">
+        </label>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <button type="button" class="raised-button" mat-raised-button (click)="picker2.open()">Open</button>
+      <div class="time-picker">
+        <ngb-timepicker
+          [style.display]="disableSelect.value ? 'none' : 'block' "
+          [spinners]="false"></ngb-timepicker>
+      </div>
     </div>
+  </div>
 
-    <div class="form-container">
-        <div class="form-group">
-            <mat-checkbox
-                class="all-day-form"
-                color="primary"
-                [checked]="checked"
-                [formControl]="disableSelect">
-                All day
-            </mat-checkbox>
-        </div>
+  <div class="form-container">
+    <div class="form-group">
+      <mat-slide-toggle
+        class="all-day-form"
+        color="primary"
+        [checked]="checked"
+        [formControl]="disableSelect">
+        All day
+      </mat-slide-toggle>
     </div>
+  </div>
 
-    <div class="form-container">
-        <div class="form-group">
-            <mat-form-field class="description" appearance="outline">
-                <mat-label>Description</mat-label>
-                <label>
+  <div class="form-container">
+    <div class="form-group">
+      <mat-form-field class="description" appearance="outline">
+        <mat-label>Description</mat-label>
+        <label>
           <textarea
-              matInput formControlName="description"></textarea>
-                </label>
-            </mat-form-field>
-        </div>
+            matInput formControlName="description"></textarea>
+        </label>
+      </mat-form-field>
     </div>
+  </div>
 
-    <button
-        type="submit"
-        class="button-bottom-right-check"
-        style="background-color: antiquewhite"
-        mat-fab>
-        <mat-icon>check</mat-icon>
-    </button>
-    <button
-        class="button-bottom-right-close"
-        routerLink="/main/home"
-        style="background-color: white"
-        mat-fab>
-        <mat-icon>close</mat-icon>
-    </button>
+  <button
+    type="submit"
+    class="button-bottom-right-check"
+    style="background-color: antiquewhite"
+    mat-fab>
+    <mat-icon>check</mat-icon>
+  </button>
+  <button
+    class="button-bottom-right-close"
+    routerLink="/main/add"
+    style="background-color: white"
+    mat-fab>
+    <mat-icon>close</mat-icon>
+  </button>
 </form>

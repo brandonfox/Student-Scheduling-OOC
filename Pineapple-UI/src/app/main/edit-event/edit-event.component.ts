@@ -11,12 +11,21 @@ import {Subscription} from 'rxjs';
     styleUrls: ['./edit-event.component.scss']
 })
 export class EditEventComponent implements OnInit {
+<<<<<<< HEAD
     eventForm: FormGroup;
     loading = false;
     submitted = false;
     checked = true;
     disableSelect = new FormControl(this.checked);
     currentEvent = this.eventService.currentEvent;
+=======
+  eventForm: FormGroup;
+  loading = false;
+  retrieved = false;
+  checked = true;
+  disableSelect = new FormControl(this.checked);
+  // currentEvent = this.eventService.currentEvent;
+>>>>>>> parent of 928adc3a... added group-ish
 
     event: any = {};
     sub: Subscription;

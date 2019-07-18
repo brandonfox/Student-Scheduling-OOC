@@ -38,7 +38,7 @@ public class EventsController {
         //Authorization token should be in header
         UserToken userDetails = SecurityService.parseToken(token);
         System.out.print("Adding an event for user " + userDetails.getUsername() + ": ");
-        User user = userService.getUserByToken(userDetails);
+        User user = userService.getUser(userDetails);
         Event event = eventService.addEvent(form,user);
         if(event == null){
             //Something went wrong
@@ -49,6 +49,7 @@ public class EventsController {
         System.out.print("success!\n");
         return new QueryResponse(true);
     }
+<<<<<<< HEAD
 
     @PutMapping("/events/edit-event/{eventId}")
     public QueryResponse editEvent(@RequestHeader("authorization") String token, @PathVariable Long eventId, @RequestBody String form) {
@@ -73,3 +74,6 @@ public class EventsController {
         return eventService.getEventsFor(userDetails);
     }
 }
+=======
+}
+>>>>>>> parent of 928adc3a... added group-ish

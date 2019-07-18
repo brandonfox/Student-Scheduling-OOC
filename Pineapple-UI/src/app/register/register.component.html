@@ -3,15 +3,15 @@
 </section>
 <div
   *ngIf="submitted && (
-  f.firstname.errors ||
-  f.lastname.errors ||
+  f.firstName.errors ||
+  f.lastName.errors ||
   f.username.errors ||
   f.email.errors ||
   f.password.errors)"
   class="alert alert-danger"
   role="alert">
-  <div *ngIf="f.firstname.errors?.required">First Name is required</div>
-  <div *ngIf="f.lastname.errors?.required">Last Name is required</div>
+  <div *ngIf="f.firstName.errors?.required">First Name is required</div>
+  <div *ngIf="f.lastName.errors?.required">Last Name is required</div>
   <div *ngIf="f.username.errors?.required">Username is required</div>
   <div *ngIf="f.email.errors?.required">Email is required</div>
   <div *ngIf="f.email.errors?.email">Please enter a valid email address</div>
@@ -28,8 +28,8 @@
           matInput
           type="text"
           class="control"
-          formControlName="firstname"
-          [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }">
+          formControlName="firstName"
+          [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
       </label>
     </mat-form-field>
   </div>
@@ -40,9 +40,9 @@
         <input
           matInput
           type="text"
-          formControlName="lastname"
+          formControlName="lastName"
           class="control"
-          [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+          [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
       </label>
     </mat-form-field>
   </div>

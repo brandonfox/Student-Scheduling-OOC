@@ -1,11 +1,12 @@
 <section class="header">
-    <h2>{{user.firstname}}'s Events</h2>
+    <h2>Your Events</h2>
 </section>
 
 <div class="card-deck">
-    <div class="card" *ngFor="let thisEvent of events">
+    <div class="card" *ngFor="let event of events">
         <div class="card-body">
             <div class="edit-button">
+<<<<<<< HEAD
                 <!--                <button mat-icon-button [matMenuTriggerFor]="menu">-->
                 <!--                    <mat-icon>more_vert</mat-icon>-->
                 <!--                    <mat-menu #menu="matMenu">-->
@@ -15,9 +16,14 @@
                 <!--                </button>-->
                 <button mat-icon-button (click)="setCurrentEvent(thisEvent)" routerLink="/main/edit"><mat-icon>edit</mat-icon></button>
                 <button mat-icon-button (click)="deleteEvent(thisEvent.id)"><mat-icon>delete</mat-icon></button>
+=======
+                <button mat-icon-button routerLink="/main/edit" (click)="setCurrentEvent(event)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+>>>>>>> parent of 928adc3a... added group-ish
             </div>
-            <h5 class="card-title">{{thisEvent.name}}</h5>
-            <div class="card-text">{{thisEvent.description}}</div>
+            <h5 class="card-title">{{event.name}}</h5>
+            <div class="card-text">{{event.description}}</div>
         </div>
         <div class="card-header">
             <div class="align-left">
@@ -25,37 +31,39 @@
             </div>
             <div class="align-right">
                 <div class="task-add-container">
-                    <button class="task-add-button" id="eventId-{{thisEvent.id}}" (click)="openTaskAddForm(thisEvent.id)">
+                    <button class="task-add-button" id="eventId-{{event.id}}" (click)="openTaskAddForm(event)">
                         <mat-icon class="task-add-icon">add</mat-icon>
                     </button>
                 </div>
-                <div class="task-form-popup" id="addForm-eventId-{{thisEvent.id}}">
-                    <div class="task-form-container">
-                        <button class="task-close-button" id="taskAddClose" (click)="closeTaskAddForm(thisEvent.id)">
+                <div class="task-add-form-popup" id="addForm-eventId-{{event.id}}">
+                    <div class="task-add-form-container">
+                        <button class="task-close-button" id="taskAddClose" (click)="closeTaskAddForm(event)">
                             <mat-icon class="task-cancel-icon">cancel</mat-icon>
                         </button>
                         <h3>Add a new task</h3>
-                        <form [formGroup]="taskAddForm" (ngSubmit)="submitTaskAddForm(thisEvent)">
-                            <mat-form-field class="title-field" appearance="legacy">
+                        <form [formGroup]="taskForm" (ngSubmit)="submitTaskAddForm(event)">
+                            <mat-form-field class="add-title" appearance="legacy">
                                 <label>
                                     <input
                                         matInput
                                         type="text"
+                                        class="control"
                                         placeholder="New Task"
                                         formControlName="title">
                                 </label>
                             </mat-form-field>
-                            <mat-form-field class="description-field" appearance="legacy">
+                            <mat-form-field class="add-description" appearance="legacy">
                                 <label>
                                     <input
                                         matInput
                                         type="text"
+                                        class="control"
                                         placeholder="This is a description of your new task"
                                         formControlName="description">
                                 </label>
                             </mat-form-field>
-                            <div class="task-submit-button-container">
-                                <button type="submit" class="task-submit-button">
+                            <div class="test">
+                                <button class="task-submit-button">
                                     <mat-icon class="task-submit-icon">check_circle</mat-icon>
                                 </button>
                             </div>
@@ -64,68 +72,33 @@
                 </div>
             </div>
         </div>
-        <div class="list-group list-group-flush" *ngFor="let task of thisEvent.tasks">
+        <div class="list-group list-group-flush" *ngFor="let task of tasks">
             <div class="list-group-item tooltip-container list-group-item-action">
-                <div class="lgi-text">{{task.title}}</div>
+                {{task.title}}
                 <div class="tooltip-content">
                     <h6>{{task.title}}</h6>
                     <p>{{task.description}}</p>
                 </div>
-                <div class="lgi-settings">
-                    <button class="task-settings-button" id="taskId-{{task.id}}" (click)="openTaskSettings(task)">
-                        <mat-icon class="task-settings-icon">settings</mat-icon>
-                    </button>
-                    <div class="task-form-popup" id="editForm-taskId-{{task.id}}">
-                        <div class="task-form-container">
-                            <button class="task-close-button" id="taskEditClose" (click)="closeTaskSettings(task.id)">
-                                <mat-icon class="task-cancel-icon">cancel</mat-icon>
-                            </button>
-                            <h3>Edit task</h3>
-                            <form (ngSubmit)="submitTaskEditForm(task, thisEvent)">
-                                <mat-form-field class="title-field" appearance="legacy">
-                                    <label>
-                                        <input
-                                            matInput
-                                            type="text"
-                                            placeholder="Task title"
-                                            value="{{titleBeingEdited}}"
-                                            [formControl]="titleBeingEdited">
-                                    </label>
-                                </mat-form-field>
-                                <mat-form-field class="description-field" appearance="legacy">
-                                    <label>
-                                        <input
-                                            matInput
-                                            type="text"
-                                            placeholder="Task description"
-                                            value="{{descriptionBeingEdited}}"
-                                            [formControl]="descriptionBeingEdited">
-                                    </label>
-                                </mat-form-field>
-                                <div class="task-submit-button-container">
-                                    <button type="submit" class="task-submit-button">
-                                        <mat-icon class="task-submit-icon">check_circle</mat-icon>
-                                    </button>
-                                    <button type="button" class="task-delete-button" (click)="removeTask(task.id, thisEvent)">
-                                        <mat-icon class="task-delete-icon">delete</mat-icon>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="card-footer">
-            <small class="text-muted">Start Date: {{thisEvent.startDate}}</small>
-            <br>
-            <small class="text-muted">End Date:   {{thisEvent.endDate}}</small>
+            <small class="text-muted">{{event.startTime}}</small>
+            <small class="text-muted">{{event.endTime}}</small>
         </div>
     </div>
 </div>
 
 <div>
     {{ now | date: 'HH:mm:ss'}}
+</div>
+<div class="eventItem">
+    <span>{{user.username}}</span>
+    <br>
+    <span>{{user.password}}</span>
+    <br>
+    <span>{{user.email}}</span>
+    <br>
+    <span>{{user.id}}</span>
 </div>
 
 <button

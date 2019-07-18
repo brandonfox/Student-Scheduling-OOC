@@ -36,6 +36,7 @@ public class GroupService {
         }
     }
 
+<<<<<<< HEAD
     public UserGroup add(String json) {
         UserGroup group = gson.fromJson(json, UserGroup.class);
         if (groupRepository.existsByName(group.getName())) {
@@ -69,6 +70,8 @@ public class GroupService {
         groupRepository.save(group);
         return true;
     }
+=======
+>>>>>>> parent of 928adc3a... added group-ish
 
 
 }

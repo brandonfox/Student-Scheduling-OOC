@@ -40,18 +40,6 @@ export class UserService {
         return this.authService.get<User[]>(this.userUrl + '/friends', params).toPromise();
     }
     public addFriend(user) {
-        return this.authService.post<boolean>(this.userUrl + '/friends/add', user).toPromise();
-    }
-    public getSentFriendRequests(): Promise<User[]> {
-        return this.authService.get<User[]>(this.userUrl + '/friends/requests/sent').toPromise();
-    }
-    public getReceivedFriendRequests(): Promise<User[]> {
-        return this.authService.get<User[]>(this.userUrl + '/friends/requests/received').toPromise();
-    }
-    public denyRequest(user) {
-        return this.authService.post(this.userUrl + '/friends/requests/deny', user).toPromise();
-    }
-    public removeFriend(friend) {
-        return this.authService.post(this.userUrl + '/friends/remove', friend).toPromise();
+        return this.authService.post<boolean>(this.userUrl + '/friends', user).toPromise();
     }
 }

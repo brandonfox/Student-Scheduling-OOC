@@ -4,52 +4,28 @@
             List of friends (Temporary until better layout made)
             <mat-list>
                 <mat-list-item *ngFor="let friend of friends">
-                    <div class="flex-fill user-list-item" (click)="userClicked(friend)">{{friend.username}}</div>
-                    <p-button label="Remove Friend" (click)="removeFriend(friend)"></p-button>
+                    <div class="flex-fill" (click)="userClicked(friend)" class="user-list-item">{{friend.username}}</div>
                     <mat-divider></mat-divider>
                 </mat-list-item>
             </mat-list>
         </mat-tab>
         <mat-tab style="flex:1;" label="All users" aria-label="users">
             List of users (Temporary until better layout made)
-            <mat-list *ngIf="friends && loggedUser && sentFriendRequests && receivedFriendRequests">
+            <mat-list *ngIf="friends && loggedUser">
                 <div *ngFor="let user of users">
                 <mat-list-item *ngIf="user.username !== loggedUser.username" (click)="userClicked(user)" class="user-list-item">
                     <div class="flex-fill">{{user.username}}</div>
-                    <div *ngIf="sentFRIds.has(user.id); else checkReceiver">
-                        <p-button label="Friend request sent."></p-button>
+                    <div *ngIf="!friendIds.has(user.id)">
+                        <p-button label="Add Friend" (click)="addFriend(user)"></p-button>
                     </div>
-                    <ng-template #checkReceiver>
-                        <div *ngIf="receivedFRIds.has(user.id); else checkFriend">
-                            <p-button label="Accept" (onClick)="addFriend(user)"></p-button>
-                            <p-button label="Reject" (onClick)="denyRequest(user)"></p-button>
-                        </div>
-                        <ng-template #checkFriend>
-                            <div *ngIf="!friendIds.has(user.id); else defaultUser">
-                                <p-button label="Add Friend" (click)="addFriend(user)"></p-button>
-                            </div>
-                            <ng-template #defaultUser>
-                                <p-button label="Remove Friend" (click)="removeFriend(user)"></p-button>
-                            </ng-template>
-                        </ng-template>
-                    </ng-template>
                     <mat-divider></mat-divider>
                 </mat-list-item>
                 </div>
             </mat-list>
         </mat-tab>
-        <mat-tab style="flex:1;" label="Friend Requests" aria-label="groups">
-<!--            Friend requests here              -->
-            <mat-list>
-                <div *ngFor="let request of receivedFriendRequests">
-                    <mat-list-item (click)="userClicked(request)" class="user-list-item">
-                        <div class="flex-fill">{{request.username}}</div>
-                        <p-button label="Accept" (onClick)="addFriend(request)"></p-button>
-                        <p-button label="Reject" (onClick)="denyRequest(request)"></p-button>
-                    </mat-list-item>
-                </div>
-            </mat-list>
-        </mat-tab>
+<!--        <mat-tab style="flex:1;" label="People from your groups" aria-label="groups">-->
+<!--            Group users here-->
+<!--        </mat-tab>-->
     </mat-tab-group>
     <mat-form-field style="flex: 1;" class="input">
         <input [(ngModel)]="searchBar" (ngModelChange)="searchChange()" matInput placeholder="Search" >

@@ -39,7 +39,7 @@ public class Event {
 
             joinColumns = @JoinColumn(name = "event_id")
     )
-//    private UserGroup userGroup = new UserGroup();
+    private UserGroup userGroup = new UserGroup();
 
     /* Getters and Setters */
 
@@ -50,7 +50,7 @@ public class Event {
     public Date getStartTime() { return startTime; }
     public Date getEndTime() { return endTime; }
     public User getUser(){ return user; }
-//    public UserGroup getUserGroup() { return userGroup; }
+    public UserGroup getUserGroup() { return userGroup; }
 
     public void setId(Long id) { this.id = id; }
     public void setName(String name) { this.name = name; }
@@ -59,5 +59,5 @@ public class Event {
     public void setStartTime(Date startTime) { this.startTime = startTime; }
     public void setEndTime(Date endTime) { this.endTime = endTime; }
     public void setUser(User user){this.user = user;}
-//    public void setUserGroup(UserGroup userGroup) { this.userGroup = userGroup; }
+    public void setUserGroup(UserGroup userGroup) { this.userGroup = userGroup; }
 }

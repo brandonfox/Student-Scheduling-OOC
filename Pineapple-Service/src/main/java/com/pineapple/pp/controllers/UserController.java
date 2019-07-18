@@ -2,10 +2,8 @@ package com.pineapple.pp.controllers;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.pineapple.pp.entities.FriendRequest;
 import com.pineapple.pp.entities.User;
 import com.pineapple.pp.entities.UserToken;
-import com.pineapple.pp.services.FriendService;
 import com.pineapple.pp.services.SecurityService;
 import com.pineapple.pp.services.UserService;
 import com.pineapple.pp.utils.QueryResponse;
@@ -20,12 +18,10 @@ import java.util.Set;
 public class UserController {
     
     private UserService userService;
-    private FriendService friendService;
     
     @Autowired
-    public UserController(UserService userService, FriendService friendService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.friendService = friendService;
     }
     
     @GetMapping("/users")
@@ -99,37 +95,11 @@ public class UserController {
 
     @GetMapping("/friends")
     public Set<User> getFriends(@RequestParam(value = "search", required = false) String searchParam, @RequestHeader("authorization") String token){
-        User user = userService.getUserByToken(SecurityService.parseToken(token));
-        return friendService.getFriendsOfUser(user,searchParam);
+        return userService.getFriendsOfUser(SecurityService.parseToken(token),searchParam);
     }
-    @PostMapping("/friends/add")
+    @PostMapping("/friends")
     public boolean addFriend(@RequestHeader("authorization") String token, @RequestBody String userJson){
         User friend = userService.getUserFromJson(userJson);
-        User user = userService.getUserByToken(SecurityService.parseToken(token));
-        return friendService.sendFriendRequest(user,friend);
-    }
-
-    @GetMapping("/friends/requests/sent")
-    public Set<User> getRequestedFriendsBy(@RequestHeader("authorization") String token){
-        User user = userService.getUserByToken(SecurityService.parseToken(token));
-        return friendService.getRequestedFriendsBy(user);
-    }
-
-    @GetMapping("/friends/requests/received")
-    public Set<User> getUsersWhoRequestedFriend(@RequestHeader("authorization") String token){
-        User user = userService.getUserByToken(SecurityService.parseToken(token));
-        return friendService.getUsersWhoRequestedFriendWith(user);
-    }
-    @PostMapping("/friends/requests/deny")
-    public boolean denyFriendRequest(@RequestHeader("authorization") String token, @RequestBody String user){
-        User denier = userService.getUserByToken(SecurityService.parseToken(token));
-        User deniee = userService.getUserFromJson(user);
-        return friendService.denyRequest(denier,deniee);
-    }
-    @PostMapping("/friends/remove")
-    public boolean removeFriend(@RequestHeader("authorization") String token, @RequestBody String user){
-        User remover = userService.getUserByToken(SecurityService.parseToken(token));
-        User removee = userService.getUserFromJson(user);
-        return friendService.removeFriend(remover,removee);
+        return userService.addFriend(SecurityService.parseToken(token),friend);
     }
 }
