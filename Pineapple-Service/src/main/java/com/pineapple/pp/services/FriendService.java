@@ -61,7 +61,7 @@ public class FriendService {
         }
         else {
             System.out.println("Sending friend request for user " + user.getUsername() + ", Request: " + requestFriend.getUsername());
-            if (user.getUsername().equals(requestFriend.getUsername()))
+            if (isSameUser(user,requestFriend))
                 return false;
             FriendRequest request = new FriendRequest(user, requestFriend);
             fRRepo.save(request);
@@ -73,7 +73,7 @@ public class FriendService {
     public boolean addFriend(User user, User friend){
         System.out.println("Adding friend for user: " + user.getUsername() + " ,Friend: " + friend.getUsername());
 
-        if(user.getUsername().equals(friend.getUsername())){
+        if(isSameUser(user,friend)){
             return false;
         }
 
@@ -84,6 +84,30 @@ public class FriendService {
         user.addFriend(friend);
         userRepository.save(user);
         return true;
+    }
+
+    public boolean removeFriend(User user, User friend){
+        System.out.println("Removing friend: " + friend.getUsername() + ", for user: " + user.getUsername());
+
+        if(isSameUser(user,friend))
+            return false;
+        user.removeFriend(friend);
+        userRepository.save(user);
+        return true;
+    }
+
+    private boolean isSameUser(User user, User user1){
+        return user.getUsername().equals(user1.getUsername());
+    }
+
+    public boolean denyRequest(User denier, User deniee){
+        try {
+            FriendRequest request = fRRepo.findBySendingUserAndRecievingUser(deniee, denier);
+            fRRepo.delete(request);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 
     public Set<User> getRequestedFriendsBy(User user){

@@ -16,4 +16,6 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     List<Event> findEventsByUser(User user);
 
+    void deleteEventById(Long id);
+
 }

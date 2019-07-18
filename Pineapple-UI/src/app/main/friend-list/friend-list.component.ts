@@ -5,7 +5,6 @@ import {MatTabChangeEvent} from '@angular/material';
 import {HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../service/authentication.service';
-import {FriendRequest} from '../../model/friend-request';
 
 @Component({
   selector: 'app-friend-list',
@@ -36,6 +35,9 @@ export class FriendListComponent implements OnInit {
   ngOnInit() {
       this.getLoggedUser();
       this.getFriends(); // Make sure the starting active tab is the friends tab
+  }
+  removeFriend(friend) {
+      this.userService.removeFriend(friend).then(() => this.getFriends());
   }
   setFriends(friends) {
       this.friends = friends;
@@ -82,7 +84,10 @@ export class FriendListComponent implements OnInit {
       this.getData();
   }
   addFriend(user) {
-      this.userService.addFriend(user).then(data => this.getFriends());
+      this.userService.addFriend(user).then(() => this.getFriends());
+  }
+  denyRequest(user) {
+      this.userService.denyRequest(user).then(() => this.getFriends());
   }
   updateIds() {
       const ids = new Set<bigint>();

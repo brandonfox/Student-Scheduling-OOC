@@ -10,12 +10,12 @@ public class FriendRequest {
         
     }
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="sender_user")
     @Id
     private User sendingUser;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="reciever_user")
     @Id
     private User recievingUser;

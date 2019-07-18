@@ -26,6 +26,10 @@ export class EventService {
         return this.authService.post(this.eventUrl, form).toPromise();
     }
 
+    public deleteEvent(eventId: bigint): Observable<Event[]> {
+        return this.authService.delete(this.eventUrl + '/remove-event/' + eventId);
+    }
+
 
     // public getEvent(): Promise<Event> {
     //   return this.authService.get(this.eventUrl).toPromise();

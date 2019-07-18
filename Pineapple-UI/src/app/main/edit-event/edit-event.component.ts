@@ -16,7 +16,7 @@ export class EditEventComponent implements OnInit {
   retrieved = false;
   checked = true;
   disableSelect = new FormControl(this.checked);
-  // currentEvent = this.eventService.currentEvent;
+  currentEvent = this.eventService.currentEvent;
 
   constructor(
     private formBuilder: FormBuilder,

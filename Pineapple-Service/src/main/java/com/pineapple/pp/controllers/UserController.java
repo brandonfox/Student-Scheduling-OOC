@@ -102,7 +102,7 @@ public class UserController {
         User user = userService.getUserByToken(SecurityService.parseToken(token));
         return friendService.getFriendsOfUser(user,searchParam);
     }
-    @PostMapping("/friends")
+    @PostMapping("/friends/add")
     public boolean addFriend(@RequestHeader("authorization") String token, @RequestBody String userJson){
         User friend = userService.getUserFromJson(userJson);
         User user = userService.getUserByToken(SecurityService.parseToken(token));
@@ -119,5 +119,17 @@ public class UserController {
     public Set<User> getUsersWhoRequestedFriend(@RequestHeader("authorization") String token){
         User user = userService.getUserByToken(SecurityService.parseToken(token));
         return friendService.getUsersWhoRequestedFriendWith(user);
+    }
+    @PostMapping("/friends/requests/deny")
+    public boolean denyFriendRequest(@RequestHeader("authorization") String token, @RequestBody String user){
+        User denier = userService.getUserByToken(SecurityService.parseToken(token));
+        User deniee = userService.getUserFromJson(user);
+        return friendService.denyRequest(denier,deniee);
+    }
+    @PostMapping("/friends/remove")
+    public boolean removeFriend(@RequestHeader("authorization") String token, @RequestBody String user){
+        User remover = userService.getUserByToken(SecurityService.parseToken(token));
+        User removee = userService.getUserFromJson(user);
+        return friendService.removeFriend(remover,removee);
     }
 }

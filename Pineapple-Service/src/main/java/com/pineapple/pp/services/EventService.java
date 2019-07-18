@@ -8,6 +8,7 @@ import com.pineapple.pp.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -60,6 +61,11 @@ public class EventService {
         event.setUser(user);
         eventRepository.save(event);
         return event;
+    }
+
+    @Transactional
+    public void deleteEvent(Long id){
+        eventRepository.deleteEventById(id);
     }
     
 }
