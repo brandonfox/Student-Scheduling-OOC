@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../service/authentication.service';
 import {EventService} from '../../service/event.service';
 import {Router} from '@angular/router';
@@ -29,23 +29,8 @@ export class EditEventComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        // this.sub = this.route.params.subscribe(params => {
-        //     const id = params['id'];
-        //     if (id) {
-        //         this.eventService.get(id).subscribe((event: any) => {
-        //             if (event) {
-        //                 this.event = event;
-        //                 this.event.href = event._links.self.href;
-        //                 this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
-        //             } else {
-        //                 console.log(`Car with id '${id}' not found, returning to list`);
-        //                 this.gotoList();
-        //             }
-        //         });
-        //     }
-        // });
         this.eventForm = this.formBuilder.group({
-            name: this.currentEvent.name,
+            name: [this.currentEvent.name, Validators.required],
             startDate: this.currentEvent.startDate,
             startTime: this.currentEvent.startTime,
             endDate: this.currentEvent.endDate,
@@ -56,7 +41,7 @@ export class EditEventComponent implements OnInit {
     }
 
     public onSubmit() {
-        console.log('Submitting form');
+        console.log('Updating form');
         console.log(this.disableSelect.value);
         this.eventForm.addControl(
             'allDay',
@@ -68,9 +53,10 @@ export class EditEventComponent implements OnInit {
             this.submitted = false;
             return;
         }
-        this.eventService.addEvent(this.eventForm.getRawValue());
+        this.eventService.editEvent(this.currentEvent.id, this.eventForm.getRawValue());
         this.router.navigate(['main/home']);
     }
 
     get f() {return this.eventForm.controls; }
 }
+
