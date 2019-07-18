@@ -50,6 +50,21 @@ public class EventsController {
         return new QueryResponse(true);
     }
 
+    @PutMapping("/events/edit-event/{eventId}")
+    public QueryResponse editEvent(@RequestHeader("authorization") String token, @PathVariable Long eventId, @RequestBody String form) {
+        UserToken userDetails = SecurityService.parseToken(token);
+        System.out.println("Editing an event for user " + userDetails.getUsername() + ": ");
+        Event event = eventService.editEvent(form, eventId);
+        if(event == null){
+            //Something went wrong
+            //TODO More detailed error report (Check user or event stuff)
+            System.out.print("failed..\n");
+            return new QueryResponse(false);
+        }
+        System.out.print("success!\n");
+        return new QueryResponse(true);
+    }
+
     @DeleteMapping("/events/remove-event/{eventId}")
     public List<Event> deleteEvent(@RequestHeader("authorization") String token, @PathVariable Long eventId){
         UserToken userDetails = SecurityService.parseToken(token);
