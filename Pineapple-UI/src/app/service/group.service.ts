@@ -14,7 +14,7 @@ export class GroupService {
 
     private groupUrl = 'http://localhost:8080/groups';
 
-    public getGroups(): Observable<Group[]> {
-        return this.authService.get<Group[]>(this.groupUrl);
+    public getGroups(): Promise<Group[]> {
+        return this.authService.get<Group[]>(this.groupUrl).toPromise();
     }
 }
