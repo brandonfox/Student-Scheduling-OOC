@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
     private user;
     events: Event[];
     taskAddForm: FormGroup;
-    taskEditForm: FormGroup;
 
     titleBeingEdited = new FormControl('');
     descriptionBeingEdited = new FormControl('');
@@ -47,7 +46,7 @@ export class HomeComponent implements OnInit {
     }
 
     getTasksByEventId(event) {
-        this.taskService.getTasksByEventId(event.id).subscribe(data => {
+        this.taskService.getTasksByEventId(event.id).then(data => {
             event.tasks = data;
         });
     }
@@ -151,7 +150,7 @@ export class HomeComponent implements OnInit {
     }
 
     getAll() {
-        this.eventService.getEvents().subscribe(data => {
+        this.eventService.getEvents().then(data => {
             this.events = data;
             for (const event of this.events) {
                 this.getTasksByEventId(event);

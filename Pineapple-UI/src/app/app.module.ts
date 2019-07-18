@@ -20,6 +20,7 @@ import { FriendListComponent } from './main/friend-list/friend-list.component';
 import {ButtonModule} from 'primeng/button';
 import { GroupComponent } from './group/group.component';
 import { AddMemberComponent } from './add-member/add-member.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
         RegisterComponent,
         FriendListComponent,
         GroupComponent,
-        AddMemberComponent
+        AddMemberComponent,
+        ProfileComponent
     ],
     providers: [UserService, CookieService],
     bootstrap: [AppComponent]

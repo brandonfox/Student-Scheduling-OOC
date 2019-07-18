@@ -14,8 +14,8 @@ export class TaskService {
 
   private taskUrl = 'http://localhost:8080/tasks';
 
-  public getTasksByEventId(eventId: bigint): Observable<Task[]> {
-      return this.authService.get<Task[]>(this.taskUrl + '/by-event' + '/' + eventId);
+  public getTasksByEventId(eventId: bigint): Promise<Task[]> {
+      return this.authService.get<Task[]>(this.taskUrl + '/by-event' + '/' + eventId).toPromise();
   }
 
   public createTask(task) {

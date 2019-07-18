@@ -17,8 +17,8 @@ export class EventService {
     }
 
     private eventUrl = 'http://localhost:8080/events';
-    public getEvents(): Observable<Event[]> {
-        return this.authService.get<Event[]>(this.eventUrl);
+    public getEvents(): Promise<Event[]> {
+        return this.authService.get<Event[]>(this.eventUrl).toPromise();
     }
 
     public addEvent(form) {
