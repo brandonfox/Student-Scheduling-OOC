@@ -9,6 +9,8 @@ import com.pineapple.pp.services.SecurityService;
 import com.pineapple.pp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.List;
@@ -30,5 +32,12 @@ public class GroupController {
         System.out.println("Retrieved request to get Groups. Parsing token");
         UserToken userDetails = SecurityService.parseToken(token);
         return GroupService.getGroupsFor(userDetails);
+    }
+
+    @PostMapping("/Groups/remove")
+    public boolean removeUser(){
+        UserGroup group;
+
+        return group.removeFriend(remover,removee);
     }
 }

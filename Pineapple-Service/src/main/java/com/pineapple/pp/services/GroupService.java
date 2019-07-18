@@ -6,8 +6,6 @@ import com.pineapple.pp.entities.UserGroup;
 import com.pineapple.pp.entities.UserToken;
 import com.pineapple.pp.repositories.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
 import java.util.List;
 
 public class GroupService {
@@ -53,7 +51,7 @@ public class GroupService {
 
     //   public void removeGroup()
 
-    public boolean addUserToGroup(User friend, UserGroup group){
+    public boolean addMembership(User friend, UserGroup group){
         try{
             System.out.println("Adding" + friend.getUsername() + "to group: " + group.getName());
             group.addMembership(friend);
@@ -64,6 +62,15 @@ public class GroupService {
             return false;
         }
     }
+
+    public boolean removeMembership(UserGroup group, User user){
+        System.out.println("Removing user: " + user.getUsername() + ", for Group: " + group.getName());
+        group.removeMember(user);
+        groupRepository.save(group);
+        return true;
+    }
+
+
 
 
 

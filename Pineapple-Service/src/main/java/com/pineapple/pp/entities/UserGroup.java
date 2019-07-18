@@ -48,8 +48,22 @@ public class UserGroup {
     public void setMembership(Set<User> membership) {
         this.membership = membership;
     }
+
+    /*Adders and Removers*/
+
     public void addMembership(User user){
         this.membership.add(user);
     }
+    public void addEvent(Event event){
+        this.events.add(event);
+    }
+
+    public void removeMember(User user){
+        this.membership.remove(user);
+    }
+    public void removeEvent(Event event){
+        this.membership.remove(event);
+    }
+
 }
 
