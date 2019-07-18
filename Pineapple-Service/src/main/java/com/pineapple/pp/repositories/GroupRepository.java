@@ -15,11 +15,17 @@ package com.pineapple.pp.repositories;
 @RepositoryRestResource
 @CrossOrigin(origins = "http://localhost:4200")
 public interface GroupRepository extends JpaRepository<UserGroup, Long> {
+
     boolean existsById(Long id);
+
     boolean existsByName(String name);
+
     UserGroup findUserGroupById(long id);
+
     UserGroup findUserGroupByName(String name);
+
     UserGroup findUserGroupByEvents(Event event);
+
     List<UserGroup> findUserGroupsByMembership(User user);
 
 }

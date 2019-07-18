@@ -15,7 +15,7 @@ public class GroupService {
 
 
     @Autowired
-    public GroupService(GroupRepository g, UserService u){
+    public GroupService(GroupRepository g, UserService u) {
         this.userService = u;
         this.groupRepository = g;
         this.gson = new Gson();
@@ -23,10 +23,11 @@ public class GroupService {
 
     /**
      * Get all groups for a specific user
+     *
      * @param token The token of a specific user
      * @return a list of groups for user
      */
-    public List<UserGroup> getGroupsFor(UserToken token){
+    public List<UserGroup> getGroupsFor(UserToken token) {
         try {
             System.out.println("Retrieving events for '" + token.getUsername() + "'");
             return groupRepository.findUserGroupsByMembership(userService.getUser(token));
@@ -51,27 +52,23 @@ public class GroupService {
 
     //   public void removeGroup()
 
-    public boolean addMembership(User friend, UserGroup group){
-        try{
+    public boolean addMembership(User friend, UserGroup group) {
+        try {
             System.out.println("Adding" + friend.getUsername() + "to group: " + group.getName());
             group.addMembership(friend);
             groupRepository.save(group);
             return true;
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             return false;
         }
     }
 
-    public boolean removeMembership(UserGroup group, User user){
+    public boolean removeMembership(UserGroup group, User user) {
         System.out.println("Removing user: " + user.getUsername() + ", for Group: " + group.getName());
         group.removeMember(user);
         groupRepository.save(group);
         return true;
     }
-
-
-
 
 
 }
