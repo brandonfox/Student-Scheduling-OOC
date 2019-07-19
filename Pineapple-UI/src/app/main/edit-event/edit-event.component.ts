@@ -25,7 +25,7 @@ export class EditEventComponent implements OnInit {
         private formBuilder: FormBuilder,
         private authService: AuthenticationService,
         private eventService: EventService,
-        private router: Router,
+        private router: Router
     ) { }
 
     ngOnInit() {

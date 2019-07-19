@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+    production: true,
+    backendUrl: 'http://' + window.location.hostname + ':8080'
 };

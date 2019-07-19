@@ -7,6 +7,7 @@ import { AuthGuard } from '../guards/auth.guard';
 import {FriendListComponent} from './friend-list/friend-list.component';
 import {EditEventComponent} from './edit-event/edit-event.component';
 import {CalendarComponent} from './calendar/calendar.component';
+import {UserGroupComponent} from './user-group/user-group.component';
 
 const routes: Routes = [
     { path: 'main',
@@ -19,7 +20,8 @@ const routes: Routes = [
             { path: 'add', component: AddEventComponent},
             { path: 'friends', component: FriendListComponent },
             { path: 'edit', component: EditEventComponent},
-            { path: 'calendar', component: CalendarComponent}
+            { path: 'calendar', component: CalendarComponent},
+            { path: 'user-groups', component: UserGroupComponent}
         ]
     }
 ];

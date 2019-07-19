@@ -29,7 +29,7 @@ export class FriendListComponent implements OnInit {
   constructor(
       private userService: UserService,
       private router: Router,
-      private authService: AuthenticationService,
+      private authService: AuthenticationService
   ) { }
 
   ngOnInit() {

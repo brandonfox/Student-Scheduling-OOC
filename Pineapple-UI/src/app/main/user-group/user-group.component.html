@@ -1,0 +1,81 @@
+<section class="header">
+    <h2 *ngIf="user">{{user.firstname}}'s Groups</h2>
+</section>
+
+<div class="card-deck">
+    <div class="card" *ngFor="let userGroup of userGroups">
+        <div class="card-body">
+            <button class="add-button" id="groupId-{{userGroup.id}}" (click)="openAddUserForm(userGroup)">
+                <mat-icon class="task-add-icon">add</mat-icon>
+            </button>
+            <h5 class="card-title">{{userGroup.name}}</h5>
+            <div class="add-user-form-popup" id="add-user-form-group-{{userGroup.id}}">
+                <div class="group-form-container">
+                    <button class="group-close-button" id="add-user-close-{{userGroup.id}}" (click)="closeAddUserForm(userGroup)">
+                        <mat-icon class="task-cancel-icon">cancel</mat-icon>
+                    </button>
+                    <h3>Add a User to This Group</h3>
+                    <form (ngSubmit)="submitAddUserForm(userGroup)">
+                        <mat-form-field class="title-field" appearance="legacy">
+                            <label>
+                                <input
+                                    matInput
+                                    type="text"
+                                    placeholder="New Group"
+                                    value="{{userBeingAdded}}"
+                                    [formControl]="userBeingAdded">
+                            </label>
+                        </mat-form-field><br/>
+                        <div class="group-submit-button-container">
+                            <button type="submit" class="group-submit-button">
+                                <mat-icon class="group-submit-icon">check_circle</mat-icon>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+        <div class="card-footer">
+            <div>{{userGroup.description}}</div>
+        </div>
+</div>
+
+<button
+    class="button-bottom-right"
+    style="background-color: antiquewhite"
+    mat-fab (click)="openGroupAddForm()">
+    <mat-icon>add</mat-icon>
+</button>
+<div class="group-form-popup" id="add-group-form">
+    <div class="group-form-container">
+        <button class="group-close-button" id="groupAddClose" (click)="closeGroupAddForm()">
+            <mat-icon class="task-cancel-icon">cancel</mat-icon>
+        </button>
+        <h3>Create a New Group</h3>
+        <form [formGroup]="groupAddForm" (ngSubmit)="submitGroupAddForm()">
+            <mat-form-field class="title-field" appearance="legacy">
+                <label>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="New Group"
+                        formControlName="name">
+                </label>
+            </mat-form-field><br/>
+            <mat-form-field class="description-field" appearance="legacy">
+                <label>
+                    <input
+                        matInput
+                        type="text"
+                        placeholder="This is a description of your new group"
+                        formControlName="description">
+                </label>
+            </mat-form-field>
+            <div class="group-submit-button-container">
+                <button type="submit" class="group-submit-button">
+                    <mat-icon class="group-submit-icon">check_circle</mat-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

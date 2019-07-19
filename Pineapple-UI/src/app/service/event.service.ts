@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {AuthenticationService} from './authentication.service';
 import { Event} from '../model/event';
 import {Observable} from 'rxjs';
-import { Globals} from '../model/globals';
+import {environment} from '../../environments/environment';
+import {HttpParams} from '@angular/common/http';
 
 
 @Injectable({
@@ -14,11 +15,12 @@ export class EventService {
 
     constructor(
         private authService: AuthenticationService,
-        private globals: Globals,
     ) {
+
     }
 
-    private eventUrl = this.globals.ip + ':8080/events';
+    private eventUrl = environment.backendUrl + '/events';
+
     public getEvents(): Observable<Event[]> {
         return this.authService.get<Event[]>(this.eventUrl);
     }
@@ -29,10 +31,13 @@ export class EventService {
     }
 
     public editEvent(eventId, form) {
-        return this.authService.put(this.eventUrl + '/edit-event/' + eventId, form).toPromise();
+        return this.authService.put(this.eventUrl + '/edit-event/', this.getIdParam(eventId), form).toPromise();
     }
 
     public deleteEvent(eventId: bigint): Observable<Event[]> {
-        return this.authService.delete(this.eventUrl + '/remove-event/' + eventId);
+        return this.authService.delete(this.eventUrl + '/remove-event/', this.getIdParam(eventId) );
+    }
+    private getIdParam(eventId: bigint): HttpParams {
+        return new HttpParams().append('event-id', eventId.toString());
     }
 }

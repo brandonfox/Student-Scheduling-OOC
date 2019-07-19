@@ -17,10 +17,10 @@ import { UserService } from './service/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MainModule } from './main/main.module';
 import { FriendListComponent } from './main/friend-list/friend-list.component';
-import { ButtonModule} from 'primeng/button';
-import { GroupComponent } from './group/group.component';
+import {ButtonModule} from 'primeng/button';
+import { UserGroupComponent } from './main/user-group/user-group.component';
 import { AddMemberComponent } from './add-member/add-member.component';
-import { Globals} from './model/globals';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -40,17 +40,20 @@ const appRoutes: Routes = [
         FormsModule,
         DemoMaterialModule,
         MainModule,
-        ButtonModule,
+        ButtonModule
     ],
     declarations: [
         AppComponent,
         LoginComponent,
         RegisterComponent,
         FriendListComponent,
-        GroupComponent,
+        UserGroupComponent,
+        AddMemberComponent,
+        ProfileComponent,
+        UserGroupComponent,
         AddMemberComponent,
     ],
-    providers: [UserService, CookieService, Globals],
+    providers: [UserService, CookieService],
     bootstrap: [AppComponent]
 })
 
