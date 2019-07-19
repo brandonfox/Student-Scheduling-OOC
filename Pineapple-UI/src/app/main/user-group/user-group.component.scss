@@ -75,6 +75,7 @@
     display: none;
     position: absolute;
     left: 103%;
+    top: 0;
     z-index: 3;
 }
 
@@ -104,4 +105,25 @@
     background: inherit;
     border: none;
     float:right;
+}
+
+.user-list-popup {
+    display: none;
+    position: absolute;
+    left: 103%;
+    top: 0;
+    z-index: 3;
+}
+
+.user-list-container {
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 100px;
+    max-height: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.3);
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
