@@ -19,15 +19,16 @@ export class TaskService {
       return this.authService.get<Task[]>(this.taskUrl + '/by-event' + '/' + eventId).toPromise();
   }
 
-  public createTask(task) {
-    return this.authService.post(this.taskUrl, task).toPromise();
+  public createTask(title, descr, eventId) {
+    return this.authService.post(this.taskUrl + '/' + title + '/' + descr + '/' + eventId, null).toPromise();
   }
 
   public editTask(taskId, form) {
       return this.authService.put(this.taskUrl + '/edit-task' + '/' + taskId, form).toPromise();
   }
 
-  public removeTask(taskId: bigint) {
-      return this.authService.delete(this.taskUrl + '/remove-task' + '/' + taskId);
+  public removeTask(taskId, eventId) {
+      console.log('task id: ' + taskId);
+      return this.authService.delete(this.taskUrl + '/remove-task' + '/' + taskId + '/' + eventId);
   }
 }

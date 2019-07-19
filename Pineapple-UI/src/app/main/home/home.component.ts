@@ -38,8 +38,7 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.taskAddForm = this.formBuilder.group({
             title: ['', Validators.required],
-            description: '',
-            event: null
+            description: ''
         });
         this.getAll();
         this.getUserInfo().then(data => this.user = data);
@@ -75,7 +74,7 @@ export class HomeComponent implements OnInit {
         this.taskAddForm.patchValue({
             event: thisEvent
         });
-        this.taskService.createTask(this.taskAddForm.getRawValue()).then(
+        this.taskService.createTask(this.taskAddForm.get('title').value, this.taskAddForm.get('description').value, thisEvent.id).then(
             data => this.getTasksByEventId(thisEvent)
         );
         this.togglePopup('addForm-eventId-' + thisEvent.id, 'none', false);
@@ -131,8 +130,8 @@ export class HomeComponent implements OnInit {
     }
 
     removeTask(taskId, event) {
-        console.log('Removing task!');
-        this.taskService.removeTask(taskId).subscribe(
+        console.log('Removing task! ' + taskId);
+        this.taskService.removeTask(taskId, event.id).subscribe(
             data => this.getTasksByEventId(event)
         );
         this.togglePopup('editForm-taskId-' + taskId, 'none', false);

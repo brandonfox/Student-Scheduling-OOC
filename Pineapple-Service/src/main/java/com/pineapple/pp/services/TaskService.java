@@ -4,38 +4,58 @@ import com.google.gson.Gson;
 import com.pineapple.pp.entities.Event;
 import com.pineapple.pp.entities.Task;
 import com.pineapple.pp.repositories.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface TaskService {
+@Service
+public class TaskService {
 
-    TaskRepository getTaskRepository();
+    @Autowired
+    private TaskRepository taskRepository;
 
-    default List<Task> findTasksByEvent(Event event) {
-        return getTaskRepository().findTasksByEvent(event);
+    @Autowired
+    private Gson gson;
+
+    public List<Task> findTasksByEvent(Event event) {
+        return this.taskRepository.findTasksByEvent(event);
     }
 
-    Gson getGson();
-
-    default Task add(String json) {
-        Task task = getGson().fromJson(json, Task.class);
-        getTaskRepository().save(task);
+    public Task add(String json) {
+        Task task = this.gson.fromJson(json, Task.class);
+        this.taskRepository.save(task);
         return task;
     }
 
+    public void addWithEvent(Event event, String title, String descr) {
+        Task task = new Task();
+        task.setEvent(event);
+        task.setTitle(title);
+        task.setDescription(descr);
+        System.out.println(task.getTitle());
+        taskRepository.save(task);
+    }
+
     @Transactional
-    default Task editTask(Long taskId, String json) {
-        Task task = getGson().fromJson(json, Task.class);
-        Task taskFromDB = getTaskRepository().findTaskById(taskId);
+    public Task editTask(Long taskId, String json) {
+        Task task = this.gson.fromJson(json, Task.class);
+        Task taskFromDB = this.taskRepository.findTaskById(taskId);
         taskFromDB.setTitle(task.getTitle());
         taskFromDB.setDescription(task.getDescription());
-        getTaskRepository().save(taskFromDB);
+        this.taskRepository.save(taskFromDB);
         return taskFromDB;
     }
 
     @Transactional
-    default void removeTaskById(Long id) {
-        getTaskRepository().deleteTaskById(id);
+    public void removeTaskById(Long id) {
+        System.out.println("task id: " + id);
+        if (taskRepository.existsById(id)) {
+            this.taskRepository.deleteTaskById(id);
+        } else {
+            System.out.println("no such id");
+        }
+//        this.taskRepository.deleteTaskById(id);
     }
 }

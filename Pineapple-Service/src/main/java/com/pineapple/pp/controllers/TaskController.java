@@ -3,7 +3,7 @@ package com.pineapple.pp.controllers;
 import com.pineapple.pp.entities.Event;
 import com.pineapple.pp.entities.Task;
 import com.pineapple.pp.services.EventService;
-import com.pineapple.pp.services.TaskServiceImpl;
+import com.pineapple.pp.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,21 +12,19 @@ import java.util.List;
 @RestController
 public class TaskController {
 
-    private TaskServiceImpl taskService;
+    private TaskService taskService;
     private EventService eventService;
 
     @Autowired
-    public TaskController(TaskServiceImpl taskService, EventService eventService) {
+    public TaskController(TaskService taskService, EventService eventService) {
         this.taskService = taskService;
         this.eventService = eventService;
     }
 
-    @PostMapping(path = "/tasks")
-    public void add(@RequestBody String json) {
-        System.out.print("Creating new task " + json + "... ");
-        Task task = taskService.add(json);
-        if (task == null) { System.out.println("Task creation failed"); }
-        else System.out.println("Task created!");
+    @PostMapping(path = "/tasks/{title}/{descr}/{eventId}")
+    public void add(@PathVariable("title") String title, @PathVariable("descr") String descr, @PathVariable("eventId") Long eventId) {
+        Event event = eventService.getEventById(eventId);
+        taskService.addWithEvent(event, title, descr);
     }
 
     @GetMapping("/tasks/by-event/{eventId}")
@@ -40,10 +38,18 @@ public class TaskController {
         }
     }
 
-    @DeleteMapping("/tasks/remove-task/{taskId}")
-    public void removeTaskById(@PathVariable("taskId") Long taskId) {
-        System.out.println("in remove task! " + taskId);
-        taskService.removeTaskById(taskId);
+    @DeleteMapping("/tasks/remove-task/{taskId}/{eventId}")
+    public void removeTaskById(@PathVariable("taskId") Long taskId, @PathVariable("eventId") Long eventId) {
+        System.out.println("in remove task! " + taskId + " event id: " + eventId);
+        Event event = eventService.getEventById(eventId);
+        List<Task> tasks = taskService.findTasksByEvent(event);
+        Task task = null;
+        for (Task t : tasks) {
+            if (t.getId().compareTo(taskId) == 0) {
+                task = t;
+                taskService.removeTaskById(task.getId());
+            }
+        }
     }
 
     @PutMapping("/tasks/edit-task/{taskId}")
