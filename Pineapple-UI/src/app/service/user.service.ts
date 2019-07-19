@@ -11,13 +11,13 @@ const httpOptions = {
 @Injectable()
 export class UserService {
 
+    userUrl;
     constructor(
         private http: HttpClient,
         private authService: AuthenticationService,
         ) {
+        this.userUrl = environment.backendUrl;
     }
-
-  private userUrl = environment.backendUrl;
 
     public getUser(): Promise<User> {
         return this.authService.get<User>(this.userUrl + '/user').toPromise();
