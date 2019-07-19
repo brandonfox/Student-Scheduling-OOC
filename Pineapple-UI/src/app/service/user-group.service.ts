@@ -21,4 +21,8 @@ export class UserGroupService {
     public createGroup(group) {
         return this.authService.post(this.groupUrl, group).toPromise();
     }
+
+    public addUserToGroup(groupId: bigint, username: string) {
+        return this.authService.post(this.groupUrl + '/add-user/' + groupId + '/' + username, null).toPromise();
+    }
 }

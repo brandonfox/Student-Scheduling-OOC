@@ -48,6 +48,14 @@ public class GroupController {
         return groupService.getGroupsByUser(user);
     }
 
+    @PostMapping("/user-groups/add-user/{groupId}/{username}")
+    public void addUserToGroup(@PathVariable("groupId") Long groupId, @PathVariable("username") String username) {
+        System.out.println("Adding " + username + " to group " + groupId);
+        User user = userService.getUserByUsername(username);
+        System.out.println(user.getEmail() + " id: " + user.getId());
+        groupService.addUserToGroup(groupId, user);
+    }
+
 //    @GetMapping("/user-groups/{groupId}")
 //    public List<Event> getEvents(@PathVariable("groupId")Long groupId){
 //        System.out.println("Retrieved request to get events by UserGroup ID.");

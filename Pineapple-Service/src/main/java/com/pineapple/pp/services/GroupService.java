@@ -50,6 +50,16 @@ public class GroupService {
         }
     }
 
+    public void addUserToGroup(Long groupId, User user) {
+        UserGroup userGroup = getGroupById(groupId);
+        userGroup.addMembership(user);
+        groupRepository.save(userGroup);
+    }
+
+    public UserGroup getGroupById(Long id) {
+        return groupRepository.findGroupById(id);
+    }
+
     public UserGroup add(String json, User user) {
         UserGroup userGroup = gson.fromJson(json, UserGroup.class);
         if (groupRepository.existsByName(userGroup.getName())) {

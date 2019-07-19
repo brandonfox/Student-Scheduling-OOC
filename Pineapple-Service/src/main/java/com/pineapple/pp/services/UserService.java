@@ -95,7 +95,9 @@ public class UserService {
     public User getUserById(Long id) {
         return userRepository.findUserById(id);
     }
-    
+
+    public User getUserByUsername(String username) { return userRepository.findUserByUsername(username); }
+
     public List<User> getAllUsers(UserToken token, String searchParam){
         try {
             System.out.print("Retrieving all users for token with username: " + token.getUsername());

@@ -85,9 +85,9 @@ export class UserGroupComponent implements OnInit {
 
     submitAddUserForm(userGroup) {
         console.log('Adding user to group');
-            // this.groupService.editTask(task.id, this.buildTaskEditForm().getRawValue()).then(
-            //     data => this.getTasksByEventId(event)
-            // );
+            this.groupService.addUserToGroup(userGroup.id, this.userBeingAdded.value).then(
+                data => this.getUserGroupsById(this.user)
+            );
         this.togglePopup('add-user-form-group-' + userGroup.id, 'none', false);
         this.userBeingAdded.setValue('');
     }
