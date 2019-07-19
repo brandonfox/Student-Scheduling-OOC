@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {UserGroup} from '../model/userGroup';
 import {AuthenticationService} from './authentication.service';
 import {Task} from '../model/task';
+import {User} from '../model/user';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +16,8 @@ export class UserGroupService {
 
     private groupUrl = 'http://localhost:8080/user-groups';
 
-    public getUserGroupsByUserId(userId: bigint): Promise<UserGroup[]> {
-        return this.authService.get<UserGroup[]>(this.groupUrl + '/by-user-id/' + userId).toPromise();
+    public getUserGroupsByUserId(userId: bigint): Observable<UserGroup[]> {
+        return this.authService.get<UserGroup[]>(this.groupUrl + '/by-user-id/' + userId);
     }
 
     public createGroup(group) {
@@ -25,4 +27,9 @@ export class UserGroupService {
     public addUserToGroup(groupId: bigint, username: string) {
         return this.authService.post(this.groupUrl + '/add-user/' + groupId + '/' + username, null).toPromise();
     }
+
+    public getUsersByGroupId(userGroup): Promise<User[]> {
+        return this.authService.get<User[]>(this.groupUrl + '/by-group-id/' + userGroup.id).toPromise();
+    }
+
 }

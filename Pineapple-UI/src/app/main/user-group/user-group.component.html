@@ -5,9 +5,10 @@
 <div class="card-deck">
     <div class="card" *ngFor="let userGroup of userGroups">
         <div class="card-body">
-            <button class="add-button" id="groupId-{{userGroup.id}}" (click)="openAddUserForm(userGroup)">
-                <mat-icon class="task-add-icon">add</mat-icon>
-            </button>
+            <div class="add-button" id="groupId-{{userGroup.id}}">
+                <button mat-icon-button (click)="openAddUserForm(userGroup)"><mat-icon>person_add</mat-icon></button>
+                <button mat-icon-button (click)="openUserList(userGroup)"><mat-icon>people_outline</mat-icon></button>
+            </div>
             <h5 class="card-title">{{userGroup.name}}</h5>
             <div class="add-user-form-popup" id="add-user-form-group-{{userGroup.id}}">
                 <div class="group-form-container">
@@ -32,6 +33,19 @@
                             </button>
                         </div>
                     </form>
+                </div>
+            </div>
+            <div class="user-list-popup" id="user-list-from-group-{{userGroup.id}}">
+                <div class="user-list-container">
+                    <button class="group-close-button" id="user-list-close-{{userGroup.id}}" (click)="closeUserList(userGroup)">
+                        <mat-icon class="task-cancel-icon">cancel</mat-icon>
+                    </button>
+                    <h5>Users in this group:</h5>
+                    <div class="list-group list-group-flush" *ngFor="let usr of userGroup.users">
+                        <div class="list-group-item list-group-item-action">
+                            {{usr.username}}
+                        </div>
+                    </div>
                 </div>
             </div>
     </div>
@@ -78,4 +92,5 @@
             </div>
         </form>
     </div>
+</div>
 </div>

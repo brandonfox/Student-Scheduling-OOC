@@ -40,10 +40,19 @@ export class UserGroupComponent implements OnInit {
             });
     }
 
+    getUsersByGroupId(userGroup) {
+        this.groupService.getUsersByGroupId(userGroup).then(
+            data => {userGroup.users = data; }
+        );
+    }
+
     getUserGroupsById(user) {
-        this.groupService.getUserGroupsByUserId(user.id).then(
+        this.groupService.getUserGroupsByUserId(user.id).subscribe(
             data => {
                 this.userGroups = data;
+                for (const grp of this.userGroups) {
+                    this.getUsersByGroupId(grp);
+                }
             });
     }
 
@@ -85,10 +94,18 @@ export class UserGroupComponent implements OnInit {
 
     submitAddUserForm(userGroup) {
         console.log('Adding user to group');
-            this.groupService.addUserToGroup(userGroup.id, this.userBeingAdded.value).then(
+        this.groupService.addUserToGroup(userGroup.id, this.userBeingAdded.value).then(
                 data => this.getUserGroupsById(this.user)
             );
         this.togglePopup('add-user-form-group-' + userGroup.id, 'none', false);
         this.userBeingAdded.setValue('');
+    }
+
+    openUserList(userGroup) {
+        this.togglePopup('user-list-from-group-' + userGroup.id, 'block', true);
+    }
+
+    closeUserList(userGroup) {
+        this.togglePopup('user-list-from-group-' + userGroup.id, 'none', false);
     }
 }
