@@ -41,33 +41,9 @@
                         <mat-icon class="task-cancel-icon">cancel</mat-icon>
                     </button>
                     <h5>Users in this group:</h5>
-                    <div class="list-group list-group-flush">
+                    <div class="list-group list-group-flush" *ngFor="let usr of userGroup.users">
                         <div class="list-group-item list-group-item-action">
-                            asdf
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            asdf
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            asdf
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            asdf
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            asdf
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            asdf
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            asdf
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            asdf
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            asdf
+                            {{usr.username}}
                         </div>
                     </div>
                 </div>

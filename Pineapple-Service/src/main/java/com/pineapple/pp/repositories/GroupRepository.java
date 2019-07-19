@@ -21,4 +21,5 @@ public interface GroupRepository extends JpaRepository<UserGroup, Long> {
 
     List<UserGroup> findGroupsByMembership(User user);
 
+    List<User> findMembershipById(Long id);
 }

@@ -75,6 +75,11 @@ public class GroupService {
         return groupRepository.findGroupByName(userGroup.getName());
     }
 
+    public List<User> getMembershipByGroupId(Long groupId) {
+        UserGroup userGroup = groupRepository.findGroupById(groupId);
+        return userGroup.getMembership();
+    }
+
     //   public void removeGroup()
 
     public boolean addMembership(User friend, UserGroup userGroup) {

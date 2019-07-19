@@ -40,10 +40,19 @@ export class UserGroupComponent implements OnInit {
             });
     }
 
+    getUsersByGroupId(userGroup) {
+        this.groupService.getUsersByGroupId(userGroup).then(
+            data => {userGroup.users = data; }
+        );
+    }
+
     getUserGroupsById(user) {
-        this.groupService.getUserGroupsByUserId(user.id).then(
+        this.groupService.getUserGroupsByUserId(user.id).subscribe(
             data => {
                 this.userGroups = data;
+                for (const grp of this.userGroups) {
+                    this.getUsersByGroupId(grp);
+                }
             });
     }
 
