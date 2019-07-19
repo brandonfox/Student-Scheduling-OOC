@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../service/authentication.service';
 import {EventService} from '../../service/event.service';
 import {UserService} from '../../service/user.service';
@@ -28,7 +28,8 @@ export class HomeComponent implements OnInit {
         private authService: AuthenticationService,
         private userService: UserService,
         private eventService: EventService,
-        private taskService: TaskService
+        private taskService: TaskService,
+        private ref: ChangeDetectorRef,
     ) {
         this.authService.authenticateUser();
         this.users = userService.getUsers();

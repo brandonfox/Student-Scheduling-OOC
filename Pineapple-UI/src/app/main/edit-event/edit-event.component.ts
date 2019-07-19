@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../service/authentication.service';
 import {EventService} from '../../service/event.service';
 import {Router} from '@angular/router';
-import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-edit-event',
@@ -19,13 +18,12 @@ export class EditEventComponent implements OnInit {
     currentEvent = this.eventService.currentEvent;
 
     event: any = {};
-    sub: Subscription;
 
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthenticationService,
         private eventService: EventService,
-        private router: Router
+        private router: Router,
     ) { }
 
     ngOnInit() {
@@ -54,7 +52,7 @@ export class EditEventComponent implements OnInit {
             return;
         }
         this.eventService.editEvent(this.currentEvent.id, this.eventForm.getRawValue());
-        this.router.navigate(['main/home']).then(window.location.reload);
+        this.router.navigate(['main/home']);
     }
 
     get f() {return this.eventForm.controls; }
