@@ -51,8 +51,9 @@ export class EditEventComponent implements OnInit {
             this.submitted = false;
             return;
         }
-        this.eventService.editEvent(this.currentEvent.id, this.eventForm.getRawValue());
-        this.router.navigate(['main/home']);
+        this.eventService.editEvent(this.currentEvent.id, this.eventForm.getRawValue()).then(
+            data => this.router.navigate(['/main/home'])
+        );
     }
 
     get f() {return this.eventForm.controls; }
