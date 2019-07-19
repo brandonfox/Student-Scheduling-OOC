@@ -17,7 +17,6 @@ export class UserService {
         private authService: AuthenticationService,
         ) {
         this.userUrl = environment.backendUrl;
-        console.log(environment.backendUrl);
     }
 
     public getUser(): Promise<User> {
