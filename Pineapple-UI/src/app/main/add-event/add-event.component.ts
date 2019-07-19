@@ -48,8 +48,9 @@ export class AddEventComponent implements OnInit {
             this.submitted = false;
             return;
         }
-        this.eventService.addEvent(this.eventForm.getRawValue());
-        this.router.navigate(['main/home']);
+        this.eventService.addEvent(this.eventForm.getRawValue()).then(
+            data => this.router.navigate(['/main/home'])
+        );
     }
 
     get f() {return this.eventForm.controls; }
