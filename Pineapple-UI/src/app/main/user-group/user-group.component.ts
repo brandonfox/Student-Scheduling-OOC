@@ -4,7 +4,7 @@ import {AuthenticationService} from '../../service/authentication.service';
 import {UserService} from '../../service/user.service';
 import {UserGroupService} from '../../service/user-group.service';
 import {User} from '../../model/user';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-user-group',
@@ -16,6 +16,8 @@ export class UserGroupComponent implements OnInit {
     user: User;
     userGroups: UserGroup[];
     groupAddForm: FormGroup;
+
+    userBeingAdded = new FormControl('');
 
     constructor(
         private formBuilder: FormBuilder,
@@ -69,5 +71,24 @@ export class UserGroupComponent implements OnInit {
     togglePopup(elementId, displayType: string, disable: boolean) {
         document.getElementById(elementId).style.display = displayType;
         // this.toggleAllButtonsDisabled(disable);
+    }
+
+    openAddUserForm(userGroup) {
+        this.userBeingAdded.setValue('');
+        this.togglePopup('add-user-form-group-' + userGroup.id, 'block', true);
+    }
+
+    closeAddUserForm(userGroup) {
+        this.togglePopup('add-user-form-group-' + userGroup.id, 'none', false);
+        this.userBeingAdded.setValue('');
+    }
+
+    submitAddUserForm(userGroup) {
+        console.log('Adding user to group');
+            // this.groupService.editTask(task.id, this.buildTaskEditForm().getRawValue()).then(
+            //     data => this.getTasksByEventId(event)
+            // );
+        this.togglePopup('add-user-form-group-' + userGroup.id, 'none', false);
+        this.userBeingAdded.setValue('');
     }
 }

@@ -58,3 +58,50 @@
         color: #323232;
     }
 }
+
+.add-user-button {
+    float: right;
+}
+
+.add-user-form-container {
+    min-width: 150px;
+    padding: 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.3);
+}
+
+.add-user-form-popup {
+    display: none;
+    position: absolute;
+    left: 103%;
+    z-index: 3;
+}
+
+.task-add-icon {
+    color: #323232;
+    &:hover {
+        color: seagreen;
+        text-shadow: 0 0 5px rgba(54, 161, 70, 0.2);
+    }
+    &:active {
+        color: #323232;
+    }
+}
+
+.add-user-cancel-icon {
+    color: #323232;
+    &:hover {
+        color: #d92a3b;
+        text-shadow: 0 0 5px rgba(54, 161, 70, 0.2);
+    }
+    &:active {
+        color: #323232;
+    }
+}
+
+.add-button {
+    background: inherit;
+    border: none;
+    float:right;
+}
