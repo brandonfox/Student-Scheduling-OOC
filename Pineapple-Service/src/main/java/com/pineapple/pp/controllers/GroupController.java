@@ -32,9 +32,18 @@ public class GroupController {
         return groupService.getGroupsFor(userDetails);
     }
 
+    @PostMapping(path = "/user-groups")
+    public void createGroup(@RequestHeader("authorization") String token, @RequestBody String groupForm) {
+        UserToken userDetails = SecurityService.parseToken(token);
+        System.out.println("Creating new group " + groupForm + " for " + userDetails.getUsername());
+        User user = userService.getUserByToken(userDetails);
+        UserGroup userGroup = groupService.add(groupForm, user);
+        if (userGroup == null) { System.out.println("Group creation failed"); }
+        else System.out.println("Group created!");
+    }
+
     @GetMapping("/user-groups/by-user-id/{userId}")
     public List<UserGroup> getGroups(@PathVariable("userId") Long userId){
-        System.out.println("Getting groups for userId");
         User user = userService.getUserById(userId);
         return groupService.getGroupsByUser(user);
     }

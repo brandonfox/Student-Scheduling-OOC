@@ -3,7 +3,9 @@ package com.pineapple.pp.entities;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -31,7 +33,7 @@ public class UserGroup {
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> membership = new HashSet<>();
+    private List<User> membership = new ArrayList<>();
 
     /* Getters and Setters */
 
@@ -39,7 +41,7 @@ public class UserGroup {
     public String getName() { return name; }
     public String getDescription() { return description; }
     public Set<Event> getEvents() { return events; }
-    public Set<User> getMembership() {
+    public List<User> getMembership() {
         return membership;
     }
 
@@ -47,7 +49,7 @@ public class UserGroup {
     public void setName(String name) { this.name = name; }
     public void setDescription(String description) { this.description = description; }
     public void setEvents(Set<Event> events) { this.events = events; }
-    public void setMembership(Set<User> membership) {
+    public void setMembership(List<User> membership) {
         this.membership = membership;
     }
 

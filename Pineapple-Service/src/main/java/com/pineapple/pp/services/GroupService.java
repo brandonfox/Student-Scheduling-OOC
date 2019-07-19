@@ -50,11 +50,12 @@ public class GroupService {
         }
     }
 
-    public UserGroup add(String json) {
+    public UserGroup add(String json, User user) {
         UserGroup userGroup = gson.fromJson(json, UserGroup.class);
         if (groupRepository.existsByName(userGroup.getName())) {
             return null;
         }
+        userGroup.addMembership(user);
         groupRepository.save(userGroup);
         return userGroup;
     }
@@ -69,8 +70,8 @@ public class GroupService {
     public boolean addMembership(User friend, UserGroup userGroup) {
         try {
             System.out.println("Adding" + friend.getUsername() + "to UserGroup: " + userGroup.getName());
-            friend.addMembership(userGroup);
-            userGroup.addMembership(friend);
+//            friend.addMembership(userGroup);
+//            userGroup.addMembership(friend);
             groupRepository.save(userGroup);
             userRepository.save(friend);
             return true;
@@ -81,8 +82,8 @@ public class GroupService {
 
     public boolean removeMembership(UserGroup userGroup, User user) {
         System.out.println("Removing user: " + user.getUsername() + ", for UserGroup: " + userGroup.getName());
-        userGroup.removeMember(user);
-        user.addMembership(userGroup);
+//        userGroup.removeMember(user);
+//        user.addMembership(userGroup);
         userRepository.save(user);
         groupRepository.save(userGroup);
         return true;

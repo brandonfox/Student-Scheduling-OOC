@@ -28,9 +28,8 @@ export class UserGroupComponent implements OnInit {
 
     ngOnInit() {
         this.groupAddForm = this.formBuilder.group({
-            title: ['', Validators.required],
-            description: '',
-            event: null
+            name: ['', Validators.required],
+            description: ''
         });
         this.authService.getLoggedUser().then(
             data => {
@@ -57,16 +56,13 @@ export class UserGroupComponent implements OnInit {
     }
 
     submitGroupAddForm() {
-        console.log('Submitting task form');
+        console.log('Submitting group form');
         if (this.groupAddForm.invalid) {
             return;
         }
-        // this.groupAddForm.patchValue({
-        //     event: thisEvent
-        // });
-        // this.group.createTask(this.taskAddForm.getRawValue()).then(
-        //     data => this.getTasksByEventId(thisEvent)
-        // );
+        this.groupService.createGroup(this.groupAddForm.getRawValue()).then(
+            data => this.getUserGroupsById(this.user)
+        );
         this.togglePopup('add-group-form', 'none', false);
     }
 

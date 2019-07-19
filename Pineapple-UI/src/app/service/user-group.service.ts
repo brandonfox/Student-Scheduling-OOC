@@ -17,4 +17,8 @@ export class UserGroupService {
     public getUserGroupsByUserId(userId: bigint): Promise<UserGroup[]> {
         return this.authService.get<UserGroup[]>(this.groupUrl + '/by-user-id/' + userId).toPromise();
     }
+
+    public createGroup(group) {
+        return this.authService.post(this.groupUrl, group).toPromise();
+    }
 }

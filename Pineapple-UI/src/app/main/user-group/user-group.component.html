@@ -32,23 +32,23 @@
         <button class="group-close-button" id="groupAddClose" (click)="closeGroupAddForm()">
             <mat-icon class="task-cancel-icon">cancel</mat-icon>
         </button>
-        <h3>Add a new task</h3>
+        <h3>Create a New Group</h3>
         <form [formGroup]="groupAddForm" (ngSubmit)="submitGroupAddForm()">
             <mat-form-field class="title-field" appearance="legacy">
                 <label>
                     <input
                         matInput
                         type="text"
-                        placeholder="New Task"
-                        formControlName="title">
+                        placeholder="New Group"
+                        formControlName="name">
                 </label>
-            </mat-form-field>
+            </mat-form-field><br/>
             <mat-form-field class="description-field" appearance="legacy">
                 <label>
                     <input
                         matInput
                         type="text"
-                        placeholder="This is a description of your new task"
+                        placeholder="This is a description of your new group"
                         formControlName="description">
                 </label>
             </mat-form-field>
