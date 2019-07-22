@@ -42,7 +42,7 @@ const colors: any = {
 
 @Component({
     selector: 'app-calendar-component',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    // changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['calendar.component.scss'],
     templateUrl: 'calendar.component.html'
 })
@@ -89,6 +89,7 @@ export class CalendarComponent implements OnInit {
                     }
                 ];
             }
+            this.refresh.next();
         });
     }
 

@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
             event: thisEvent
         });
         this.taskService.createTask(this.taskAddForm.get('title').value, this.taskAddForm.get('description').value, thisEvent.id).then(
-            data => this.getTasksByEventId(thisEvent)
+            () => this.getTasksByEventId(thisEvent)
         );
         this.togglePopup('addForm-eventId-' + thisEvent.id, 'none', false);
     }
@@ -119,7 +119,7 @@ export class HomeComponent implements OnInit {
         if (this.titleBeingEdited.value !== task.title || this.descriptionBeingEdited.value !== task.description) {
             console.log('Submitting task edit form');
             this.taskService.editTask(task.id, this.buildTaskEditForm().getRawValue()).then(
-                data => this.getTasksByEventId(event)
+                () => this.getTasksByEventId(event)
             );
         }
         this.togglePopup('editForm-taskId-' + task.id, 'none', false);
@@ -130,7 +130,7 @@ export class HomeComponent implements OnInit {
     removeTask(taskId, event) {
         console.log('Removing task! ' + taskId);
         this.taskService.removeTask(taskId, event.id).subscribe(
-            data => this.getTasksByEventId(event)
+            () => this.getTasksByEventId(event)
         );
         this.togglePopup('editForm-taskId-' + taskId, 'none', false);
     }
@@ -142,7 +142,7 @@ export class HomeComponent implements OnInit {
     deleteEvent(eventId) {
         console.log('Deleting event...');
         this.eventService.deleteEvent(eventId).subscribe(
-            data => this.getAll()
+            () => this.getAll()
         );
     }
 
