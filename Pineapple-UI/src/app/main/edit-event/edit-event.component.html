@@ -11,7 +11,7 @@
                         style="font-size: 30px;"
                         formControlName="name">
                 </label>
-                <div *ngIf="submitted && f.name.errors.required">Name is required</div>
+                <div *ngIf="submitted && f.name.errors?.required">Name is required</div>
             </mat-form-field>
         </div>
     </div>

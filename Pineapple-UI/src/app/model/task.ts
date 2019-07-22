@@ -1,6 +1,6 @@
 import {Event} from './event';
 
-export class Task {
+export interface Task {
 
   id: bigint;
   title: string;

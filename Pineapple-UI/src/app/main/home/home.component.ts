@@ -1,10 +1,11 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../service/authentication.service';
 import {EventService} from '../../service/event.service';
 import {UserService} from '../../service/user.service';
-import {Event} from '../../model/event';
 import {TaskService} from '../../service/task.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Event} from '../../model/event';
+import {User} from '../../model/user';
 
 @Component({
     selector: 'app-home',
@@ -13,10 +14,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
 
-    now: number;
-
     private users;
-    user;
+    user: User;
     events: Event[];
     taskAddForm: FormGroup;
 
@@ -28,21 +27,22 @@ export class HomeComponent implements OnInit {
         private authService: AuthenticationService,
         private userService: UserService,
         private eventService: EventService,
-        private taskService: TaskService,
-        private ref: ChangeDetectorRef,
+        private taskService: TaskService
     ) {
         this.authService.authenticateUser();
         this.users = userService.getUsers();
-        this.user = userService.getUser();
     }
 
     ngOnInit() {
         this.taskAddForm = this.formBuilder.group({
             title: ['', Validators.required],
-            description: ''
-        });
+            description: ['']});
         this.getAll();
-        this.getUserInfo().then(data => this.user = data);
+        this.userService.getUser().then(
+            (data: User) => {
+                this.user = data;
+            }
+        );
     }
 
     getTasksByEventId(event) {
@@ -51,9 +51,6 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    getUserInfo() {
-        return this.userService.getUser();
-    }
     // TODO Change html file to display date in a more human readable format
     // TODO Add a refresh mechanism to display events properly
 
