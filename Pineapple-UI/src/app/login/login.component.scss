@@ -1,34 +1,233 @@
-.header {
-  text-align: center;
+.login-clean {
+    background-color: antiquewhite;
+    padding: 80px 0;
 }
 
-.logo {
-  width: 100px;
-  padding-top: 80px;
-  fill: currentColor;
+.login-clean,
+.illustration {
+    text-align: center;
+    font-size: 100px;
+    color: antiquewhite;
 }
 
-.form-field,
+.login-clean form {
+    max-width: 320px;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #494c49;
+    padding: 40px;
+    border-radius: 4px;
+    color: #505e6c;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.9);
+}
+
+mat-form-field {
+    display: block;
+    text-align: center;
+    font-size: 12pt;
+    font-family: "Open Sans", sans-serif;
+}
+
+::ng-deep .mat-form-field-label {
+    /*change color of label*/
+    color: antiquewhite !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: antiquewhite !important;
+}
+
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: antiquewhite !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: antiquewhite !important;;
+}
+
+.features-clean {
+    color: #faebd7;
+    background-color: #494c49;
+    padding-bottom: 30px;
+}
+
+@media (max-width:767px) {
+    .features-clean {
+        padding-bottom: 10px;
+    }
+}
+
+.features-clean p {
+    color: #7d8285;
+}
+
+.features-clean h2 {
+    font-weight: bold;
+    margin-bottom: 40px;
+    padding-top: 40px;
+    color: inherit;
+}
+
+@media (max-width:767px) {
+    .features-clean h2 {
+        margin-bottom: 25px;
+        padding-top: 25px;
+        font-size: 24px;
+    }
+}
+
+.features-clean .intro {
+    font-size: 16px;
+    max-width: 500px;
+    margin: 0 auto 60px;
+}
+
+@media (max-width:767px) {
+    .features-clean .intro {
+        margin-bottom: 40px;
+    }
+}
+
+.features-clean .item {
+    min-height: 100px;
+    padding-left: 80px;
+    margin-bottom: 40px;
+}
+
+@media (max-width:767px) {
+    .features-clean .item {
+        min-height: 0;
+    }
+}
+
+.features-clean .item .name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: inherit;
+}
+
+.features-clean .item .description {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+.features-clean .item .icon {
+    font-size: 40px;
+    color: #faebd7;
+    float: left;
+    margin-left: -65px;
+}
+
 .alert-danger {
-  display: block;
-  width: 300px;
-  margin: 20px auto;
-  font-family: Ubuntu, sans-serif;
+    display: block;
+    width: 300px;
+    margin: 20px auto;
+    font-family: Ubuntu, sans-serif;
 }
 
 .button-container {
-  display: flex;
-  justify-content: flex-end;
-  width: 300px;
-  margin: auto;
+    display: flex;
+    justify-content: flex-end;
+    margin: auto;
 }
 
 .button-container button {
-  margin: 3px auto;
-  font-family: Ubuntu, sans-serif;
-  color: grey;
+    margin: 3px auto;
+    font-family: Ubuntu, sans-serif;
+    color: grey;
 }
 
 button:focus {
-  outline:0;
+    outline:0;
+}
+
+.footer-clean {
+    padding: 50px 0;
+    background-color: #faebd7;
+    color: #4b4c4d;
+}
+
+.footer-clean h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.footer-clean ul {
+    padding: 0;
+    list-style: none;
+    line-height: 1.6;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.footer-clean ul a {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.footer-clean ul a:hover {
+    opacity: 1;
+}
+
+.footer-clean .item.social {
+    text-align: right;
+}
+
+@media (max-width:767px) {
+    .footer-clean .item {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-clean .item.social {
+        text-align: center;
+    }
+}
+
+.footer-clean .item.social > a {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin-left: 10px;
+    margin-top: 22px;
+    color: inherit;
+    opacity: 0.75;
+}
+
+.footer-clean .item.social > a:hover {
+    opacity: 0.9;
+}
+
+@media (max-width:991px) {
+    .footer-clean .item.social > a {
+        margin-top: 40px;
+    }
+}
+
+@media (max-width:767px) {
+    .footer-clean .item.social > a {
+        margin-top: 10px;
+    }
+}
+
+.footer-clean .copyright {
+    margin-top: 14px;
+    margin-bottom: 0;
+    font-size: 13px;
+    opacity: 0.6;
 }
