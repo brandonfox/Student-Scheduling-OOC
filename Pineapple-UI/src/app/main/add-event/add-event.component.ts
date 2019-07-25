@@ -37,7 +37,6 @@ export class AddEventComponent implements OnInit {
 
     public onSubmit() {
         console.log('Submitting form');
-        console.log(this.disableSelect.value);
         this.eventForm.addControl(
             'allDay',
             new FormControl(this.disableSelect.value));
@@ -49,7 +48,7 @@ export class AddEventComponent implements OnInit {
             return;
         }
         this.eventService.addEvent(this.eventForm.getRawValue()).then(
-            data => this.router.navigate(['/main/home'])
+            () => this.router.navigate(['/main/home'])
         );
     }
 

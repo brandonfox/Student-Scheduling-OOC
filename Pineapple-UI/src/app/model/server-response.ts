@@ -1,4 +1,4 @@
-export class ServerResponse {
+export interface ServerResponse {
   successStatus: boolean;
   context: string;
 }

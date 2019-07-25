@@ -52,7 +52,9 @@
         </mat-tab>
     </mat-tab-group>
     <mat-form-field style="flex: 1;" class="input">
-        <input [(ngModel)]="searchBar" (ngModelChange)="searchChange()" matInput placeholder="Search" >
+        <label>
+            <input [(ngModel)]="searchBar" (ngModelChange)="searchChange()" matInput placeholder="Search" >
+        </label>
     </mat-form-field>
 </div>
 

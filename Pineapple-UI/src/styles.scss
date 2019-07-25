@@ -2,8 +2,7 @@
 //@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import "~src/custom-theme";
 @import "~bootstrap/dist/css/bootstrap.css";
-@import "~ionicons/dist/css/ionicons.css";
-@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "~angular-calendar/css/angular-calendar.css";
 
 html {
     font-family: sans-serif;
@@ -14,7 +13,7 @@ html {
 
 body {
     margin: 0;
-    font-family: Ubuntu, sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;

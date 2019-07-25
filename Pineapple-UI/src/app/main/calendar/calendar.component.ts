@@ -1,24 +1,18 @@
 import {
     Component,
-    ChangeDetectionStrategy,
     ViewChild,
     TemplateRef, OnInit
 } from '@angular/core';
 import {
     startOfDay,
     endOfDay,
-    subDays,
-    addDays,
-    endOfMonth,
     isSameDay,
-    isSameMonth,
-    addHours
+    isSameMonth
 } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
     CalendarEvent,
-    CalendarEventAction,
     CalendarEventTimesChangedEvent,
     CalendarView
 } from 'angular-calendar';
@@ -42,7 +36,6 @@ const colors: any = {
 
 @Component({
     selector: 'app-calendar-component',
-    // changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['calendar.component.scss'],
     templateUrl: 'calendar.component.html'
 })
@@ -95,14 +88,8 @@ export class CalendarComponent implements OnInit {
 
     dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
         if (isSameMonth(date, this.viewDate)) {
-            if (
-                (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-                events.length === 0
-            ) {
-                this.activeDayIsOpen = false;
-            } else {
-                this.activeDayIsOpen = true;
-            }
+            this.activeDayIsOpen = !((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+                events.length === 0);
             this.viewDate = date;
         }
     }

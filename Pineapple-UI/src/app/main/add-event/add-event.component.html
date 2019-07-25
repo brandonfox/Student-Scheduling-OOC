@@ -1,83 +1,95 @@
 <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
-    <div class="form-container">
-        <div class="form-group">
-            <mat-form-field class="add-title" appearance="legacy">
-                <label>
-                    <input
-                        matInput
-                        type="text"
-                        class="control"
-                        placeholder="Add Title"
-                        style="font-size: 30px;"
-                        formControlName="name">
-                </label>
-                <div *ngIf="submitted && f.name.errors?.required">Name is required</div>
-            </mat-form-field>
-        </div>
-    </div>
+    <mat-card class="example-card">
+        <mat-card-content>
+            <div class="form-container">
+                <div class="form-group">
+                    <mat-form-field class="add-title" appearance="legacy">
+                        <label>
+                            <input
+                                matInput
+                                type="text"
+                                class="control"
+                                placeholder="Add Title"
+                                style="font-size: 30px;"
+                                formControlName="name">
+                        </label>
+                        <div *ngIf="submitted && f.name.errors?.required">Name is required</div>
+                    </mat-form-field>
+                </div>
+            </div>
 
-    <div class="form-container">
-        <div class="form-group">
-            <mat-form-field class="date-picker" appearance="outline">
-                <label>
-                    <input matInput formControlName="startDate" type="date" placeholder="Choose a date">
-                </label>
-            </mat-form-field>
-            <mat-form-field class="time-picker" [style.display]="disableSelect.value ? 'none' : 'block'" appearance="outline">
-                <label>
-                    <input matInput formControlName="startTime" type="time" placeholder="Choose a date">
-                </label>
-            </mat-form-field>
-            <div class="to">To</div>
-            <mat-form-field class="date-picker" appearance="outline">
-                <label>
-                    <input matInput formControlName="endDate" type="date" placeholder="Choose a date">
-                </label>
-            </mat-form-field>
-            <mat-form-field class="time-picker" [style.display]="disableSelect.value ? 'none' : 'block'" appearance="outline">
-                <label>
-                    <input matInput formControlName="endTime" type="time" placeholder="Choose a date">
-                </label>
-            </mat-form-field>
-        </div>
-    </div>
+            <div class="form-container">
+                <div class="form-group">
+                    <mat-form-field class="date-picker" appearance="outline">
+                        <label>
+                            <input matInput formControlName="startDate" [matDatepicker]="picker1" placeholder="Choose a date">
+                        </label>
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="time-picker" [style.display]="disableSelect.value ? 'none' : 'block'" appearance="outline">
+                        <label>
+                            <input matInput formControlName="startTime" type="time" placeholder="Choose a date">
+                        </label>
+                    </mat-form-field>
+                    <div class="to">To</div>
+                    <mat-form-field class="date-picker" appearance="outline">
+                        <label>
+                            <input matInput formControlName="endDate" [matDatepicker]="picker2" placeholder="Choose a date">
+                        </label>
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="time-picker" [style.display]="disableSelect.value ? 'none' : 'block'" appearance="outline">
+                        <label>
+                            <input matInput formControlName="endTime" type="time" placeholder="Choose a date">
+                        </label>
+                    </mat-form-field>
+                </div>
+            </div>
 
-    <div class="form-container">
-        <div class="form-group">
-            <mat-checkbox
-                class="all-day-form"
-                color="primary"
-                [checked]="checked"
-                [formControl]="disableSelect">
-                All day
-            </mat-checkbox>
-        </div>
-    </div>
+            <div class="form-container">
+                <div class="form-group">
+                    <mat-checkbox
+                        class="all-day-form"
+                        color="primary"
+                        [checked]="checked"
+                        [formControl]="disableSelect">
+                        All day
+                    </mat-checkbox>
+                </div>
+            </div>
 
-    <div class="form-container">
-        <div class="form-group">
-            <mat-form-field class="description" appearance="outline">
-                <mat-label>Description</mat-label>
-                <label>
-          <textarea
-              matInput formControlName="description"></textarea>
-                </label>
-            </mat-form-field>
-        </div>
-    </div>
+            <div class="form-container">
+                <div class="form-group">
+                    <mat-form-field class="description" appearance="outline">
+                        <mat-label>Description</mat-label>
+                        <label>
+              <textarea
+                  matInput formControlName="description"></textarea>
+                        </label>
+                    </mat-form-field>
+                </div>
+            </div>
 
-    <button
-        type="submit"
-        class="button-bottom-right-check"
-        style="background-color: antiquewhite"
-        mat-fab>
-        <mat-icon>check</mat-icon>
-    </button>
-    <button
-        class="button-bottom-right-close"
-        routerLink="/main/home"
-        style="background-color: white"
-        mat-fab>
-        <mat-icon>close</mat-icon>
-    </button>
+        </mat-card-content>
+<!--        <mat-card-actions>-->
+<!--            <button mat-button>LIKE</button>-->
+<!--            <button mat-button>SHARE</button>-->
+<!--        </mat-card-actions>-->
+    </mat-card>
+        <button
+            type="submit"
+            class="button-bottom-right-check"
+            style="background-color: antiquewhite"
+            mat-fab>
+            <mat-icon>check</mat-icon>
+        </button>
+        <button
+            class="button-bottom-right-close"
+            routerLink="/main/home"
+            style="background-color: white"
+            mat-fab>
+            <mat-icon>close</mat-icon>
+        </button>
 </form>

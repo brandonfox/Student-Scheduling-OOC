@@ -1,16 +1,11 @@
 mat-form-field {
     font-family: Ubuntu, sans-serif;
+    width: 100%;
 }
 
-.add-title {
-    display: block;
-    width: 50vw;
-    margin: 10px 0 0;
-}
-
-button:focus {
-    outline: 0;
-    border: none;
+::ng-deep *:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important;
 }
 
 mat-icon{
@@ -21,11 +16,9 @@ mat-icon{
 .raised-button,
 .date-picker,
 .time-picker{
-    //margin-right: 8px;
     font-family: Ubuntu, sans-serif;
 }
-//
-//.date-picker,
+
 .time-picker {
     width: 4cm;
 }
@@ -52,3 +45,11 @@ mat-icon{
     right: 16px;
 }
 
+.example-card {
+    max-width: 100%;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}

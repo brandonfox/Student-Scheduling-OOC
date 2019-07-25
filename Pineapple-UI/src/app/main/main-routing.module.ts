@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+import { AuthGuard } from '../guards/auth.guard';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { HomeComponent } from './home/home.component';
 import { AddEventComponent } from './add-event/add-event.component';
-import { AuthGuard } from '../guards/auth.guard';
-import {FriendListComponent} from './friend-list/friend-list.component';
-import {EditEventComponent} from './edit-event/edit-event.component';
-import {CalendarComponent} from './calendar/calendar.component';
-import {UserGroupComponent} from './user-group/user-group.component';
+import { FriendListComponent } from './friend-list/friend-list.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { UserGroupComponent } from './user-group/user-group.component';
 
 const routes: Routes = [
     { path: 'main',

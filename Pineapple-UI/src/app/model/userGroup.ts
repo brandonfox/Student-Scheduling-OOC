@@ -1,7 +1,7 @@
 import {User} from './user';
 import {Event} from './event';
 
-export class UserGroup {
+export interface UserGroup {
     id: bigint;
     name: string;
     description: string;

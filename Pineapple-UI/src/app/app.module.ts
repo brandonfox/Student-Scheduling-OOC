@@ -1,26 +1,21 @@
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LayoutModule } from '@angular/cdk/layout';
+import { RouterModule, Routes } from '@angular/router';
 
-// used to create fake backend
+import { MainModule } from './main/main.module';
+import { MaterialModule } from './core/material-module';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { RouterModule, Routes } from '@angular/router';
-import { LayoutModule } from '@angular/cdk/layout';
-import { DemoMaterialModule } from './core/material-module';
 import { MainLayoutComponent } from './main/main-layout/main-layout.component';
 import { UserService } from './service/user.service';
 import { CookieService } from 'ngx-cookie-service';
-import { MainModule } from './main/main.module';
-import { FriendListComponent } from './main/friend-list/friend-list.component';
-import {ButtonModule} from 'primeng/button';
-import { UserGroupComponent } from './main/user-group/user-group.component';
-import { AddMemberComponent } from './add-member/add-member.component';
-import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full'},
@@ -31,30 +26,29 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [
-        BrowserModule,
         BrowserAnimationsModule,
+        BrowserModule,
+        CommonModule,
+        FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterModule.forRoot(appRoutes, { useHash: false } ),
         LayoutModule,
-        FormsModule,
-        DemoMaterialModule,
+        RouterModule.forRoot(appRoutes, {useHash: false}),
         MainModule,
-        ButtonModule
+        MaterialModule,
     ],
     declarations: [
         AppComponent,
         LoginComponent,
-        RegisterComponent,
-        FriendListComponent,
-        UserGroupComponent,
-        AddMemberComponent,
-        ProfileComponent,
-        UserGroupComponent,
-        AddMemberComponent,
+        RegisterComponent
     ],
-    providers: [UserService, CookieService],
-    bootstrap: [AppComponent]
+    providers: [
+        UserService,
+        CookieService
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
 
 export class AppModule {}
